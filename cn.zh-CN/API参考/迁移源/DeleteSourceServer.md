@@ -4,8 +4,8 @@
 
 ## 接口说明 {#description .section}
 
--   删除已关联迁移任务的迁移源时，需设置参数`Force`。
--   迁移源如果关联了正在运行中的迁移任务则无法删除。
+-   迁移源若关联了Running（运行中）状态的迁移任务，则无法删除。
+-   迁移源若关联了除Running状态外的其他状态的迁移任务，则需设置`Force=true`删除。
 
 ## 调试 {#apiExplorer .section}
 
@@ -16,6 +16,9 @@
 |名称|类型|是否必选|示例值|描述|
 |--|--|----|---|--|
 |SourceId|String|是|s-xxxxxxxxxxxxxxx|迁移源ID。
+
+ |
+|Action|String|否|DeleteSourceServer|系统规定参数。取值：DeleteSourceServer。
 
  |
 |Force|Boolean|否|true|是否强制删除迁移源。
