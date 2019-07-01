@@ -18,7 +18,7 @@
 |SourceId|String|是|s-xxxxxxxxxxxxxxx|迁移源ID。
 
  |
-|Action|String|否|DeleteSourceServer|系统规定参数。取值：DeleteSourceServer。
+|Action|String|否|DeleteSourceServer|系统规定参数。取值：DeleteSourceServer
 
  |
 |Force|Boolean|否|true|是否强制删除迁移源。
