@@ -17,17 +17,15 @@
 |Action|String|否|DescribeReplicationJobs|系统规定参数。取值：DescribeReplicationJobs
 
  |
-|BusinessStatus|String|否|Prepare|迁移任务的业务状态，取值范围：
+|BusinessStatus|String|否|Preparing|迁移任务的业务状态，取值范围：
 
- -   Prepare（准备中）
--   SyncData（数据同步）
--   Deliver（镜像制作中）
--   Cleanup（即将完成）
-
- 迁移任务的业务状态详情，请参见[迁移状态](~~121594~~)。
+ -   Preparing（准备中）
+-   Syncing（同步中）
+-   Processing（处理中）
+-   Cleaning（清除中）
 
  |
-|JobId.N|RepeatList|否|j-xxxxxxxxxxxxxxx.1|迁移任务ID列表。N的最大值：50。
+|JobId.N|RepeatList|否|j-xxxxxxxxxxxxxxx|迁移任务ID列表。N的最大值：50。
 
  |
 |Name|String|否|MyMigrationTask|迁移任务的名称。
@@ -48,7 +46,7 @@
  例如，您需要迁移源服务器至上海，则RegionId为`cn-shanghai`。您可以调用[DescribeRegions](~~25609~~)查看最新的阿里云地域列表。
 
  |
-|SourceId.N|RepeatList|否|s-xxxxxxxxxxxxxxx.1|迁移源ID列表。N的最大值：50。
+|SourceId.N|RepeatList|否|s-xxxxxxxxxxxxxxx|迁移源ID列表。N的最大值：50。
 
  |
 |Status|String|否|Ready|迁移任务的主状态。取值范围：
@@ -56,12 +54,10 @@
  -   Ready（未开始）
 -   Running（运行中）
 -   Stopped（已暂停）
--   Failed（出错）
--   Finish（已完成）
+-   InError（出错）
+-   Finished（已完成）
 -   Expired（已过期）
 -   Deleting（删除中）
-
- 迁移任务的主状态详情，请参见[迁移状态](~~121594~~)。
 
  |
 
@@ -78,7 +74,7 @@
 |ReplicationJobs| | |迁移任务详情集合。
 
  |
-|└BusinessStatus|String|Prepare|迁移任务的业务阶段。
+|└BusinessStatus|String|Preparing|迁移任务的业务状态。
 
  |
 |└CreationTime|String|2014-07-24T13:00:52Z|迁移任务的创建时间。
@@ -174,8 +170,10 @@
 请求示例
 
 ``` {#request_demo}
+
 http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
 &<公共请求参数>
+
 ```
 
 正常返回示例
@@ -188,7 +186,7 @@ http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
   <PageSize>10</PageSize>
   <ReplicationJobs>
     <ReplicationJob>
-      <BusinessStatus>Prepare</BusinessStatus>
+      <BusinessStatus>Preparing</BusinessStatus>
       <CreationTime>2014-07-24T13:00:52Z</CreationTime>
       <DataDisks>
         <DataDisk>
@@ -211,10 +209,10 @@ http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
       <ScheduledStartTime>2019-06-04T13:35:00Z</ScheduledStartTime>
       <SourceId>s-xxxxxxxxxxxxxxx</SourceId>
       <StartTime>2019-06-04T14:40:52Z</StartTime>
-      <State>Prepare</State>
+      <Status>Running</Status>
       <StatusInfo>statusinfo</StatusInfo>
       <SystemDiskSize>40</SystemDiskSize>
-      <TARGEType>image</TARGEType>
+      <TargetType>image</TargetType>
       <TransitionInstanceId>instanceid2</TransitionInstanceId>
       <VSwitchId>xxxxxxxxxxxxxxx</VSwitchId>
       <VaildTime>30</VaildTime>
@@ -245,11 +243,12 @@ http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
 				"StatusInfo":"statusinfo",
 				"ImageName":"MyAilCloudImage",
 				"ScheduledStartTime":"2019-06-04T13:35:00Z",
-				"BusinessStatus":"Prepare",
+				"BusinessStatus":"Preparing",
 				"JobId":"j-xxxxxxxxxxxxxxx",
 				"StartTime":"2019-06-04T14:40:52Z",
 				"Description":"This is my migration task.",
 				"SystemDiskSize":"40",
+				"TargetType":"image",
 				"VaildTime":"30",
 				"DataDisks":{
 					"DataDisk":[
@@ -265,12 +264,11 @@ http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
 				"Progress":"55.45",
 				"Name":"MyMiagrationTask",
 				"CreationTime":"2014-07-24T13:00:52Z",
-				"State":"Prepare",
+				"Status":"Running",
 				"RegionId":"cn-hangzhou",
 				"TransitionInstanceId":"instanceid2",
 				"EndTime":"2019-06-04T16:00:52Z",
-				"ErrorCode":"InternalError",
-				"TARGEType":"image"
+				"ErrorCode":"InternalError"
 			}
 		]
 	}
