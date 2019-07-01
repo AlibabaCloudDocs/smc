@@ -17,7 +17,7 @@
 |JobId|String|是|j-xxxxxxxxxxx|迁移任务ID。
 
  |
-|Action|String|否|ModifyReplicationJobAttribute|系统规定参数。取值：ModifyReplicationJobAttribute。
+|Action|String|否|ModifyReplicationJobAttribute|系统规定参数。取值：ModifyReplicationJobAttribute
 
  |
 |DataDisk.N.Index|Integer|否|1|目标阿里云服务器ECS的数据盘顺序。取值范围：1~16
@@ -57,7 +57,7 @@
  **说明：** 当执行时间为空时，SMC不自动启动迁移任务，您需要调用[StartReplicationJob](~~121823~~)启动。
 
  |
-|SystemDiskSize|Integer|否|50|目标阿里云服务器ECS的系统盘大小。单位为GiB。取值范围：40~500
+|SystemDiskSize|Integer|否|50|目标阿里云服务器ECS的系统盘大小。单位为GiB。取值范围：20~500
 
  **说明：** 该参数取值需要大于您源服务器系统盘实际占用大小，例如，源系统盘大小为500 GiB，实际占用100 GiB，则该参数取值需大于100 GiB。
 
