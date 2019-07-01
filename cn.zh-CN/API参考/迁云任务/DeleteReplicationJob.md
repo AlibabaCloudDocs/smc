@@ -18,7 +18,7 @@
 |JobId|String|是|j-xxxxxxxxxx|迁移任务Id。
 
  |
-|Action|String|否|DeleteReplicationJob|系统规定参数。取值：DeleteReplicationJob。
+|Action|String|否|DeleteReplicationJob|系统规定参数。取值：DeleteReplicationJob
 
  |
 
