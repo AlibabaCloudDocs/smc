@@ -10,5 +10,5 @@
 
 我们支持HTTP或者HTTPS请求，允许GET和POST方法。SMC API的调用方式请参见[调用方式](cn.zh-CN/API参考/调用方式.md#)。
 
-我们为您提供了SMC API快速入门参考，详情请参见[快速入门](cn.zh-CN/API参考/快速入门.md#)。SMC API的更多详情，请参见[API概览](cn.zh-CN/.md#)。
+我们为您提供了SMC API快速入门参考，详情请参见[快速入门](cn.zh-CN/API参考/快速入门.md#)。SMC API的更多详情，请参见[API 概览](cn.zh-CN/API参考/API 概览.md#)。
 
