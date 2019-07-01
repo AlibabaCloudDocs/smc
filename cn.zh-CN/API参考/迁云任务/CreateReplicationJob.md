@@ -31,7 +31,7 @@
  **说明：** 该参数取值需要大于迁移源系统盘实际占用大小，例如，源系统盘大小为500 GiB，实际占用100 GiB，则该参数取值需大于100 GiB。
 
  |
-|Action|String|否|CreateReplicationJob|系统规定参数。取值：CreateReplicationJob。
+|Action|String|否|CreateReplicationJob|系统规定参数。取值：CreateReplicationJob
 
  |
 |ClientToken|String|否|xxxxxxxxxx|幂等token，防止重复创建。
