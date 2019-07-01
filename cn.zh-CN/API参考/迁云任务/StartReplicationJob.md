@@ -4,7 +4,7 @@
 
 ## 接口说明 {#description .section}
 
-您只能使用该API启动**Ready**、**Stopped**或**Failed**状态的迁移任务。
+您只能使用该API启动**Ready（未开始）**、**Stopped（已暂停）**或**InError（出错）**状态的迁移任务。
 
 ## 调试 {#apiExplorer .section}
 
