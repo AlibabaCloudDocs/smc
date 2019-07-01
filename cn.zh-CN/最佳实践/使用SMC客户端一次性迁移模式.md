@@ -15,11 +15,11 @@
     1.  在迁移源上，下载[SMC客户端](https://p2v-tools.oss-cn-hangzhou.aliyuncs.com/smc/Alibaba_Cloud_Migration_Tool.zip)。
     2.  解压缩SMC客户端。 SMC客户端为Windows和Linux系统均提供32位和64位版本（i386表示32位，x86\_64表示64位）。请根据迁移源的平台类型，选择相应的客户端版本。解压后的客户端文件夹，如下图所示。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/630372/156196662850475_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/630372/156196921050475_zh-CN.png)
 
     3.  解压缩您选择的客户端版本。 解压后文件夹中包含的目录和文件，如下图所示。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/630335/156196662949979_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/630335/156196921049979_zh-CN.png)
 
         |文件（夹）名|描述|
         |:-----|:-|
@@ -290,7 +290,7 @@
         -   在go2aliyun\_client所在目录下，使用root权限依次运行以下命令。
 
             ``` {#codeblock_ufy_4so_jpa}
-            chmod +x ./go2aliyun_client --onetime
+            chmod +x ./go2aliyun_client
             ```
 
             ``` {#codeblock_38g_164_grm}
@@ -300,7 +300,7 @@
         -   在go2aliyun\_client所在目录下，使用sudo权限依次运行以下命令。
 
             ``` {#codeblock_zdg_8wd_rd8}
-            sudo chmod +x ./go2aliyun_client --onetime
+            sudo chmod +x ./go2aliyun_client
             ```
 
             ``` {#codeblock_617_zpk_432}
@@ -312,7 +312,7 @@
 
 -   当客户端界面提示`Goto Aliyun Finished!`时，表示迁移成功，如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/668852/156196662950084_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/668852/156196921050084_zh-CN.png)
 
     此时，您可以：
 
@@ -324,7 +324,7 @@
     3.  远程连接实例，检查迁移后的系统，详情请参见[迁移Windows服务器后怎么检查系统？](../cn.zh-CN/常见问题/SMC FAQ.md#section_c5i_33t_xn7)或[迁移Linux服务器后怎么检查系统？](../cn.zh-CN/常见问题/SMC FAQ.md#section_8nx_71l_ksv)。
 -   当客户端界面提示`Goto Aliyun Not Finished!`时，表示迁移失败，如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/668852/156196662950085_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/668852/156196921050085_zh-CN.png)
 
     此时，您需要：
 
