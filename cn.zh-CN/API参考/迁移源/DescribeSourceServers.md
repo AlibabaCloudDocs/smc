@@ -17,7 +17,7 @@
 |Action|String|否|DescribeSourceServers|系统规定参数。取值：DescribeSourceServers
 
  |
-|JobId|String|否|j-xxxxxxxxxxxxxxx.1|迁移任务ID。
+|JobId|String|否|j-xxxxxxxxxxxxxxx|迁移任务ID。
 
  |
 |Name|String|否|MySourceServer|迁移源名称。长度为2~128个英文或中文字符。必须以大小字母或中文开头，不能以 http:// 和 https:// 开头。可以包含数字、半角冒号（:）、下划线（\_）或者连字符（-）。
@@ -35,17 +35,15 @@
  默认值：10。
 
  |
-|SourceId.N|RepeatList|否|s-xxxxxxxxxxxxxxx.1|迁移源ID，可以输入多个。
+|SourceId.N|RepeatList|否|s-xxxxxxxxxxxxxxx|迁移源ID，可以输入多个。
 
  |
 |State|String|否|Available|迁移源状态。取值范围：
 
- -   Unavailable（不可用）
--   Available（可用）
--   InUse（使用中）
+ -   Unavailable（不可用，包括离线和出错）
+-   Available（在线）
+-   InUse（迁移中）
 -   Deleting（删除中）
-
- 迁移源状态详情，请参见[迁移状态](~~121594~~)。
 
  |
 
@@ -59,19 +57,19 @@
 |PageSize|Integer|10|每页行数。
 
  |
-|RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|请求ID。
+|RequestId|String|766A24CA-AA5D-436E-A525-3B870482195C|请求ID。
 
  |
 |SourceServers| | |迁移源数组
 
  |
-|└AgentVersion|String|1.0|SMC客户端版本号。
+|└AgentVersion|String|1.5.2.3|SMC客户端版本号。
 
  |
 |└Architecture|String|x86\_64|迁移源的系统架构。
 
  |
-|└CreationTime|String|2014-07-15T13:00:52Z|迁移源创建时间。
+|└CreationTime|String|2019-06-27T02:58:09Z|迁移源的注册时间。
 
  |
 |└DataDisks| | |迁移源的数据盘数组。
@@ -80,34 +78,31 @@
 |└Index|Integer|1|数据盘顺序。
 
  |
-|└Path|String|PATH|数据盘N路径。
+|└Path|String|/home/data|数据盘N路径。
 
  |
-|└Size|Integer|40|数据盘N大小。单位为GiB。
+|└Size|Integer|20|数据盘N大小。单位为GiB。
 
  |
-|└Description|String|This is a source server.|迁移源描述。
+|└Description|String|Server Source Imported By GotoAliyun.|迁移源描述。
 
  |
-|└ErrorCode|String|403|错误码。
+|└ErrorCode|String|SourceServer.Offline|迁移源状态错误码。
 
  |
-|└HeartbeatRate|Integer|60|Agent心跳频率。单位：秒。
+|└HeartbeatRate|Integer|30|SMC客户端（SMC Agent）心跳频率。单位：秒。
 
  |
 |└JobId|String|j-xxxxxxxxxxxxxxx|最近一次的迁移任务ID。
 
  |
-|└JobName|String|MyMigrationTask|最近一次迁移任务名称。
-
- |
 |└KernelLevel|Integer|1|内核版本级别。
 
  |
-|└Name|String|SourceServerName|迁移源名称。
+|└Name|String|SourceServerName|迁移源的名称。
 
  |
-|└Platform|String|Windows Server 2008|迁移源的系统平台。
+|└Platform|String|OpenSUSE|迁移源的系统平台。
 
  |
 |└ReplicationDriver|String|SMT|复制驱动器。默认值：SMT（迁云工具）。
@@ -116,32 +111,39 @@
 |└SourceId|String|s-xxxxxxxxxxx|迁移源ID。
 
  |
-|└State|String|Available|迁移源状态。
+|└State|String|InUse|迁移源状态。
 
  |
-|└StatusInfo|String|Available|迁移源状态详细信息。
-
- |
-|└SystemDiskSize|Integer|40|目标云服务器的系统盘大小。单位为GiB。
-
- |
-|└SystemInfo|String|HOTENAME hostname|迁移源系统信息。Json格式键值对，可扩展，键值固定。大小不超过1KB。如：
+|└StatusInfo|String|\{"error\_code": "S1", "error\_msg": "Rsync not found. Please install rsync."\}|迁移源状态详细信息。该参数在迁移源状态为异常时返回。JSON格式键值对，如：
 
  ```
 
-HOSTNAME 主机名
-IPV4 IPv4地址
-IPV6 IPv6地址
-MAC 网卡mac地址
-KERNEL 内核版本
-VENDER 制造商
-CORES cpu核数
-MEMORY 内存
+error_code 错误码
+error_msg 错误信息
 
 ```
 
  |
-|TotalCount|Integer|5|迁移源总数。
+|└SystemDiskSize|Integer|40|迁移源的系统盘大小。单位为GiB。
+
+ |
+|└SystemInfo|String|\{\\"agent\_mode\\":\\"daemon\\",\\"agent\_type\\":\\"aliyun\\",\\"client\_type\\":\\"\\",\\"cores\\":\\"2\\",\\"cpu\_usage\\":\\"0.00\\",\\"hostname\\":\\"ixxxxxxxxxx\\",\\"ipv4\\":\\"10.0.0.1\\",\\"memory\\":\\"8.00\\",\\"memory\_usage\\":\\"3.61\\"\}|迁移源系统信息。JSON格式键值对，可扩展，键值固定。大小不超过1KB。如：
+
+ ```
+
+AGENT_MODE 迁移模式
+HOSTNAME 主机名
+IPV4 IPv4地址
+IPV6 IPv6地址
+CORES cpu核数
+CPU_USAGE CPU使用率
+MEMORY 内存
+MEMORY_USAGE 内存使用率
+
+```
+
+ |
+|TotalCount|Integer|1|迁移源总数。
 
  |
 
@@ -162,34 +164,31 @@ http(s)://smc.aliyuncs.com/?Action=DescribeSourceServers
 <DescribeSourceServersReponse>
   <PageNumber>1</PageNumber>
   <PageSize>10</PageSize>
-  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
-  <TotalCount>5</TotalCount>
+  <RequestId>766A24CA-AA5D-436E-A525-3B870482195C</RequestId>
+  <TotalCount>1</TotalCount>
   <SourceServers>
     <SourceServer>
-      <AgentVesion>1.0</AgentVesion>
+      <AgentVesion>1.5.2.3</AgentVesion>
+      <ReplicationDriver>SMT</ReplicationDriver>
+      <Description>Server Source Imported By GotoAliyun.</Description>
+      <SystemDiskSize>40</SystemDiskSize>
+      <HeartbeatRate>30</HeartbeatRate>
       <Architecture>x86_64</Architecture>
-      <CreationTime>2014-07-15T13:00:52Z</CreationTime>
       <DataDisks>
         <DataDisk>
           <Index>1</Index>
-          <Path>PATH</Path>
-          <Size>40</Size>
+          <Path>/home/data</Path>
+          <Size>20</Size>
         </DataDisk>
       </DataDisks>
-      <Description>This is a source server.</Description>
-      <ErrorCode>InternalError</ErrorCode>
-      <HeartbeatRate>60</HeartbeatRate>
-      <JobId>j-xxxxxxxxxxxxxxx</JobId>
-      <JobName>MyMiagration Task</JobName>
-      <KernelLevel>1</KernelLevel>
+      <SourceId>s-xxxxxxxxxx</SourceId>
+      <SystemInfo>{\"agent_mode\":\"daemon\",\"agent_type\":\"aliyun\",\"client_type\":\"\",\"cores\":\"2\",\"cpu_usage\":\"0.00\",\"hostname\":\"ixxxxxxxxxx\",\"ipv4\":\"10.0.0.1\",\"memory\":\"8.00\",\"memory_usage\":\"3.61\"}</SystemInfo>
       <Name>SourceServerName</Name>
-      <Platform>Windows Server 2008</Platform>
-      <ReplicationDriver>SMT</ReplicationDriver>
-      <SourceId>s-sourceid1</SourceId>
-      <State>Available</State>
-      <StatusInfo>statusinfo1</StatusInfo>
-      <SystemDiskSize>40</SystemDiskSize>
-      <SystemInfo>HOSTNAME hostname</SystemInfo>
+      <CreationTime>2019-06-27T02:58:09Z</CreationTime>
+      <State>InUse</State>
+      <JobId>j-xxxxxxxxxxxxxxx</JobId>
+      <KernelLevel>1</KernelLevel>
+      <Platform>OpenSUSE</Platform>
     </SourceServer>
   </SourceServers>
 </DescribeSourceServersReponse>
@@ -201,38 +200,37 @@ http(s)://smc.aliyuncs.com/?Action=DescribeSourceServers
 ``` {#json_return_success_demo}
 {
 	"PageNumber":1,
-	"TotalCount":"5",
+	"TotalCount":1,
 	"PageSize":10,
-	"RequestId":"473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E",
+	"RequestId":"766A24CA-AA5D-436E-A525-3B870482195C",
 	"SourceServers":{
 		"SourceServer":[
 			{
+				"AgentVersion":"1.5.2.3",
 				"ReplicationDriver":"SMT",
-				"Description":"This is a source server.",
-				"SystemDiskSize":"40",
-				"HeartbeatRate":"60",
-				"JobName":"MyMiagration Task",
+				"Description":"Server Source Imported By GotoAliyun.",
+				"SystemDiskSize":40,
+				"HeartbeatRate":30,
+				"JobName":"MyMigrationTask",
 				"Architecture":"x86_64",
 				"DataDisks":{
 					"DataDisk":[
 						{
-							"Index":"1",
-							"Size":"40",
-							"Path":"PATH"
+							"Index":1,
+							"Path":"/home/data",
+							"Size":20
 						}
 					]
 				},
-				"SourceId":"s-sourceid1",
-				"SystemInfo":"HOSTNAME hostname",
-				"CreationTime":"2014-07-15T13:00:52Z",
-				"Name":"SourceServerName",
-				"StatusInfo":"statusinfo1",
-				"State":"Available",
-				"JobId":"j-xxxxxxxxxxxxxxx",
-				"KernelLevel":"1",
-				"AgentVesion":"1.0",
-				"ErrorCode":"InternalError",
-				"Platform":"Windows Server 2008"
+				"SourceId":"s-xxxxxxxxxxx",
+				"SystemInfo":"{\"agent_mode\":\"daemon\",\"agent_type\":\"aliyun\",\"client_type\":\"\",\"cores\":\"2\",\"cpu_usage\":\"0.00\",\"hostname\":\"ixxxxxxxxxxx\",\"ipv4\":\"10.0.0.1\",\"memory\":\"8.00\",\"memory_usage\":\"3.61\"}",
+				"Name":"sourceServerName",
+				"CreationTime":"2019-06-27T02:58:09Z",
+				"State":"InUse",
+				"JobId":"j-xxxxxxxxxx",
+				"KernelLevel":1,
+				"ErrorCode":"",
+				"Platform":"OpenSUSE"
 			}
 		]
 	}
