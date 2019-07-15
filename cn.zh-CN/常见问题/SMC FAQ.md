@@ -3,14 +3,14 @@
 -   一般性FAQ
     -   [我在什么场景下使用服务器迁移中心SMC？](#section_lqm_mcj_ht2)
     -   [服务器迁移中心SMC支持哪些迁移方式？](#section_ry6_ron_ify)
+    -   [在一台物理主机数据库服务器上有单实例Oracle数据库，在向阿里云做迁移时，应该选择整台服务器（包含操作系统、数据库）迁移，还是选择数据库迁移（仅迁移数据库）？两种方式都有哪些利弊？](#section_7wr_yaq_j99)
     -   [SMC的迁移过程是什么？](#section_h30_ti7_cno)
     -   [SMC是否支持断点续传？](#section_jas_0vg_mmr)
     -   [SMC是否支持增量迁移数据？](#section_qnr_e43_55i)
     -   [迁移中断或提示失败时，如何处理？](#section_aao_rej_1jy)
     -   [中转实例的规格有哪些？](#section_lii_mn5_7ki)
     -   [关于中转实例，我需要注意什么？](#section_vqn_j3d_190)
-    -   [为什么日志提示子账号权限不足Forbidden.SubUser？](#section_rv9_gi2_v8k)
-    -   [我的服务器在出方向需要访问哪些公网地址和端口？](#section_ora_z1t_efs)
+    -   [我的待迁移服务器需要在出方向访问哪些公网地址和端口？](#section_ora_z1t_efs)
     -   [阿里云支持激活哪些Windows Server？](#section_447_0cw_ulc)
     -   [如何安装Rsync？](#section_6ai_ig1_k06)
     -   [如何关闭SELinux？](#section_8za_stx_q0e)
@@ -21,12 +21,14 @@
     -   [我想要重新导入迁移源，怎么办？](#section_uez_q5r_a20)
     -   [迁移源为非在线状态时，无法创建迁移任务怎么办？](#section_weo_he3_b2a)
     -   [为什么无法删除迁移源？](#section_nu9_xbl_bad)
-    -   [为什么新建迁移任务页面没有出现数据盘配置项，怎么办？](#section_nt4_qfc_tev)
+    -   [为什么新建迁移任务页面没有出现数据盘配置项？怎么办？](#section_nt4_qfc_tev)
     -   [迁移进行中或迁移报错时，是否可以为迁移源新建迁移任务？](#section_25p_nj0_7r5)
     -   [迁移任务多久过期？过期后会怎样？](#section_oe7_6bl_vu6)
+    -   [迁移任务状态有哪些？分别表示什么？](#section_228_crt_kbx)
 -   故障排查FAQ
-    -   [日志提示“Your Account Haven't Completed Real-name Authentication.”错误，怎么办？](#section_7vo_kuy_s0k)
-    -   [日志提示“Your Account Haven't Authorized For SMC RAM Role.”错误，怎么办？](#section_0b6_33l_aa2)
+    -   [日志提示子账号权限不足Forbidden.SubUser，怎么办？](#section_tqr_azb_drh)
+    -   [日志提示Your Account Haven't Completed Real-name Authentication错误，怎么办？](#section_7vo_kuy_s0k)
+    -   [日志提示Your Account Haven't Authorized For SMC RAM Role错误，怎么办？](#section_0b6_33l_aa2)
     -   [日志提示IllegalTimestamp错误，怎么办？](#section_kg8_hvy_brj)
     -   [日志提示InvalidAccountStatus.NotEnoughBalance错误，怎么办？](#section_pxf_i43_kcs)
     -   [日志提示Forbidden.RAM错误，怎么办？](#section_5qw_dzv_7z7)
@@ -57,16 +59,25 @@
 
 ## 我在什么场景下使用服务器迁移中心SMC？ {#section_lqm_mcj_ht2 .section}
 
-SMC可将待迁移物理服务器、虚拟机以及其他云平台云主机一站式地迁移到阿里云ECS，支持迁移主流Windows和Linux操作系统。更多详情，请参见[什么是服务器迁移中心](../cn.zh-CN/产品简介/什么是服务器迁移中心.md#)。
+SMC可将待迁移物理服务器、虚拟机以及其他云平台云主机一站式地迁移到阿里云ECS，支持迁移主流Windows和Linux操作系统。详情请参见[什么是服务器迁移中心](../cn.zh-CN/产品简介/什么是服务器迁移中心.md#)。
 
 ## 服务器迁移中心SMC支持哪些迁移方式？ {#section_ry6_ron_ify .section}
 
 SMC支持控制台迁移模式和一次性迁移模式。
 
--   控制台迁移模式：通过SMC客户端导入迁移源信息后，登录SMC控制台为迁移源创建并完成迁移任务。具体步骤请参见[迁移流程](../cn.zh-CN/用户指南/迁移流程.md#)。
--   一次性迁移模式：无需控制台操作，通过SMC客户端配置信息后，运行客户端将源服务器迁移至阿里云。具体步骤请参见[使用SMC客户端一次性迁移模式](../cn.zh-CN/最佳实践/使用SMC客户端一次性迁移模式.md#)。
+-   控制台迁移模式：通过SMC客户端导入迁移源信息后，登录SMC控制台为迁移源创建并完成迁移任务。具体步骤，请参见[迁移流程](../cn.zh-CN/用户指南/迁移流程.md#)。
+-   一次性迁移模式：无需控制台操作，通过SMC客户端配置信息后，运行客户端将源服务器迁移至阿里云。具体步骤，请参见[使用SMC客户端一次性迁移模式](../cn.zh-CN/最佳实践/使用SMC客户端一次性迁移模式.md#)。
+
+## 在一台物理主机数据库服务器上有单实例Oracle数据库，在向阿里云做迁移时，应该选择整台服务器（包含操作系统、数据库）迁移，还是选择数据库迁移（仅迁移数据库）？两种方式都有哪些利弊？ {#section_7wr_yaq_j99 .section}
+
+请根据您的实际需要，选择迁移方式。 两种迁移方式的利弊如下：
+
+-   如果您只需要Oracle数据库应用，则仅迁移Oracle应用更为轻量合适。缺点是您需要重新考虑Oracle应用的部署接入方式。
+-   如果您既需要Oracle应用，又依赖整体操作系统的应用环境，则整体迁移服务器至阿里云更为方便。缺点是如果服务器整体量大，则迁移周期较长。
 
 ## SMC的迁移过程是什么？ {#section_h30_ti7_cno .section}
+
+SMC的迁移过程如下：
 
 1.  将迁移源信息导入SMC控制台。
 2.  SMC后台服务准备中转实例。
@@ -79,7 +90,7 @@ SMC支持控制台迁移模式和一次性迁移模式。
 
 ## SMC是否支持增量迁移数据？ {#section_qnr_e43_55i .section}
 
-不支持。建议在迁移前先暂停如数据库或容器服务之类的应用，或者使用SMC客户端的Excludes目录配置需排除的相关应用目录，迁移完成后再同步数据。排除目录的步骤，请参见[如何过滤、排除不需要迁移的文件或目录？](#section_9xm_osd_b9i)。
+不支持。建议在迁移前先暂停如数据库或容器服务之类的应用，或者使用SMC客户端的Excludes目录配置需排除的相关应用目录，迁移完成后再同步数据。排除目录的步骤，请参见[如何过滤、排除不需要迁移的文件或目录？](#section_9xm_osd_b9i)
 
 ## 迁移中断或提示失败时，如何处理？ {#section_aao_rej_1jy .section}
 
@@ -100,32 +111,28 @@ SMC会按下列顺序，依次选择符合条件的实例规格来创建中转�
 
 ## 关于中转实例，我需要注意什么？ {#section_vqn_j3d_190 .section}
 
--   SMC自动创建、启动、停止和释放中转实例No\_Delete\_SMC\_Transition\_Instance。为保证顺利完成迁移任务，请勿干预中转实例的运行状态。
+有关中转实例的注意事项如下：
+
+-   SMC自动创建、启动、停止和释放中转实例`No_Delete_SMC_Transition_Instance`。为保证顺利完成迁移任务，请勿干预中转实例的运行状态。
 -   中转实例的默认安全组在入方向开放了8080和8703端口，这是中转实例的迁移服务端口，请勿修改或删除该安全组配置。
--   迁移任务完成后，中转实例会被自动释放，如果迁移失败，需要手动[释放实例](../cn.zh-CN/实例/管理实例/释放实例.md#)。
+-   迁移任务完成后，中转实例会被自动释放，如果迁移失败，需要手动释放实例。释放步骤，请参见[释放实例](../cn.zh-CN/实例/管理实例/释放实例.md#)。
 
-## 为什么日志提示子账号权限不足Forbidden.SubUser？ {#section_rv9_gi2_v8k .section}
+## 我的待迁移服务器需要在出方向访问哪些公网地址和端口？ {#section_ora_z1t_efs .section}
 
-SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建中转实例和云盘等资源，该操作属于下单操作。某些服务商账号如七牛云和联通沃云可能不具备该权限，如果有迁移需求，可以[联系我们](cn.zh-CN/常见问题/联系我们.md#)。
+确认源服务器能访问以下服务地址和端口。
 
-## 我的服务器在出方向需要访问哪些公网地址和端口？ {#section_ora_z1t_efs .section}
-
-确认源服务器能访问以下服务地址IP端口：
-
--   云服务器ECS：`https://ecs.aliyuncs.com` 443端口。有关其他地域ECS服务地址，请参见[接入地址](../cn.zh-CN/API参考/快速入门/请求结构.md#)。
--   专有网络VPC：`http://vpc.aliyuncs.com` 443端口。
--   安全凭证STS：`https://sts.aliyuncs.com` 443端口。
--   中转实例：公网IP地址8080和8703端口。使用[VPC内网迁移](../../../../../cn.zh-CN/迁移服务/P2V 迁云工具/VPC内网迁云.md#)方案时，访问私有IP地址。
+-   服务器迁移中心SMC：`https://smc.aliyuncs.com`443端口。
+-   中转实例：公网IP地址8080和8703端口。使用VPC内网迁移方案时，需访问私有IP地址。VPC内网迁移详情，请参见[VPC内网迁移](../../../../../cn.zh-CN/迁移服务/P2V 迁云工具/VPC内网迁云.md#)。
 
 **说明：** 源服务器不需要开放任何入方向的端口，但是需要在出方向访问上述公网地址和端口。
 
 ## 阿里云支持激活哪些Windows Server？ {#section_447_0cw_ulc .section}
 
-支持自动激活Windows Server 2003、2008、2012和2016。其他不在此列版本的Windows如果迁移至ECS，需要[申请许可移动性证](https://help.aliyun.com/document_detail/84749.html)。
+支持自动激活Windows Server 2003、2008、2012和2016。其他不在此列版本的Windows如果迁移至ECS，需要申请许可移动性证，详情请参见[申请许可移动性证](https://help.aliyun.com/document_detail/84749.html)。
 
 ## 如何安装Rsync？ {#section_6ai_ig1_k06 .section}
 
-请您根据源服务器的操作系统选择相应的命令安装。
+请您根据源服务器的操作系统选择相应的命令安装Rsync。
 
 -   CentOS：运行`yum -y install rsync`。
 -   Ubuntu：运行`apt-get -y install rsync`。
@@ -135,11 +142,11 @@ SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建
 
 ## 如何关闭SELinux？ {#section_8za_stx_q0e .section}
 
-建议您运行`setenforce 0`临时关闭SELinux，或编辑 /etc/selinux/config文件设置`SELINUX=disabled`。
+建议您运行setenforce 0临时关闭SELinux，或编辑/etc/selinux/config文件设置`SELINUX=disabled`。
 
 ## 如何过滤、排除不需要迁移的文件或目录？ {#section_9xm_osd_b9i .section}
 
-排除不需要迁移的文件或目录，需在运行SMC客户端之前配置。配置文件位于客户端Excludes目录下，包括以下文件：
+排除不需要迁移的文件或目录，需在运行SMC客户端之前配置。配置文件位于客户端Excludes目录下，包括以下文件。
 
 -   系统盘配置文件：rsync\_excludes\_win.txt（Windows系统）或rsync\_excludes\_linux.txt（Linux系统）
 
@@ -224,7 +231,7 @@ SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建
 
 ## 我想要重新导入迁移源，怎么办？ {#section_uez_q5r_a20 .section}
 
-您需要先删除迁移源后，再重新运行客户端导入迁移源。如果迁移源已和迁移任务关联，您需要先删除与之关联的迁移任务，再删除迁移源。
+您需要先删除迁移源后，再重新运行客户端导入迁移源。若迁移源已和迁移任务关联，请先删除与之关联的迁移任务，再删除迁移源。
 
 ## 误释放了中转实例怎么办？ {#section_1nu_xd1_bip .section}
 
@@ -232,21 +239,21 @@ SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建
 
 ## 迁移源为非在线状态时，无法创建迁移任务怎么办？ {#section_weo_he3_b2a .section}
 
-您需要先修复迁移源状态为在线后，方可新建迁移任务。修复方法如下：
+先修复迁移源状态为在线后，再新建迁移任务。修复方法如下。
 
 -   迁移源状态为离线：
 
-    该状态表明迁移源已和SMC控制台失去联系。您需要重新运行SMC客户端，并且不能关闭客户端直至迁移完成。具体步骤请参见[操作迁移源](../cn.zh-CN/用户指南/操作迁移源.md#)。
+    该状态表明迁移源已和SMC控制台失去联系。您需要重新运行SMC客户端，并且不能关闭客户端直至迁移完成。具体步骤，请参见[操作迁移源](../cn.zh-CN/用户指南/操作迁移源.md#)。
 
 -   迁移源状态为异常或出错：您需要检查控制台日志、客户端日志（Logs目录下）和客户端界面显示的错误信息，根据提示处理。您也可以参考本文中的错误码及处理方法。若仍无法修复问题，请[联系我们](cn.zh-CN/常见问题/联系我们.md#)。
 
 ## 为什么无法删除迁移源？ {#section_nu9_xbl_bad .section}
 
-因为迁移源关联了尚未完成的迁移任务。您需要先暂停、删除迁移任务后，再删除迁移源。
+因为迁移源关联了尚未完成的迁移任务。您需要先暂停并删除迁移任务后，再删除迁移源。
 
-## 为什么新建迁移任务页面没有出现数据盘配置项，怎么办？ {#section_nt4_qfc_tev .section}
+## 为什么新建迁移任务页面没有出现数据盘配置项？怎么办？ {#section_nt4_qfc_tev .section}
 
-SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您的迁移源没有数据盘，或数据盘未挂载，新建迁移任务页面便不会出现数据盘配置项。若您需要迁移数据盘，需完成以下操作：
+SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您的迁移源没有数据盘，或数据盘未挂载，新建迁移任务页面便不会出现数据盘配置项。若您需要迁移未挂载的数据盘，需完成以下操作：
 
 1.  挂载数据盘。
 2.  重新运行SMC客户端。
@@ -254,22 +261,61 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 ## 迁移进行中或迁移报错时，是否可以为迁移源新建迁移任务？ {#section_25p_nj0_7r5 .section}
 
-不可以。当迁移源关联的迁移任务正在运行中或出错时，您需要暂停或删除迁移任务后，再重新新建迁移任务。
+不可以。处理方式如下：
+
+-   迁移源关联的迁移任务正在运行中时，先暂停并删除迁移任务后，再为迁移源新建迁移任务。
+-   迁移源关联的迁移任务出错时，先删除迁移任务后，再为迁移源新建迁移任务。
 
 ## 迁移任务多久过期？过期后会怎样？ {#section_oe7_6bl_vu6 .section}
 
-通过SMC控制台创建迁移任务时，由于控制台不提供过期时间的设置方式，因此任务的默认有效期为30天。通过[CreateReplicationJob](../cn.zh-CN/API参考/迁云任务/CreateReplicationJob.md#)创建迁移任务时，您可根据实际需要设置任务的有效期（有效期范围为7天~90天）。
+通过SMC控制台创建迁移任务时，由于控制台不提供过期时间的设置方式，因此任务的默认有效期为30天。通过CreateReplicationJob创建迁移任务时，您可根据实际需要设置任务的有效期（有效期范围为7天~90天）。API详情，请参见[CreateReplicationJob](../cn.zh-CN/API参考/迁云任务/CreateReplicationJob.md#)。
 
-迁移任务创建后，开始计算有效期。任务过期后：
+迁移任务创建后，开始计算有效期。任务过期后的处理方式如下：
 
 -   迁移任务状态为Running（运行中）时，不做处理。
 -   迁移任务状态为Ready（未开始）、Stopped（已暂停）和 InError（出错）时，标记为过期状态。过期7天后，SMC自动清理迁移任务。
 
-## 日志提示“Your Account Haven't Completed Real-name Authentication.”错误，怎么办？ {#section_7vo_kuy_s0k .section}
+## 迁移任务状态有哪些？分别表示什么？ {#section_228_crt_kbx .section}
+
+迁移任务的状态分为以下两种：
+
+-   迁移任务主状态：迁移任务整个生命周期的状态。
+-   迁移任务业务状态：迁移任务运行中（Running）的阶段状态。
+
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156318227651026_zh-CN.png)
+
+|迁移任务主状态|状态描述|该状态下您可以进行的操作|
+|:------|:---|:-----------|
+|未开始（Ready）|迁移任务已创建，未启动|启动迁移任务。|
+|运行中（Running）|迁移任务正在运行中。运行中（Runing）状态不会直接显示在SMC控制台，而是以[业务状态](#table_6p3_f67_5zr)的形式展示在迁移任务的**状态**列|等待迁移任务运行结束，或在迁移任务状态为**同步中（Syncing）**时暂停迁移任务。 **说明：** 您无法删除正在运行中的迁移任务。
+
+ |
+|已暂停（Stopped）|迁移任务已暂停|重启或删除迁移任务。|
+|出错（InError）|迁移任务已失败|查看客户端或控制台的提示信息或迁移日志，了解失败原因，修复问题。如果失败由客户端引起（如迁移源状态为离线、异常等），您需要先重启客户端，再重启迁移任务。|
+|已完成（Finished）|迁移任务成功结束|前往ECS控制台镜像列表的自定义镜像页面，查看SMC为您生成的镜像。|
+|已过期（Expired）|迁移任务已过期|删除迁移任务。 **说明：** 迁移任务的默认有效期为30天。任务到期后，会被标记为过期状态并保存7天，7天后SMC自动清理该任务。详情请参见[迁移任务多久过期？过期后会怎样？](#section_oe7_6bl_vu6)
+
+ |
+|删除中（Deleting）|迁移任务删除中|等待迁移任务删除完成，或为迁移源新建迁移任务。 **说明：** 删除迁移任务时，SMC会自动释放迁移过程中已创建的相关资源，如中转实例等。需要的时间较长，请您耐心等待。
+
+ |
+
+|迁移任务业务状态|状态描述|该状态下您可以进行的操作|
+|:-------|:---|------------|
+|准备中（Preparing）|您启动迁移任务后，迁移任务状态即更新为准备中|无。|
+|同步中（Syncing）|迁移任务开始上传迁移源数据|您可以暂停迁移任务。|
+|处理中（Processing）|迁移任务正在制作目标镜像中|无。|
+|清除中（Cleaning）|清理中转环境，迁移任务即将完成|无。|
+
+## 日志提示子账号权限不足Forbidden.SubUser，怎么办？ {#section_tqr_azb_drh .section}
+
+SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建中转实例和云盘等资源，该操作属于下单操作。某些服务商账号可能不具备该权限，如果有迁移需求，可以[联系我们](cn.zh-CN/常见问题/联系我们.md#)。
+
+## 日志提示Your Account Haven't Completed Real-name Authentication错误，怎么办？ {#section_7vo_kuy_s0k .section}
 
 该错误表示您的账号需要进行实名认证。实名认证的方法，请参见[准备阿里云账号](../cn.zh-CN/用户指南/准备工作（迁移前必读）.md#section_1yg_nf4_rco)。
 
-## 日志提示“Your Account Haven't Authorized For SMC RAM Role.”错误，怎么办？ {#section_0b6_33l_aa2 .section}
+## 日志提示Your Account Haven't Authorized For SMC RAM Role错误，怎么办？ {#section_0b6_33l_aa2 .section}
 
 您需要为您的账号授予SMC Role相关权限。授权方法请参见[准备阿里云账号](../cn.zh-CN/用户指南/准备工作（迁移前必读）.md#section_1yg_nf4_rco)。
 
@@ -279,17 +325,17 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 ## 日志提示InvalidAccountStatus.NotEnoughBalance错误，怎么办？ {#section_pxf_i43_kcs .section}
 
-中转实例的默认计费方式为[按量付费](../cn.zh-CN/产品定价/按量付费.md#)，您的支付方式余额不足时，无法顺利迁移。您需要更新账户状态后重试。
+中转实例的默认计费方式为按量付费，您的支付方式余额不足时，无法顺利迁移。您需要更新账户状态后重试。按量付费详情，请参见[按量付费](../cn.zh-CN/产品定价/按量付费.md#)。
 
 ## 日志提示Forbidden.RAM错误，怎么办？ {#section_5qw_dzv_7z7 .section}
 
 您使用的RAM账号权限不足，无法使用相关API。
 
-您需要被授权ECS和VPC访问权限`AliyunECSFullAccess`和`AliyunVPCFullAccess`。更多详情，请参见[账号访问控制](../cn.zh-CN/安全/账号访问控制.md#)。
+您需要为RAM账号授予ECS和VPC访问权限`AliyunECSFullAccess`和`AliyunVPCFullAccess`，详情请参见[账号访问控制](../cn.zh-CN/安全/账号访问控制.md#)。
 
 ## 日志提示InvalidImageName.Duplicated错误，怎么办？ {#section_f09_jaz_05u .section}
 
-您指定的参数`image_name`不能与您已有的镜像名称重复。
+您指定的参数image\_name不能与您已有的镜像名称重复。
 
 ## 日志提示InvalidAccountStatus.SnapshotServiceUnavailable错误，怎么办？ {#section_gph_ns2_acq .section}
 
@@ -307,16 +353,16 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 ## 日志提示Create transition vpc failed. \(QuotaExceeded.Vpc: VPC quota exceeded.\)错误，怎么办？ {#section_qur_9g3_nka .section}
 
-该错误表示您的专有网络VPC超出限额。如果您没有为迁移任务设置专有网络VPC和虚拟交换机VSwitch参数，迁移任务运行过程中会自动创建中转VPC&VSwitch，迁移任务运行结束清理中转VPC&VSwitch。
+该错误表示您的专有网络VPC超出限额。如果您没有为迁移任务设置专有网络VPC和虚拟交换机VSwitch参数，迁移任务运行过程中会自动创建中转VPC和VSwitch，迁移任务运行结束清理中转VPC和VSwitch。
 
-每个阿里云账号在一个地域的VPC限额为10。VPC超出限额后，您可通过以下任一方式处理：
+每个阿里云账号在一个地域的VPC限额为10。VPC超出限额后，您可通过以下任一方式处理。
 
--   删除现有VPC。具体步骤请[删除专有网络](../../../../../cn.zh-CN/用户指南/专有网络和子网/管理专有网络.md#section_j4l_1xw_rdb)。
--   [提交工单](https://workorder.console.aliyun.com/)调整VPC限额。
+-   删除现有VPC。具体步骤，请参见[删除专有网络](../../../../../cn.zh-CN/用户指南/专有网络和子网/管理专有网络.md#section_j4l_1xw_rdb)。
+-   调整VPC限额。请您[提交工单](https://workorder.console.aliyun.com/)。
 
 ## 日志提示InvalidAccessKeyId.NotFound错误，怎么办？ {#section_rfn_fot_g83 .section}
 
-该错误表示您输入的访问密钥（AccessKey）不正确。您需要通过以下操作修复该错误：
+该错误表示您输入的访问密钥（AccessKey）不正确。您需要通过以下操作修复该错误。
 
 1.  打开user\_config.json文件。
 2.  删除访问密钥`AccessKeyId`和`AccessKeySecret`的值。
@@ -325,17 +371,17 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 ## 日志提示Do Rsync Disk x Failed错误，怎么办？ {#section_gh1_ywk_103 .section}
 
-该错误表示文件传输中断。您可以按以下步骤检查：
+该错误表示文件传输中断。您可以按以下步骤检查。
 
-1.  查看错误日志文件详细信息。如果错误日志文件中多次出现**return: 3072**或**return: 7680**信息提示，请确认源服务器数据库服务或者容器服务是否未开启状态，例如，Oracle、MySQL、MS SQL Server、MongoDB和Docker等服务。您需要先暂停服务或者排除相关数据文件目录后再迁云。
+1.  查看错误日志文件详细信息。如果错误日志文件中多次出现`return: 3072`或`return: 7680`信息提示，请确认源服务器数据库服务或者容器服务是否未开启状态，例如，Oracle、MySQL、MS SQL Server、MongoDB和Docker等服务。您需要先暂停服务或者排除相关数据文件目录后再迁云。
 2.  依次检查：
     -   中转实例状态是否正常。
-    -   本地网络服务是否正常。迁云工具需要访问80、443、8703和8080通信端口，请确保您的服务器已经放行这些端口。
+    -   本地网络服务是否正常。SMC需要访问80、443、8703和8080通信端口，请确保您的服务器已经放行这些端口。
 3.  问题解决后，再次运行主程序重试。
 
 ## Linux服务器日志错误提示check rsync failed或者rsync not found，怎么办？ {#section_i9v_jy5_513 .section}
 
-请检查迁移源系统是否已安装rsync组件。安装rsync的步骤，请参见[如何安装Rsync？](#section_6ai_ig1_k06)。
+请检查迁移源系统是否已安装rsync组件。安装rsync的步骤，请参见[如何安装Rsync？](#section_6ai_ig1_k06)
 
 ## Linux服务器日志提示check virtio failed错误，怎么办？ {#section_eji_23f_0ry .section}
 
@@ -343,7 +389,7 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 ## Linux服务器日志错误提示check selinux failed，怎么办？ {#section_wdz_y67_4sv .section}
 
-请检查迁移源系统是否已禁用SElinux。禁用SELInux的操作步骤，请参见[如何关闭SELinux？](#section_8za_stx_q0e)。
+请检查迁移源系统是否已禁用SElinux。禁用SELInux的操作步骤，请参见[如何关闭SELinux？](#section_8za_stx_q0e)
 
 ## Linux服务器日志错误提示Do Grub Failed，怎么办？ {#section_284_a0c_8dl .section}
 
@@ -353,14 +399,14 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件后发现显示`VssSnapshotul::VssSnapshotul GetSnapshotul Failed: 0x80042308`。此时您可以：
 
-1.  开启Volume Shadow Copy服务：
+1.  开启Volume Shadow Copy服务。
     1.  在服务器中单击**开始**，在搜索框中输入**服务**，回车确认。
     2.  找到Volume Shadow Copy服务，单击**启动此服务**。
-2.  卸载QEMU Guest Agent软件：
+2.  卸载QEMU Guest Agent软件。
     1.  在服务器中单击**开始**，在搜索框中输入**服务**，回车确认。
     2.  查看是否有QEMU Guest Agent VSS Provider服务，若无该项服务，您可以直接重新运行迁云工具。
     3.  找到卸载脚本，大概位置位于C:\\Program Files \(x86\)\\virtio\\monitor\\uninstall.bat目录，执行脚本卸载QEMU Guest Agent软件。
-3.  重新运行迁云工具。
+3.  重新运行SMC客户端。
 
 ## 迁移Windows服务器后，启动实例被提示需要激活Windows，怎么办？ {#section_kxd_mod_x2b .section}
 
@@ -368,7 +414,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 1.  远程登录Windows实例。
 2.  在[微软KMS Client Keys页面](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/jj612867(v%3dws.11))查询到Windows服务器对应的KMS Client Key，此处假设为xxxx-xxxx-xxxx-xxxx-xxxx。
-3.  使用管理员权限打开命令行工具，运行以下命令：
+3.  使用管理员权限打开命令行工具，依次运行以下命令：
 
     ``` {#codeblock_6vr_a9x_yce}
     slmgr /upk
@@ -382,37 +428,37 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 -   如果数据盘盘符缺失，您可以打开磁盘管理器，重新添加即可。
     1.  打开**控制面板** \> **系统与安全** \> **管理工具** \> **计算机管理**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156196704213371_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156318227713371_zh-CN.png)
 
     2.  找到并右击盘符缺失的数据盘，单击**更改驱动器和路径**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156196704213372_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156318227713372_zh-CN.png)
 
     3.  单击**添加**并添加数据盘盘符。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156196704213373_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156318227713373_zh-CN.png)
 
 -   如果数据盘盘符错乱，您可以打开磁盘管理器，重新更改即可。
     1.  打开**控制面板** \> **系统与安全** \> **管理工具** \> **计算机管理**。
     2.  找到并右击盘符缺失的数据盘，单击**更改驱动器和路径**。
     3.  单击**更改**并更改数据盘盘符。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156196704313374_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156318227713374_zh-CN.png)
 
 
 ## 迁移Windows服务器后，启动实例发现文件权限异常或部分系统菜单目录显示语言不统一，怎么办？ {#section_6l1_guc_ms9 .section}
 
-您需要等待文件系统权限修复操作成功完成。更多详情，请参见[迁移Windows服务器后怎么检查系统？](#section_c5i_33t_xn7)。
+您需要等待文件系统权限修复操作成功完成。更多详情，请参见[迁移Windows服务器后怎么检查系统？](#section_c5i_33t_xn7)
 
 ## 迁移Windows服务器后怎么检查系统？ {#section_c5i_33t_xn7 .section}
 
-迁移Windows系统后初次启动实例时，您需要进行下列检查：
+迁移Windows系统后初次启动实例时，您需要进行下列检查。
 
 1.  检查系统盘数据是否完整。
 2.  如果有数据盘缺失，进入磁盘管理检查盘符是否丢失。
-3.  等待文件系统权限修复过程完成后，选择是否重启实例：
+3.  等待文件系统权限修复过程完成后，选择是否重启实例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22635/156196704313956_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22635/156318227713956_zh-CN.png)
 
     **说明：** 初次启动ECS实例后，如果文件系统权限修复程序未自启动，您可以运行C:\\go2aliyun\_prepare\\go2aliyun\_restore.exe手动修复。执行前要确保实例上的磁盘数量和盘符路径跟源系统保持一致。
 
@@ -421,26 +467,26 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 ## 迁移Linux服务器后怎么检查系统？ {#section_8nx_71l_ksv .section}
 
-迁移Linux系统后初次启动实例时：
+迁移Linux系统后初次启动实例时，您需要进行以下检查。
 
 1.  检查系统盘数据是否完整。
-2.  如果有数据盘，您需要自行[挂载数据盘](../cn.zh-CN/块存储/云盘/挂载云盘.md#)。
+2.  如果有数据盘，您需要自行挂载数据盘。详情请参见[挂载数据盘](../cn.zh-CN/块存储/云盘/挂载云盘.md#)。
 3.  检查网络服务是否正常。
 4.  然后检查其他系统服务是否正常。
 
 ## 迁移Linux服务器后，启动实例发现原数据盘目录下没有数据，怎么办？ {#section_rak_i9w_gky .section}
 
-迁移带数据盘的Linux服务器后，启动实例时默认不挂载数据盘。您可以在启动ECS实例后运行`ls /dev/vd*`命令查看数据盘设备，根据实际需要手动挂载，并编辑`/etc/fstab`配置开机自动挂载。
+迁移带数据盘的Linux服务器后，启动实例时默认不挂载数据盘。您可以在启动ECS实例后运行ls /dev/vd\*命令查看数据盘设备，根据实际需要手动挂载，并编辑/etc/fstab配置开机自动挂载。
 
 ## 迁移Linux服务器后，根据该自定义镜像创建的实例为何不能启动？ {#section_4wq_e1j_can .section}
 
-您需要进行下列检查：
+您需要进行下列检查。
 
 -   检查驱动。创建I/O优化的实例时，请确保源服务器已经安装[virtio驱动](../cn.zh-CN/镜像/自定义镜像/导入镜像/安装virtio驱动.md#)。
 -   检查源系统引导配置是否正确。
 -   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](../cn.zh-CN/实例/连接实例/连接Linux实例/使用管理终端连接Linux实例.md#)登录实例发现开机界面如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156196704350179_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156318227850179_zh-CN.png)
 
     您需要升级GRUB系统引导程序至1.9版本以上后，重新迁移。升级GRUB的步骤，请参见[如何为Linux服务器安装GRUB](../../../../../cn.zh-CN/镜像/常见问题/如何为Linux服务器安装GRUB.md#)。
 
@@ -463,7 +509,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 SMC为您的迁移源生成一份自定义镜像。您可以在迁移任务页面，找到您的迁移任务，在**迁移结果**栏单击红框中的链接，可查看该自定义镜像。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156196704350103_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156318227850103_zh-CN.png)
 
 ## 迁移后创建的ECS实例hostname依旧保留了其他云平台的名称，如何解决？ {#section_6py_r5e_qgz .section}
 
