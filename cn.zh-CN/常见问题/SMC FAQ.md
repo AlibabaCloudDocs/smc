@@ -288,7 +288,7 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 迁移任务主状态和业务状态的关系如下图所示。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156343556351026_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156343978251026_zh-CN.png)
 
 |迁移任务主状态|状态说明|该状态下您可以进行的操作|
 |:------|:---|:-----------|
@@ -331,7 +331,7 @@ SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建
 
 ## 日志提示Forbidden.Unauthorized错误，怎么办？ {#section_xl0_pjl_069 .section}
 
-该错误表示您需要为当前RAM用户授予AliyunSMCFullAccesss权限。授权方法，请参见[准备阿里云账号](../cn.zh-CN/用户指南/迁移前必读：准备工作.md#section_1yg_nf4_rco)。
+该错误表示您需要为当前RAM用户授予AliyunSMCFullAccess权限。授权方法，请参见[准备阿里云账号](../cn.zh-CN/用户指南/迁移前必读：准备工作.md#section_1yg_nf4_rco)。
 
 ## 日志提示Your Account Haven't Completed Real-name Authentication错误，怎么办？ {#section_7vo_kuy_s0k .section}
 
@@ -453,22 +453,22 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 -   如果数据盘盘符缺失，您可以打开磁盘管理器，重新添加即可。
     1.  打开**控制面板** \> **系统与安全** \> **管理工具** \> **计算机管理**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343556313371_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343978313371_zh-CN.png)
 
     2.  找到并右击盘符缺失的数据盘，单击**更改驱动器和路径**。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343556313372_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343978313372_zh-CN.png)
 
     3.  单击**添加**并添加数据盘盘符。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343556413373_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343978313373_zh-CN.png)
 
 -   如果数据盘盘符错乱，您可以打开磁盘管理器，重新更改即可。
     1.  打开**控制面板** \> **系统与安全** \> **管理工具** \> **计算机管理**。
     2.  找到并右击盘符缺失的数据盘，单击**更改驱动器和路径**。
     3.  单击**更改**并更改数据盘盘符。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343556413374_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22638/156343978413374_zh-CN.png)
 
 
 ## 迁移Windows服务器后，启动实例发现文件权限异常或部分系统菜单目录显示语言不统一，怎么办？ {#section_6l1_guc_ms9 .section}
@@ -483,7 +483,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 2.  如果有数据盘缺失，进入磁盘管理检查盘符是否丢失。
 3.  等待文件系统权限修复过程完成后，选择是否重启实例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22635/156343556413956_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22635/156343978413956_zh-CN.png)
 
     **说明：** 初次启动ECS实例后，如果文件系统权限修复程序未自启动，您可以运行C:\\go2aliyun\_prepare\\go2aliyun\_restore.exe手动修复。执行前要确保实例上的磁盘数量和盘符路径跟源系统保持一致。
 
@@ -511,7 +511,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 -   检查源系统引导配置是否正确。
 -   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](../cn.zh-CN/实例/连接实例/连接Linux实例/使用管理终端连接Linux实例.md#)登录实例发现开机界面如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156343556450179_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156343978450179_zh-CN.png)
 
     您需要升级GRUB系统引导程序至1.9版本以上后，重新迁移。升级GRUB的步骤，请参见[如何为Linux服务器安装GRUB](../../../../../cn.zh-CN/镜像/常见问题/如何为Linux服务器安装GRUB.md#)。
 
@@ -534,7 +534,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 SMC为您的迁移源生成一份自定义镜像。您可以在迁移任务页面，找到您的迁移任务，在**迁移结果**栏单击红框中的链接，可查看该自定义镜像。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156343556450103_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156343978450103_zh-CN.png)
 
 ## 迁移后创建的ECS实例hostname依旧保留了其他云平台的名称，如何解决？ {#section_6py_r5e_qgz .section}
 
