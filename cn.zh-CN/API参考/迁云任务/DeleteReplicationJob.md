@@ -7,9 +7,9 @@
 -   迁移任务删除后不可恢复。
 -   迁移任务删除后自动释放已创建的相关资源，如中转实例等。
 
-## 调试 {#apiExplorer .section}
+## 调试 {#api_explorer .section}
 
-前往【[API Explorer](https://api.aliyun.com/#product=smc&api=DeleteReplicationJob)】在线调试，API Explorer 提供在线调用 API、动态生成 SDK Example 代码和快速检索接口等能力，能显著降低使用云 API 的难度，强烈推荐使用。
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=smc&api=DeleteReplicationJob&type=RPC&version=2019-06-01)
 
 ## 请求参数 {#parameters .section}
 
@@ -22,7 +22,7 @@
 
  |
 
-## 返回参数 {#resultMapping .section}
+## 返回数据 {#resultMapping .section}
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
@@ -46,9 +46,8 @@ http(s)://smc.aliyuncs.com/?Action=DeleteReplicationJob
 
 ``` {#xml_return_success_demo}
 <DeleteReplicationJobResponse>
-  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
+    <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
 </DeleteReplicationJobResponse>
-
 ```
 
 `JSON` 格式
@@ -66,5 +65,5 @@ http(s)://smc.aliyuncs.com/?Action=DeleteReplicationJob
 |400|ReplicationJob.InvalidStatus|The specified replication job status is invalid.|无效的迁移任务状态|
 |500|InternalError|An error occurred while processing your request. Please try again. If the problem still exists, please submit a ticket.|内部错误，请重试。如果多次尝试失败，请提交工单|
 
-[查看本产品错误码](https://error-center.aliyun.com/status/product/smc)
+访问[错误中心](https://error-center.aliyun.com/status/product/smc)查看更多错误码。
 
