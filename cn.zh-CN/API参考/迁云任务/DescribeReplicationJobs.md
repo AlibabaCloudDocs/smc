@@ -6,9 +6,9 @@
 
 请求参数的作用类似于一个过滤器，过滤器为逻辑与（AND）关系。如果某一参数为空，则过滤器不起作用。
 
-## 调试 {#apiExplorer .section}
+## 调试 {#api_explorer .section}
 
-前往【[API Explorer](https://api.aliyun.com/#product=smc&api=DescribeReplicationJobs)】在线调试，API Explorer 提供在线调用 API、动态生成 SDK Example 代码和快速检索接口等能力，能显著降低使用云 API 的难度，强烈推荐使用。
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=smc&api=DescribeReplicationJobs&type=RPC&version=2019-06-01)
 
 ## 请求参数 {#parameters .section}
 
@@ -61,7 +61,7 @@
 
  |
 
-## 返回参数 {#resultMapping .section}
+## 返回数据 {#resultMapping .section}
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
@@ -74,88 +74,88 @@
 |ReplicationJobs| | |迁移任务详情集合。
 
  |
-|└BusinessStatus|String|Preparing|迁移任务的业务状态。
+|BusinessStatus|String|Preparing|迁移任务的业务状态。
 
  |
-|└CreationTime|String|2014-07-24T13:00:52Z|迁移任务的创建时间。
+|CreationTime|String|2014-07-24T13:00:52Z|迁移任务的创建时间。
 
  |
-|└DataDisks| | |目标阿里云服务器ECS的数据盘。
+|DataDisks| | |目标阿里云服务器ECS的数据盘。
 
  |
-|└Index|Integer|1|数据盘顺序。
+|Index|Integer|1|数据盘顺序。
 
  |
-|└Size|Integer|40|数据盘大小，单位为GiB。
+|Size|Integer|40|数据盘大小，单位为GiB。
 
  |
-|└Description|String|This is my migration task.|迁移任务的描述。
+|Description|String|This is my migration task.|迁移任务的描述。
 
  |
-|└EndTime|String|2019-06-04T16:00:52Z|迁移任务的完成时间。
+|EndTime|String|2019-06-04T16:00:52Z|迁移任务的完成时间。
 
  |
-|└ErrorCode|String|InternalError|迁移任务的错误码。
+|ErrorCode|String|InternalError|迁移任务的错误码。
 
  |
-|└ImageId|String|xxxxxxxxxxxxxxxx|迁移任务交付的目标镜像ID。
+|ImageId|String|xxxxxxxxxxxxxxxx|迁移任务交付的目标镜像ID。
 
  |
-|└ImageName|String|MyAliCloudImage|迁移任务交付的目标镜像名称。
+|ImageName|String|MyAliCloudImage|迁移任务交付的目标镜像名称。
 
  |
-|└InstanceId|String|i-xxxxxxxxxxxx|目标实例ID。
+|InstanceId|String|i-xxxxxxxxxxxx|目标实例ID。
 
  |
-|└JobId|String|j-xxxxxxxxxxxx|迁移任务ID。
+|JobId|String|j-xxxxxxxxxxxx|迁移任务ID。
 
  |
-|└Name|String|MyMigrationTask|迁移任务名称。
+|Name|String|MyMigrationTask|迁移任务名称。
 
  |
-|└NetMode|Integer|0|迁移时使用的网络类型。
+|NetMode|Integer|0|迁移时使用的网络类型。
 
  |
-|└Progress|Float|55.45|迁移任务总进度。
+|Progress|Float|55.45|迁移任务总进度。
 
  |
-|└RegionId|String|cn-hangzhou|迁移源需迁入的目标阿里云地域ID。
+|RegionId|String|cn-hangzhou|迁移源需迁入的目标阿里云地域ID。
 
  |
-|└ReplicationParameters|String|BandWidthLimit:0|复制驱动器参数信息。
+|ReplicationParameters|String|BandWidthLimit:0|复制驱动器参数信息。
 
  |
-|└ScheduledStartTime|String|2019-06-04T 13:35:00Z|迁移任务的执行时间。
+|ScheduledStartTime|String|2019-06-04T 13:35:00Z|迁移任务的执行时间。
 
  |
-|└SourceId|String|s-xxxxxxxxxxx|迁移源ID。
+|SourceId|String|s-xxxxxxxxxxx|迁移源ID。
 
  |
-|└StartTime|String|2019-06-04T14:40:52Z|迁移任务的开始时间。
+|StartTime|String|2019-06-04T14:40:52Z|迁移任务的开始时间。
 
  |
-|└Status|String|Running|迁移任务的主状态。
+|Status|String|Running|迁移任务的主状态。
 
  |
-|└StatusInfo|String|statusinfo|迁移状态的详细信息。
+|StatusInfo|String|statusinfo|迁移状态的详细信息。
 
  |
-|└SystemDiskSize|Integer|40|目标阿里云服务器ECS的系统盘大小。
+|SystemDiskSize|Integer|40|目标阿里云服务器ECS的系统盘大小。
 
  |
-|└TargetType|String|image|迁移交付的目标类型。
+|TargetType|String|image|迁移交付的目标类型。
 
  |
-|└TransitionInstanceId|String|instanceid2|迁移中转实例ID。
+|TransitionInstanceId|String|instanceid2|迁移中转实例ID。
 
  |
-|└VSwitchId|String|xxxxxxxxxxxxxxx|指定VPC下的虚拟交换机ID。
+|VSwitchId|String|xxxxxxxxxxxxxxx|指定VPC下的虚拟交换机ID。
 
  |
-|└ValidTime|String|2019-06-08T14:40:52Z|迁移任务的过期时间。
+|ValidTime|String|2019-06-08T14:40:52Z|迁移任务的过期时间。
 
  |
-|└VpcId|String|xxxxxxxxxxxxxxx|已配置高速通道服务或者VPN网关的VPC ID。
+|VpcId|String|xxxxxxxxxxxxxxx|已配置高速通道服务或者VPN网关的VPC ID。
 
  |
 |RequestId|String|473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E|请求ID。
@@ -182,47 +182,46 @@ http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
 
 ``` {#xml_return_success_demo}
 <DescribeReplicationJobsResponse>
-  <PageNumber>1</PageNumber>
-  <PageSize>10</PageSize>
-  <ReplicationJobs>
-    <ReplicationJob>
-      <BusinessStatus>Preparing</BusinessStatus>
-      <CreationTime>2014-07-24T13:00:52Z</CreationTime>
-      <DataDisks>
-        <DataDisk>
-          <Index>1</Index>
-          <Size>40</Size>
-        </DataDisk>
-      </DataDisks>
-      <Description>This is my migration task.</Description>
-      <EndTime>2019-06-04T16:00:52Z</EndTime>
-      <ErrorCode>InternalError</ErrorCode>
-      <ImageId>xxxxxxxxxxxxxxx</ImageId>
-      <ImageName>MyAilCloudImage</ImageName>
-      <InstanceId>i-xxxxxxxxxxxxxxx</InstanceId>
-      <JobId>j-xxxxxxxxxxxxxxx</JobId>
-      <Name>MyMiagrationTask</Name>
-      <NetMode>0</NetMode>
-      <Progress>55.45</Progress>
-      <RegionId>cn-hangzhou</RegionId>
-      <ReplicationParameters>BandWidthLimit:0</ReplicationParameters>
-      <ScheduledStartTime>2019-06-04T13:35:00Z</ScheduledStartTime>
-      <SourceId>s-xxxxxxxxxxxxxxx</SourceId>
-      <StartTime>2019-06-04T14:40:52Z</StartTime>
-      <Status>Running</Status>
-      <StatusInfo>statusinfo</StatusInfo>
-      <SystemDiskSize>40</SystemDiskSize>
-      <TargetType>image</TargetType>
-      <TransitionInstanceId>instanceid2</TransitionInstanceId>
-      <VSwitchId>xxxxxxxxxxxxxxx</VSwitchId>
-      <VaildTime>30</VaildTime>
-      <Vpcld>xxxxxxxxxxxxxxx</Vpcld>
-    </ReplicationJob>
-  </ReplicationJobs>
-  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
-  <TotalCount>5</TotalCount>
+	  <PageNumber>1</PageNumber>
+	  <PageSize>10</PageSize>
+	  <ReplicationJobs>
+		    <ReplicationJob>
+			      <BusinessStatus>Preparing</BusinessStatus>
+			      <CreationTime>2014-07-24T13:00:52Z</CreationTime>
+			      <DataDisks>
+				        <DataDisk>
+					          <Index>1</Index>
+					          <Size>40</Size>
+				        </DataDisk>
+			      </DataDisks>
+			      <Description>This is my migration task.</Description>
+			      <EndTime>2019-06-04T16:00:52Z</EndTime>
+			      <ErrorCode>InternalError</ErrorCode>
+			      <ImageId>xxxxxxxxxxxxxxx</ImageId>
+			      <ImageName>MyAilCloudImage</ImageName>
+			      <InstanceId>i-xxxxxxxxxxxxxxx</InstanceId>
+			      <JobId>j-xxxxxxxxxxxxxxx</JobId>
+			      <Name>MyMiagrationTask</Name>
+			      <NetMode>0</NetMode>
+			      <Progress>55.45</Progress>
+			      <RegionId>cn-hangzhou</RegionId>
+			      <ReplicationParameters>BandWidthLimit:0</ReplicationParameters>
+			      <ScheduledStartTime>2019-06-04T13:35:00Z</ScheduledStartTime>
+			      <SourceId>s-xxxxxxxxxxxxxxx</SourceId>
+			      <StartTime>2019-06-04T14:40:52Z</StartTime>
+			      <Status>Running</Status>
+			      <StatusInfo>statusinfo</StatusInfo>
+			      <SystemDiskSize>40</SystemDiskSize>
+			      <TargetType>image</TargetType>
+			      <TransitionInstanceId>instanceid2</TransitionInstanceId>
+			      <VSwitchId>xxxxxxxxxxxxxxx</VSwitchId>
+			      <VaildTime>30</VaildTime>
+			      <Vpcld>xxxxxxxxxxxxxxx</Vpcld>
+		    </ReplicationJob>
+	  </ReplicationJobs>
+	  <RequestId>473469C7-AA6F-4DC5-B3DB-A3DC0DE3C83E</RequestId>
+	  <TotalCount>5</TotalCount>
 </DescribeReplicationJobsResponse>
-
 ```
 
 `JSON` 格式
@@ -277,5 +276,5 @@ http(s)://smc.aliyuncs.com/?Action=DescribeReplicationJobs
 
 ## 错误码 { .section}
 
-[查看本产品错误码](https://error-center.aliyun.com/status/product/smc)
+访问[错误中心](https://error-center.aliyun.com/status/product/smc)查看更多错误码。
 
