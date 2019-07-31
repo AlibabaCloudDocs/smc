@@ -6,9 +6,9 @@
 
 请求参数的作用类似于一个过滤器，过滤器为逻辑与（AND）关系。如果某一参数为空，则过滤器不起作用。
 
-## 调试 {#apiExplorer .section}
+## 调试 {#api_explorer .section}
 
-前往【[API Explorer](https://api.aliyun.com/#product=smc&api=DescribeSourceServers)】在线调试，API Explorer 提供在线调用 API、动态生成 SDK Example 代码和快速检索接口等能力，能显著降低使用云 API 的难度，强烈推荐使用。
+[您可以在OpenAPI Explorer中直接运行该接口，免去您计算签名的困扰。运行成功后，OpenAPI Explorer可以自动生成SDK代码示例。](https://api.aliyun.com/#product=smc&api=DescribeSourceServers&type=RPC&version=2019-06-01)
 
 ## 请求参数 {#parameters .section}
 
@@ -47,7 +47,7 @@
 
  |
 
-## 返回参数 {#resultMapping .section}
+## 返回数据 {#resultMapping .section}
 
 |名称|类型|示例值|描述|
 |--|--|---|--|
@@ -63,58 +63,58 @@
 |SourceServers| | |迁移源数组
 
  |
-|└AgentVersion|String|1.5.2.3|SMC客户端版本号。
+|AgentVersion|String|1.5.2.3|SMC客户端版本号。
 
  |
-|└Architecture|String|x86\_64|迁移源的系统架构。
+|Architecture|String|x86\_64|迁移源的系统架构。
 
  |
-|└CreationTime|String|2019-06-27T02:58:09Z|迁移源的注册时间。
+|CreationTime|String|2019-06-27T02:58:09Z|迁移源的注册时间。
 
  |
-|└DataDisks| | |迁移源的数据盘数组。
+|DataDisks| | |迁移源的数据盘数组。
 
  |
-|└Index|Integer|1|数据盘顺序。
+|Index|Integer|1|数据盘顺序。
 
  |
-|└Path|String|/home/data|数据盘N路径。
+|Path|String|/home/data|数据盘N路径。
 
  |
-|└Size|Integer|20|数据盘N大小。单位为GiB。
+|Size|Integer|20|数据盘N大小。单位为GiB。
 
  |
-|└Description|String|Server Source Imported By GotoAliyun.|迁移源描述。
+|Description|String|Server Source Imported By GotoAliyun.|迁移源描述。
 
  |
-|└ErrorCode|String|SourceServer.Offline|迁移源状态错误码。
+|ErrorCode|String|SourceServer.Offline|迁移源状态错误码。
 
  |
-|└HeartbeatRate|Integer|30|SMC客户端（SMC Agent）心跳频率。单位：秒。
+|HeartbeatRate|Integer|30|SMC客户端（SMC Agent）心跳频率。单位：秒。
 
  |
-|└JobId|String|j-xxxxxxxxxxxxxxx|最近一次的迁移任务ID。
+|JobId|String|j-xxxxxxxxxxxxxxx|最近一次的迁移任务ID。
 
  |
-|└KernelLevel|Integer|1|内核版本级别。
+|KernelLevel|Integer|1|内核版本级别。
 
  |
-|└Name|String|SourceServerName|迁移源的名称。
+|Name|String|SourceServerName|迁移源的名称。
 
  |
-|└Platform|String|OpenSUSE|迁移源的系统平台。
+|Platform|String|OpenSUSE|迁移源的系统平台。
 
  |
-|└ReplicationDriver|String|SMT|复制驱动器。默认值：SMT（迁云工具）。
+|ReplicationDriver|String|SMT|复制驱动器。默认值：SMT（迁云工具）。
 
  |
-|└SourceId|String|s-xxxxxxxxxxx|迁移源ID。
+|SourceId|String|s-xxxxxxxxxxx|迁移源ID。
 
  |
-|└State|String|InUse|迁移源状态。
+|State|String|InUse|迁移源状态。
 
  |
-|└StatusInfo|String|\{"error\_code": "S1", "error\_msg": "Rsync not found. Please install rsync."\}|迁移源状态详细信息。该参数在迁移源状态为异常时返回。JSON格式键值对，如：
+|StatusInfo|String|\{"error\_code": "S1", "error\_msg": "Rsync not found. Please install rsync."\}|迁移源状态详细信息。该参数在迁移源状态为异常时返回。JSON格式键值对，如：
 
  ```
 
@@ -124,10 +124,10 @@ error_msg 错误信息
 ```
 
  |
-|└SystemDiskSize|Integer|40|迁移源的系统盘大小。单位为GiB。
+|SystemDiskSize|Integer|40|迁移源的系统盘大小。单位为GiB。
 
  |
-|└SystemInfo|String|\{\\"agent\_mode\\":\\"daemon\\",\\"agent\_type\\":\\"aliyun\\",\\"client\_type\\":\\"\\",\\"cores\\":\\"2\\",\\"cpu\_usage\\":\\"0.00\\",\\"hostname\\":\\"ixxxxxxxxxx\\",\\"ipv4\\":\\"10.0.0.1\\",\\"memory\\":\\"8.00\\",\\"memory\_usage\\":\\"3.61\\"\}|迁移源系统信息。JSON格式键值对，可扩展，键值固定。大小不超过1KB。如：
+|SystemInfo|String|\{\\"agent\_mode\\":\\"daemon\\",\\"agent\_type\\":\\"aliyun\\",\\"client\_type\\":\\"\\",\\"cores\\":\\"2\\",\\"cpu\_usage\\":\\"0.00\\",\\"hostname\\":\\"ixxxxxxxxxx\\",\\"ipv4\\":\\"10.0.0.1\\",\\"memory\\":\\"8.00\\",\\"memory\_usage\\":\\"3.61\\"\}|迁移源系统信息。JSON格式键值对，可扩展，键值固定。大小不超过1KB。如：
 
  ```
 
@@ -162,37 +162,37 @@ http(s)://smc.aliyuncs.com/?Action=DescribeSourceServers
 
 ``` {#xml_return_success_demo}
 <DescribeSourceServersReponse>
-  <PageNumber>1</PageNumber>
-  <PageSize>10</PageSize>
-  <RequestId>766A24CA-AA5D-436E-A525-3B870482195C</RequestId>
-  <TotalCount>1</TotalCount>
-  <SourceServers>
-    <SourceServer>
-      <AgentVesion>1.5.2.3</AgentVesion>
-      <ReplicationDriver>SMT</ReplicationDriver>
-      <Description>Server Source Imported By GotoAliyun.</Description>
-      <SystemDiskSize>40</SystemDiskSize>
-      <HeartbeatRate>30</HeartbeatRate>
-      <Architecture>x86_64</Architecture>
-      <DataDisks>
-        <DataDisk>
-          <Index>1</Index>
-          <Path>/home/data</Path>
-          <Size>20</Size>
-        </DataDisk>
-      </DataDisks>
-      <SourceId>s-xxxxxxxxxx</SourceId>
-      <SystemInfo>{\"agent_mode\":\"daemon\",\"agent_type\":\"aliyun\",\"client_type\":\"\",\"cores\":\"2\",\"cpu_usage\":\"0.00\",\"hostname\":\"ixxxxxxxxxx\",\"ipv4\":\"10.0.0.1\",\"memory\":\"8.00\",\"memory_usage\":\"3.61\"}</SystemInfo>
-      <Name>SourceServerName</Name>
-      <CreationTime>2019-06-27T02:58:09Z</CreationTime>
-      <State>InUse</State>
-      <JobId>j-xxxxxxxxxxxxxxx</JobId>
-      <KernelLevel>1</KernelLevel>
-      <Platform>OpenSUSE</Platform>
-    </SourceServer>
-  </SourceServers>
+	  <PageNumber>1</PageNumber>
+	  <PageSize>10</PageSize>
+	  <RequestId>766A24CA-AA5D-436E-A525-3B870482195C</RequestId>
+	  <TotalCount>1</TotalCount>
+	  <SourceServers>
+		    <SourceServer>
+			      <AgentVesion>1.5.2.3</AgentVesion>
+                  <ReplicationDriver>SMT</ReplicationDriver>
+                  <Description>Server Source Imported By GotoAliyun.</Description>
+			      <SystemDiskSize>40</SystemDiskSize>
+                  <HeartbeatRate>30</HeartbeatRate>
+                  <Architecture>x86_64</Architecture>			
+			      <DataDisks>
+				        <DataDisk>
+					          <Index>1</Index>
+                              <Path>/home/data</Path>	
+                              <Size>20</Size>	
+				        </DataDisk>
+			      </DataDisks>
+			      <SourceId>s-xxxxxxxxxx</SourceId>
+                  <SystemInfo>{\"agent_mode\":\"daemon\",\"agent_type\":\"aliyun\",\"client_type\":\"\",\"cores\":\"2\",\"cpu_usage\":\"0.00\",\"hostname\":\"ixxxxxxxxxx\",\"ipv4\":\"10.0.0.1\",\"memory\":\"8.00\",\"memory_usage\":\"3.61\"}</SystemInfo>
+			      <Name>SourceServerName</Name>
+                  <CreationTime>2019-06-27T02:58:09Z</CreationTime>
+                  <State>InUse</State>
+                  <JobId>j-xxxxxxxxxxxxxxx</JobId>
+			      <KernelLevel>1</KernelLevel>
+                  <ErrorCode></ErrorCode>
+			      <Platform>OpenSUSE</Platform>					
+		    </SourceServer>
+	  </SourceServers>
 </DescribeSourceServersReponse>
-
 ```
 
 `JSON` 格式
@@ -239,5 +239,5 @@ http(s)://smc.aliyuncs.com/?Action=DescribeSourceServers
 
 ## 错误码 { .section}
 
-[查看本产品错误码](https://error-center.aliyun.com/status/product/smc)
+访问[错误中心](https://error-center.aliyun.com/status/product/smc)查看更多错误码。
 
