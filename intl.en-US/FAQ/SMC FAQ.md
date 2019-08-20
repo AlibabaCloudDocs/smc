@@ -288,7 +288,7 @@ The status of a migration task is divided into the following two types:
 
 The following figure shows the relationship between the migration task status and business status.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156630164751026_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156630172951026_en-US.png)
 
 |Migration task status|Description|Operation that can be performed in this state|
 |:--------------------|:----------|:--------------------------------------------|
@@ -471,7 +471,7 @@ When you start the created instance for the first time after a Windows server mi
 2.  If a data disk is missing, go to the Disk Management utility to check whether the drive letter is missing.
 3.  After the automatic recovery of the file system access permission is complete, select whether to restart the instance.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22635/156630164813956_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22635/156630172913956_en-US.png)
 
     **Note:** If the Goto Aliyun Restore Tool does not start during the first startup attempt, you can run the C:\\go2aliyun\_prepare\\go2aliyun\_restore.exe command to manually invoke the recovery process. Make sure that the number of disks and drive letter paths on the instance are consistent with those of the source system before running the command.
 
@@ -499,7 +499,7 @@ You must perform the following checks:
 -   Check whether the boot configurations of the source server system are correct.
 -   If your source server system is CentOS 5 or Debian 7, the GRUB version is earlier than 1.9, and the following output appears when you connect to the ECS instance by using the [Management Terminal](../reseller.en-US/Instances/Connect to instances/Connect to Linux instances/Connect to an instance by using the Management Terminal.md#) in the ECS console,
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156630164850179_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/490278/156630172950179_en-US.png)
 
     you must upgrade GRUB to V1.9 or later, and then perform the migration again. For more information about how to upgrade GRUB, see [Install GRUB v1.99 in a Linux server](../../reseller.en-US/Images/FAQ/Install GRUB v1.99 in a Linux server.md#).
 
