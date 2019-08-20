@@ -12,7 +12,7 @@ After migration source information is imported, the SMC console automatically ge
 
         **Note:** You can obtain the migration source ID from the client interface as shown in the following figure, and find the migration source based on the ID. For more information about how to find a migration source, see [How do I find a migration source?](../../../../reseller.en-US/FAQ/SMC FAQ.md#section_7hf_tn4_x5i)
 
-        ![Obtain the migration source ID](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/668922/156630040350022_en-US.png)
+        ![Obtain the migration source ID](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/668922/156630222350022_en-US.png)
 
     4.  Click **Create Migration Task**.
     5.  In the Create Migration Task dialog box that appears, set the migration task parameters. The following table describes the migration task parameters. 
@@ -70,7 +70,7 @@ After migration source information is imported, the SMC console automatically ge
 
 -   On the Migration Tasks page, wait for the task to complete. When the status is **Finished**, the migration succeeded. You can then perform the following operations:
     1.  Click the image link in the **Migration Result** column. On the Images page that appears, find the generated custom image.
-    2.  Use this custom image to create a pay-as-you-go ECS instance or replace the system disk to test whether the custom image runs properly. For more information about how to use a custom image to create an instance, see [../../../../dita-oss-bucket/SP\_2/DNECS19100341/EN-US\_TP\_9627.md\#](../../../../reseller.en-US/Instances/Create an instance/Create an instance by using a custom image.md#). For more information about how to replace a system disk, see [Replace the system disk \(non-public image\)](../../../../reseller.en-US/Block Storage/Block storage/Change the operating system/Replace the system disk (non-public image).md#).
+    2.  Use this custom image to create a pay-as-you-go ECS instance or replace the system disk to test whether the custom image runs properly. For more information about how to use a custom image to create an instance, see [Create an instance by using a custom image](../../../../reseller.en-US/Instances/Create an instance/Create an instance by using a custom image.md#). For more information about how to replace a system disk, see [Replace the system disk \(non-public image\)](../../../../reseller.en-US/Block Storage/Block storage/Change the operating system/Replace the system disk (non-public image).md#).
 
         **Note:** You can use a custom image without data disks to replace the system disk of the instance.
 
