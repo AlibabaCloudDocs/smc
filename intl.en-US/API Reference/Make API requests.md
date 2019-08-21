@@ -28,13 +28,13 @@ The endpoint of the SMC API is smc.aliyuncs.com.
 
 ## Common parameters {#section_njt_q7b_2g7 .section}
 
-The following table describes common request parameters used when you send GET requests through the URL to call the SMC API. For more information about common parameters, see [RPC APIs](../../../../reseller.en-US/Alibaba Cloud API/Common parameters/RPC APIs.md#).
+The following table describes common request parameters used when you send GET requests through the URL to call the SMC API.
 
 |Parameter|Type|Required|Example|Description|
 |---------|----|--------|-------|-----------|
 |Action|String|Yes|CreateReplicationJob|The operation that you want to perform. For more information about the parameter values, see [List of operations by function](reseller.en-US/API Reference/List of operations by function.md#).|
 |AccessKeyId|String|Yes|LTAIp4\*\*\*\*\*\*\*\*fjx|The AccessKey ID. For more information, see [Create an AccessKey](../../../../reseller.en-US/General Reference/Create an AccessKey.md#).|
-|Signature|String|Yes|OLeaidS1JvxuMvnyHOwuJ%2BuX5qY%3D|Your signature. For more information about RPC-based API signatures, see [Sign RPC APIs](../../../../reseller.en-US/Alibaba Cloud API/Signature/Sign RPC APIs.md#).|
+|Signature|String|Yes|OLeaidS1JvxuMvnyHOwuJ%2BuX5qY%3D|Your signature. For more information about RPC-based API signatures, see [Digital signature](../../../../reseller.en-US/API Reference/Getting started/Digital signature.md#).|
 |SignatureMethod|String|Yes|HMAC-SHA1|The signature method. Set the value to HMAC-SHA1.|
 |SignatureVersion|String|Yes|1.0|The version of the signature algorithm. Set the value to 1.0.|
 |SignatureNonce|String|Yes|3ee8c1b8-\*\*\*\*-44af-\*\*\*\*-4e0ad82fd6cf|A unique random number that is used to prevent network replay attacks. Different random numbers must be used for different requests.|
