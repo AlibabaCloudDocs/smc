@@ -49,7 +49,7 @@ To call the operation from Alibaba Cloud CLI, perform the following steps:
 2.  Call the [CreateReplicationJob](https://api.aliyun.com/#/?product=smc&api=CreateReplicationJob&tab=DEMO&lang=JAVA) operation to create a migration task.
 3.  Call the [DescribeReplicationJobs](https://api.aliyun.com/#/?product=smc&api=DescribeReplicationJobs&tab=DEMO&lang=JAVA) operation to query the status of created migration tasks.
 
-For more information about OpenAPI Explorer, see [What is OpenAPI Explorer?](../../../../reseller.en-US/Product Overview/What is OpenAPI Explorer?.md#). For more information about the SMC API, see [List of operations by function](reseller.en-US/API Reference/List of operations by function.md#).
+For more information about the SMC API, see [List of operations by function](reseller.en-US/API Reference/List of operations by function.md#).
 
 ## Use Java SDK to call the SMC API {#section_y96_3mb_ped .section}
 
