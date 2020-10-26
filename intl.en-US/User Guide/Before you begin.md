@@ -25,7 +25,7 @@ Before you start a migration task, perform the following steps:
     -   Method 2: Log on to the [SMC console](https://smc.console.aliyun.com). You are prompted to authorize a RAM user.
     RAM user authorization: Use your Alibaba Cloud account to log on to the [RAM console](https://ram.console.aliyun.com/users), and grant the AliyunSMCFullAccess permission to the RAM user.
 
-5.  Create the AccessKey pair for your Alibaba Cloud account or RAM user and obtain the AccessKey pair. For more information, see [Create an AccessKey]().
+5.  Create the AccessKey pair for your Alibaba Cloud account or RAM user and obtain the AccessKey pair. For more information, see [Create an AccessKey pair]().
 
     **Note:** AccessKey pairs are credentials that you can use to access Alibaba Cloud API resources. Therefore, we recommend that you keep your AccessKey pair strictly confidential. We recommend that you use a RAM user to create a temporary AccessKey pair and then disable the AccessKey pair after the migration is complete. This prevents the AccessKey pair from being leaked or misused.
 
