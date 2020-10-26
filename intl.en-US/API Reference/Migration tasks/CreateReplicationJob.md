@@ -1,173 +1,203 @@
-# CreateReplicationJob {#doc_api_smc_CreateReplicationJob .reference}
+# CreateReplicationJob
 
-You can call this operation to create a migration task for a migration source.
+Creates a migration task for a source server.
 
-## Description {#description .section}
+## Description
 
--   Migration tasks can only be created for migration sources that are in the Available state.
--   Each migration source can only be associated with a single unfinished migration task. Unfinished states include Ready, Running, Stopped, InError, and Expired.
--   Each Alibaba Cloud account can have up to 100 migration tasks.
--   When the type of migration destination is image, you must specify the ImageName, SystemDiskSize, and DataDisk parameters.
--   When you perform a VPC-based migration, the VSwitchId parameter is required and the VpcId parameter is optional.
+-   You can create migration tasks only for source servers that are in the Available state.
+-   Each source server can be associated with only one migration task that is in the Ready, Running, Stopped, Waiting, InError, or Expired state.
+-   You can create a maximum of 100 migration tasks for each Alibaba Cloud account.
+-   If you migrate a source server to a destination image, you must specify the ImageName, SystemDiskSize, and DataDisk parameters.
+-   If you use a virtual private cloud \(VPC\) to migrate data, the VSwitchId parameter is required but the VpcId parameter is optional.
+-   SMC allows you to migrate source servers to Docker container images. You can use SMC to migrate containerized applications to Container Registry at low costs.
 
-## Debugging {#apiExplorer .section}
+## Debugging
 
-Alibaba Cloud provides [OpenAPI Explorer](https://api.aliyun.com/#product=smc&api=CreateReplicationJob) to simplify API usage. You can use OpenAPI Explorer to search for APIs, call APIs, and dynamically generate SDK example code.
+[OpenAPI Explorer automatically calculates the signature value. For your convenience, we recommend that you call this operation in OpenAPI Explorer. OpenAPI Explorer dynamically generates the sample code of the operation for different SDKs.](https://api.aliyun.com/#product=smc&api=CreateReplicationJob&type=RPC&version=2019-06-01)
 
-## Request parameters {#parameters .section}
+## Request parameters
 
-|Parameter|Type|Required|Example|Description|
-|---------|----|--------|-------|-----------|
-|RegionId|String|Yes|cn-hangzhou| The ID of the Alibaba Cloud region to which the source server is to be migrated.
+|Parameter|Position|Type|Required|Example|Description|
+|---------|--------|----|--------|-------|-----------|
+|Action|Query|String|Yes|CreateReplicationJob|The operation that you want to perform. Set the value to CreateReplicationJob. |
+|RegionId|Query|String|Yes|cn-hangzhou|The ID of the destination Alibaba Cloud region.
 
- If you want to migrate the source server to Shanghai, the corresponding Alibaba Cloud region ID is `cn-shanghai`. You can call the [DescribeRegions](~~25609~~) operation to view the latest regions of Alibaba Cloud.
+For example, if you want to migrate the source server to Shanghai, set the value to `cn-shanghai`. You can call [DescribeRegions](~~25609~~)to query the latest list of Alibaba Cloud regions. |
+|SourceId|Query|String|Yes|s-bp1e2fsl57knvuug\*\*\*\*|The ID of the source server. |
+|SystemDiskSize|Query|Integer|Yes|80|The system disk size of the destination ECS instance. Unit: GiB. Valid values: 20 to 500.
 
- |
-|SourceId|String|Yes|s-xxxxxxxxxxxxxxx| The ID of the migration source.
+**Note:** The value must be greater than the used space of the system disk on the source server. For example, if the total size of the source disk is 500 GiB and the used space is 100 GiB, the value of this parameter must be greater than 100 GiB. |
+|ClientToken|Query|String|No|123e4567-e89b-12d3-a456-426655440000|The client token that is used to ensure the idempotence of the request. You can use the client to generate the value. The token can contain only ASCII characters and cannot exceed 64 characters in length. For more information, see [How to ensure idempotence](~~25693~~). |
+|Name|Query|String|No|testMigrationTaskName|The name of the migration task. The name must meet the following requirements:
 
- |
-|SystemDiskSize|Integer|Yes|80| The system disk size of the target Alibaba Cloud ECS instance. Unit: GiB. Valid values: 20 to 500.
+-   It must be unique.
+-   It must be 2 to 128 characters in length and can contain digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with `http://` or `https://`. |
+|Description|Query|String|No|This\_is\_a\_migration\_task|The description of the migration task.
 
- **Note:** The parameter value must be greater than the actual used space of the system disk on the source server. For example, if the size of the source disk was 500 GiB but the actual used space was only 100 GiB, you would only need to set this parameter to a value greater than 100 GiB.
+The description must be 2 to 128 characters in length and can contain digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with `http://` or `https://`. |
+|TargetType|Query|String|No|Image|The type of the destination image. Valid values:
 
- |
-|Action|String|No|CreateReplicationJob| The operation that you want to perform. Set this parameter to CreateReplicationJob.
+-   Image: After the migration task is complete, SMC generates a destination ECS image for the source server.
+-   ContainerImage: After the migration task is complete, SMC generates a destination Docker container image for the source server. |
+|ScheduledStartTime|Query|String|No|2019-06-04T13:35:00Z|The time when the migration task is performed. This parameter must meet the following requirements:
 
- |
-|ClientToken|String|No|xxxxxxxxxx| A client token that is used to ensure the idempotence of the request.
-
- |
-|DataDisk.N.Index|Integer|No|1| The serial number of data disk N for the target Alibaba Cloud ECS instance. Valid values: 1 to 16. The parameter value starts from 1.
-
- **Note:** This operation can only create target data disks for data disks that exist on the migration source.
-
- |
-|DataDisk.N.Size|Integer|No|100| The size of data disk N for the target Alibaba Cloud ECS instance. Unit: GiB. Valid values: 20 to 32768.
-
- **Note:** The parameter value must be greater than the actual used space of the data disk on the source server. For example, if the size of the source disk was 500 GiB but the actual used space was only 100 GiB, you would only need to set this parameter to a value greater than 100 GiB.
-
- |
-|Description|String|No|This\_is\_a\_migration\_task| The description of the migration task to be created. The description must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.
-
- |
-|ImageName|String|No|MyAliCloudImage| The name of the target Alibaba Cloud image to be delivered by the migration task. The target image name must meet the following requirements:
-
- -   The image name must be unique in an Alibaba Cloud region.
--   The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.
-
- **Note:** If the specified image name already exists in the region where the migration task is running, the migration task ID is added to the image name as a suffix. Example: ImageName-JobId.
-
- |
-|InstanceId|String|No|i-xxxxxxxxxxxxx| The ID of the target instance.
-
- |
-|Name|String|No|MigrationTask| The name of the migration task. The migration task name must meet the following requirements:
-
- -   The task name must be unique.
--   The name must be 2 to 128 characters in length and can contain letters, digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with http:// or https://.
-
- |
-|NetMode|Integer|No|0| The network mode in which data is transmitted.
-
- -   A value of 0 indicates that data is transmitted through the public network. In this case, your source server is required to be able to access the public network, and cloud migration data is transmitted through the public network.
--   A value of 2 indicates that data is transmitted through the internal network. In this case, the VSwitchId parameter must be specified. The VpcId parameter can be left unspecified, and its value can be retrieved through the SMC API.
-
- Default value: 0
-
- |
-|ReplicationParameters|String|No|BandWidthLimit:0| The replication driver parameters. The parameter information can be up to 2,048 characters in length.
-
- The parameters must be specified as key-value pairs in JSON format. The key-value pairs are extensible and have known fixed keys. Different drivers support different parameters. For more information, see SourceServer.ReplicationDriver. For example, the SMT driver supports the following parameters:
-
- -   BandwidthLimit: specifies the bandwidth limit for data transmission.
--   CompressLevel: specifies the transmission compression rate.
--   Checksum: specifies whether to enable the checksum verification.
--   UseSSHTunnel: specifies whether to enable the SSH encrypted tunnel. EfficiencyLevel: specifies the efficiency level of data transmission.
-
- |
-|ScheduledStartTime|String|No|2019-06-04T13:35:00Z| The time when the migration task will be executed. The parameter value must meet the following requirements:
-
- -   You must specify the time in the ISO 8601 standard in the YYYY-MM-DDThh:mm:ssZ format. The time must be in UTC. Example: 2018-01-01T12:00:00Z.
+-   Specify the time in the ISO 8601 standard in the YYYY-MM-DDThh:mm:ssZ format. Use the UTC+0 time zone. For example, 2018-01-01T12:00:00Z indicates 20:00:00 on January 1, 2018 \(UTC+8\).
 -   The value must be within 30 days after the current time.
 
- **Note:** If this parameter is not specified, the migration task will not be started automatically. You must call the [StartReplicationJob](~~121823~~) operation to start the task.
+**Note:** If you do not specify this parameter, you must manually start the migration task by calling [StartReplicationJob](~~121823~~). |
+|ValidTime|Query|String|No|2019-06-04T13:35:00Z|The time when the migration task expires. You can schedule the migration task to expire 7 to 90 days after the task is created.
 
- |
-|TargetType|String|No|image| The type of migration destination to be delivered by the migration task. Set the value to image. After successful migration, SMC will generate an Alibaba Cloud image for the migration source. You can use this image to create an ECS instance and complete the migration to Alibaba Cloud.
+-   Specify the time in the ISO 8601 standard in the YYYY-MM-DDThh:mm:ssZ format. Use the UTC+0 time zone. For example, 2018-01-01T12:00:00Z indicates 20:00:00 on January 1, 2018 \(UTC+8\).
+-   If this parameter is not specified, the migration task does not expire.
+-   When a migration task expires, the task enters the Expired state. SMC retains the migration task for seven days after the task expires. After the retention period, SMC deletes the migration task.
 
- |
-|VSwitchId|String|No|xxxxxxxxxxxxxx| The ID of the VSwitch to connect to the specified VPC.
+By default, a migration task is valid within 30 days after it is created. |
+|ImageName|Query|String|No|testAliCloudImageName|The name of the destination image. The destination image name must meet the following requirements:
 
- |
-|ValidTime|String|No|2019-06-04T13:35:00Z| The time when the migration task is set to expire. You can schedule the migration task to expire on a date within 7 to 90 days of creation.
+-   The name must be unique in the destination region.
+-   It must be 2 to 128 characters in length and can contain digits, colons \(:\), underscores \(\_\), and hyphens \(-\). It must start with a letter and cannot start with `http://` or `https://`.
 
- -   Specify the time in the ISO 8601 standard in the YYYY-MM-DDThh:mm:ssZ format. The time must be in UTC. Example: 2018-01-01T12:00:00Z.
--   If this parameter is not specified, the migration task will be permanently valid.
--   After the task expires, it is marked as expired and retained for seven days. After the seven days have passed, the system will clear the task.
+**Note:** If you specify an image name that already exists in the destination region, the migration task ID is appended to the image name as a suffix. Example: ImageName\_j-2zexxxxxxxxxxxxx. |
+|InstanceId|Query|String|No|i-bp1f1dvfto1sigz5\*\*\*\*|The ID of the destination ECS instance. |
+|DataDisk.N.Size|Query|Integer|No|100|The size of a data disk on the destination ECS instance. Unit: GiB. Valid values: 20 to 32768.
 
- The default validity period for a migration task is 30 days after creation.
+**Note:** The size of a destination data disk must be larger than the size of data in the source data disk. For example, if the size of the source disk is 500 GiB but the actual used space is only 100 GiB, you only need to set this parameter to a value greater than 100 GiB. |
+|DataDisk.N.Index|Query|Integer|No|1|The index of data disk N on the destination ECS instance. Data disks on a destination ECS instance are arranged in a sequential order that starts from 1. Valid values: 1 to 16.
 
- |
-|VpcId|String|No|xxxxxxxxxxxxxx| The ID of the VPC. The specified VPC must have Express Connect or VPN Gateway configured.
+**Note:** To create a destination data disk for a source server, make sure that this source server has data disks. |
+|DataDisk.N.Part.N.Device|Query|String|No|0\_1|The device ID of partition N on the destination data disk. The partitions in the destination data disk are arranged in the same sequential order as those in the corresponding source data disk.
 
- |
+**Note:** You must specify both the DataDisk.N.Part.N.Device and `DataDisk.N.Part.N.SizeBytes` parameters or leave both parameters empty. |
+|DataDisk.N.Part.N.SizeBytes|Query|Long|No|254803968|The size of partition N on the destination data disk. Unit: bytes. The default value is equal to the partition size of the source data disk.
 
-## Response parameters {#resultMapping .section}
+**Note:**
+
+-   The total size of all partitions in a destination data disk cannot exceed the size of the destination data disk.
+-   You must specify both the `DataDisk.N.Part.N.Device` and DataDisk.N.Part.N.SizeBytes parameters or leave both parameters empty. |
+|DataDisk.N.Part.N.Block|Query|Boolean|No|true|Specifies whether to enable block replication for partition N in a destination data disk. Valid values:
+
+-   true
+-   false
+
+Default value: true. |
+|Tag.N.Key|Query|String|No|TestKey|The key of a tag for the migration task. Valid values of N: 1 to 20.
+
+This parameter cannot be an empty string. The key can be up to 128 characters in length, and cannot start with `aliyun`, `acs:`, `http://`, or `https://`. |
+|Tag.N.Value|Query|String|No|TestValue|The value of a tag for the migration task. Valid values of N: 1 to 20.
+
+You can enter an empty string as the parameter value. The key can be up to 128 characters in length, and cannot start with `aliyun`, `acs:`, `http://`, or `https://`. |
+|VpcId|Query|String|No|vpc-bp1vwnn14rqpyiczj\*\*\*\*|The ID of a VPC for which you have configured Express Connect or VPN Gateway. |
+|VSwitchId|Query|String|No|vsw-bp1ddbrxdlrcbim46\*\*\*\*|The ID of the VSwitch in the specified VPC.
+
+This parameter is required if you use a VPC to migrate data. |
+|ReplicationParameters|Query|String|No|\{"bandwidth\_limit":0,"compress\_level":1,"checksum":true\}|A string of key-value pairs that are used to configure the replication driver. The parameters must be specified as key-value pairs in the JSON format. The keys are fixed for each type of replication driver. The JSON string can be up to 2,048 characters in length.
+
+A replication driver is a tool that is used to migrate a source server to an intermediate instance. The parameters vary based on the replication driver type. If you use an SMT driver, you can set the following parameters:
+
+-   bandwidth\_limit: the maximum bandwidth for data transmission.
+-   compress\_level: the compression ratio of data to be transmitted.
+-   checksum: specifies whether to enable checksum verification.
+
+For more information about replication drivers, see the response parameter [ReplicationDriver](~~121818~~) in the `DescribeSourceServers` operation. |
+|NetMode|Query|Integer|No|0|The network mode for data transmission. Valid values:
+
+-   0: Data is transmitted over the Internet. Make sure that the source server can access the Internet.
+-   2: Data is transmitted over a VPC. You must specify the VSwitchId parameter. You can call an API operation to query the value of the VpcId parameter based on the VSwitchId parameter. Therefore, you do not need to specify the VpcId parameter.
+
+Default value: 0. |
+|RunOnce|Query|Boolean|No|true|Specifies whether to disable incremental migration for the source server. Default value: true. Valid values:
+
+-   true: disables incremental migration. Incremental data of the source server is not synchronized.
+-   false: enables incremental migration. You must specify the `Frequency` parameter. SMC synchronizes incremental data of the source server to Alibaba Cloud at the specified frequency. SMC can synchronize incremental data from the source server to Alibaba Cloud without interrupting your business. SMC generates a full data image for the source server when the migration task is running.
+
+**Note:** You can specify this parameter only when you create a migration task. The value cannot be modified after it is specified. |
+|Frequency|Query|Integer|No|12|The interval at which SMC synchronizes incremental data to Alibaba Cloud. Unit: hours. Valid values: 1 to 168.
+
+`This parameter is required if you set`RunOnce to false.
+
+By default, this parameter is not specified. |
+|MaxNumberOfImageToKeep|Query|Integer|No|10|The maximum number of images that can be retained during incremental migration. Valid values: 1 to 10.
+
+`This parameter is required if you set`RunOnce to false.
+
+By default, this parameter is not specified. |
+|InstanceType|Query|String|No|ecs.c6.large|The type of the intermediate instance.
+
+You can call the [DescribeInstanceTypes](~~25620~~) operation to query ECS instance types.
+
+-   If you specify this parameter, SMC creates an intermediate instance of the specified type. If the specified instance type is unavailable, you cannot create the migration task.
+-   If you do not specify this parameter, SMC selects an available instance type in a specific order to create an intermediate instance. For more information, see [SMC FAQ](~~121707~~). |
+|SystemDiskPart.N.Device|Query|String|No|0\_1|The device ID of partition N on the destination system disk. The partitions in the destination system disk are arranged in the same sequential order as those in the source system disk.
+
+**Note:** You must specify both the SystemDiskPart.N.Device and `SystemDiskPart.N.SizeBytes` parameters or leave both parameters empty. |
+|SystemDiskPart.N.SizeBytes|Query|Long|No|254803968|The size of partition N in the destination system disk. Unit: bytes. The default value is equal to the partition size of the source system disk.
+
+**Note:**
+
+-   The total size of all partitions in the destination system disk cannot exceed the size of the destination system disk.
+-   You must specify both the `SystemDiskPart.N.Device` and SystemDiskPart.N.SizeBytes parameters or leave both parameters empty. |
+|SystemDiskPart.N.Block|Query|Boolean|No|true|Specifies whether to enable block replication for partition N in the destination system disk. Valid values:
+
+-   true
+-   false
+
+Default value: true. |
+|InstanceRamRole|Query|String|No|SMCAdmin|The RAM role that is attached to the intermediate instance. |
+|ContainerNamespace|Query|String|No|testNamespace|The namespace of the destination Docker container image. For more information, see [Container Registry](~~60744~~). |
+|ContainerRepository|Query|String|No|testRepository|The repository that stores the destination Docker container image. For more information, see [Container Registry](~~60744~~). |
+|ContainerTag|Query|String|No|CentOS:v1|The tag of the destination Docker container image. For more information, see [Container Registry](~~60744~~). |
+
+## Response parameters
 
 |Parameter|Type|Example|Description|
 |---------|----|-------|-----------|
-|JobId|String|j-xxxxxxxxxxxxxxx| The ID of the migration task.
+|JobId|String|j-bp17bclvg344jlyt\*\*\*\*|The ID of the migration task. |
+|RequestId|String|C8B26B44-0189-443E-9816-D951F59623A9|The ID of the request. |
 
- |
-|RequestId|String|C8B26B44-0189-443E-9816-D951F59623A9| The ID of the request.
+## Examples
 
- |
-
-## Examples {#demo .section}
-
-Sample request
-
-``` {#request_demo}
-
-http(s)://smc.aliyuncs.com/? Action=CreateReplicationJob
-&RegionId=cn-hangzhou
-&SourceId=s-xxxxxxxxxxxxxxx
-&SystemDiskSize=80
-&<Common request parameters>
+Sample requests
 
 ```
+http(s)://smc.aliyuncs.com/? Action=CreateReplicationJob
+&RegionId=cn-hangzhou
+&SourceId=s-bp1e2fsl57knvuug****
+&SystemDiskSize=80
+&<Common request parameters>
+```
 
-Sample success response
+Sample success responses
 
 `XML` format
 
-``` {#xml_return_success_demo}
+```
 <CreateReplicationJobResponse>
-  <JobId>j-2xxxxxxxxxxxq</JobId>
-  <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
+    <JobId>j-bp17bclvg344jlyt****</JobId>
+    <RequestId>C8B26B44-0189-443E-9816-D951F59623A9</RequestId>
 </CreateReplicationJobResponse>
-
 ```
 
 `JSON` format
 
-``` {#json_return_success_demo}
+```
 {
-	"RequestId":"C8B26B44-0189-443E-9816-D951F59623A9",
-	"JobId":"j-2xxxxxxxxxxq"
+    "JobId": "j-bp17bclvg344jlyt****",
+    "RequestId": "C8B26B44-0189-443E-9816-D951F59623A9"
 }
 ```
 
-## Error codes {#section_q1l_tfz_xgj .section}
+## Error codes
 
-|HTTP status code|Error code|Error message|Description|
-|----------------|----------|-------------|-----------|
-|400|SourceServerState.Invalid|The specified source server status is invalid.|The error message returned because the operation is not supported while the migration source is in the current state.|
-|400|ReplicationJobDataDiskIndex.Invalid|The specified replication job contains data disk index not found in source server.|The error message returned because the specified migration task contains data disk indexes not found in the migration source.|
-|400|VSwitchIdVpcId.Mismatch|The specified VSwitchId and VpcId does not match.|The error message returned because the specified VSwitchId and VpcId do not correspond to each other.|
-|400|InvalidSecurityGroupId.IncorrectNetworkType|The network type of the specified security group does not support this action.|The error message returned because the operation is not supported by security groups of the current network type. Check the network type of the security group.|
-|400|InvalidSecurityGroupId.VPCMismatch|The specified security group and the specified virtual switch are not in the same VPC.|The error message returned because the specified security group and VSwitch do not belong to the same VPC.|
-|400|QuotaExceeded.ReplicationJob|The maximum number of replication jobs is exceeded. Please submit a ticket to raise the quota.|The error message returned because the maximum number of migration tasks has been reached. Submit a ticket to raise the quota.|
+|HttpCode|Error code|Error message|Description|
+|--------|----------|-------------|-----------|
+|400|SourceServerState.Invalid|The specified source server status is invalid.|The error message returned because the operation is not supported while the source server is in the current status.|
+|400|ReplicationJobDataDiskIndex.Invalid|The specified replication job contains data disk index not found in source server.|The error message returned because the specified migration task contains data disk indexes that are not found in the source server.|
+|400|VSwitchIdVpcId.Mismatch|The specified VSwitchId and VpcId does not match.|The error message returned because the specified VSwitchId and VpcId do not match.|
+|400|InvalidSecurityGroupId.IncorrectNetworkType|The network type of the specified security group does not support this action.|The error message returned because the operation is not supported by the network type of the security group.|
+|400|InvalidSecurityGroupId.VPCMismatch|The specified security group and the specified virtual switch are not in the same VPC.|The error message returned because the specified security group and VSwitch are not connected to the same VPC.|
+|400|QuotaExceeded.ReplicationJob|The maximum number of replication jobs is exceeded. Please submit a ticket to raise the quota.|The error message returned because the maximum number of migration tasks has been exceeded. Submit a ticket to raise the quota.|
 |400|ReplicationJobName.Duplicate|The specified replication job name already exists.|The error message returned because the specified migration task name already exists. Modify the migration task name.|
-|500|InternalError|An error occurred while processing your request. Please try again. If the problem still exists, please submit a ticket.|The error message returned because an internal error has occurred. Try again later. If the problem persists, submit a ticket.|
+|500|InternalError|An error occurred while processing your request. Please try again. If the problem still exists, please submit a ticket.|The error message returned because an internal error has occurred. Try again later. If the error persists, submit a ticket.|
+
+For a list of error codes, visit the [API Error Center](https://error-center.alibabacloud.com/status/product/smc).
 
