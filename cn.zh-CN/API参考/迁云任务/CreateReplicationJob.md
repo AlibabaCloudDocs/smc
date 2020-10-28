@@ -38,7 +38,8 @@
 |TargetType|String|否|Image|迁移任务交付的目标类型。取值范围：
 
  -   Image：迁移成功后，SMC为您的迁移源生成阿里云镜像。
--   ContainerImage：迁移成功后，SMC为您的迁移源生成Docker容器镜像。 |
+-   ContainerImage：迁移成功后，SMC为您的迁移源生成Docker容器镜像。
+-   Instance：迁移成功后，SMC将您的迁移源直接迁移至目标实例。当您设置该参数值时，您需要同时指定`InstanceId`参数。 |
 |ScheduledStartTime|String|否|2019-06-04T13:35:00Z|迁移任务的执行时间。该参数值的设置需满足以下要求：
 
  -   遵循ISO8601标准，并需要使用UTC+0时间，格式为YYYY-MM-DDThh:mm:ssZ。例如，2018-01-01T12:00:00Z，表示北京时间2018年01月01日20点00分00秒。
