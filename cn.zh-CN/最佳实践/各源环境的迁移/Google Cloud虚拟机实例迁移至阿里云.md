@@ -2,7 +2,7 @@
 
 您可以参见本文档中的步骤，将Google Cloud虚拟机实例迁移至阿里云。
 
-在开始迁移服务器之前，您需要针对不同系统的虚拟机进行准备工作。详情请参见：
+在开始迁移服务器之前，您需要针对不同系统的虚拟机进行准备工作。具体操作，请参见：
 
 -   [Google Cloud Windows系统迁移至阿里云之前的准备工作](#section_zas_1hb_bsx)
 -   [Google Cloud Linux系统迁移至阿里云之前的准备工作](#section_uu9_m1w_2qo)
@@ -15,7 +15,7 @@
 -   确保系统时间与所在地域的标准时间一致。
 -   检查授权应用。源服务器迁移到阿里云后，系统底层硬件设备会发生变化，可能会导致一些跟硬件绑定的应用许可证（license）失效，您需要做好检查。
 -   检查网络环境。
-    -   如果是跨国际地域，由于网络环境较不稳定，操作步骤请参见[跨国际地域迁移的操作步骤](#section_thr_bib_rnq)。
+    -   如果是跨国际地域，由于网络环境较不稳定，具体操作，请参见[跨国际地域迁移的操作步骤](#section_thr_bib_rnq)。
     -   如果您的网络可以打通VPC内网，建议在创建迁移任务时网络模式选择内网传输。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。
 -   检查并确保Windows系统VSS服务为启动状态。
 -   检查是否安装了QEMU Guest Agent软件。如果安装了此工具软件，您需要先卸载。卸载的具体步骤，请参见[Windows服务器卡在Prepare For Rsync Disk 0阶段，怎么办](/cn.zh-CN/常见问题/SMC FAQ.md)。
@@ -28,7 +28,7 @@
     -   运行命令setenforce 0临时将其关闭。
     -   修改/etc/selinux/config文件，配置`SELINUX=disabled`永久禁用SELinux。详情请参见[开启或关闭SELinux](/cn.zh-CN/最佳实践/安全/开启或关闭SELinux.md)。
 -   检查网络环境。
-    -   如果是跨国际地域，由于网络环境较不稳定，操作步骤请参见[跨国际地域迁移的操作步骤](#section_thr_bib_rnq)。
+    -   如果是跨国际地域，由于网络环境较不稳定，具体操作，请参见[跨国际地域迁移的操作步骤](#section_thr_bib_rnq)。
     -   如果您的网络可以打通VPC内网，建议在创建迁移任务时网络模式选择内网传输。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。
 -   检查cloud-init。具体操作步骤，请参见[安装cloud-init](/cn.zh-CN/镜像/自定义镜像/导入镜像/安装cloud-init.md)。
 -   检查GRUB引导程序。部分低内核版本如CentOS 5/Red Hat 5、Debian 7需要将GRUB升级至1.99及以上版本。具体操作步骤，请参见[如何为Linux服务器安装GRUB](/cn.zh-CN/镜像/常见问题/如何为Linux服务器安装GRUB？.md)。
@@ -39,7 +39,7 @@
 
 1.  将Google Cloud虚拟机实例迁移到阿里云对应的国际地域，详情请参见下文中迁移虚拟机至阿里云操作说明，并选择迁移至云服务器镜像。
 
-    例如，Google Cloud虚拟机实例位于美国，您可以将其迁移至阿里云位于美国的地域。具体地域及地域ID请参见[地域和可用区](https://help.aliyun.com/document_detail/123712.html)。
+    例如，Google Cloud虚拟机实例位于美国，您可以将其迁移至阿里云位于美国的地域。具体地域及地域ID，请参见[地域和可用区]()。
 
 2.  完成迁移后，将新建的镜像复制到目标阿里云地域。具体操作步骤，请参见[复制镜像](/cn.zh-CN/镜像/自定义镜像/复制镜像.md)。
 
@@ -48,7 +48,7 @@
 
 ## 迁移虚拟机至阿里云
 
-请先准备阿里云账号并了解注意事项，详情请参见[准备工作（迁移前必读）](/cn.zh-CN/用户指南/准备工作（迁移前必读）.md)。
+请先准备阿里云账号并了解注意事项。更多信息，请参见[准备工作（迁移前必读）](/cn.zh-CN/用户指南/准备工作（迁移前必读）.md)。
 
 1.  下载并解压SMC客户端。
 
@@ -68,13 +68,13 @@
 
         **说明：** Linux系统中使用unzip <SMC客户端压缩包名称\>命令解压SMC客户端，如果您的源服务器未安装unzip插件，请先安装。例如，CentOS 7的安装命令为yum -y install unzip。
 
-        ![客户端版本](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50475.png)
+        ![客户端版本](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50475.png)
 
     4.  解压适配您迁移源系统版本的客户端压缩包。
 
         解压后文件夹中包含的目录和文件，如下图所示。
 
-        ![客户端主目录](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p49979.png)
+        ![客户端主目录](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p49979.png)
 
         |文件（夹）名|描述|
         |:-----|:-|
@@ -227,17 +227,17 @@
 
             输入访问密钥的AccessKeyId和AccessKeySecret，并按`Enter`键。
 
-            ![输入AK](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p49934.png)
+            ![输入AK](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p49934.png)
 
             可能会出现以下提示信息：
 
             -   多数主流迁移源系统已默认安装rsync。若没有安装，则SMC客户端会提示，请输入yes自动安装rsync，如下图所示。
 
-                ![安装rsync](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50398.png)
+                ![安装rsync](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50398.png)
 
             -   若迁移源系统的SELinux处于开启状态，则SMC客户端会提示您关闭。请输入yes自动关闭SELinux，如下图所示。
 
-                ![关闭SELinux](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50473.png)
+                ![关闭SELinux](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50473.png)
 
     **说明：** 请勿关闭客户端直至迁移完成。否则，迁移源将与SMC控制台失去联系，无法完成迁移。
 
@@ -251,7 +251,7 @@
 
         您可以从客户端界面获取迁移源ID，如下图所示，并根据迁移源ID找到目标迁移源。查找迁移源，请参见[如何查找迁移源](/cn.zh-CN/常见问题/SMC FAQ.md)。
 
-        ![获取迁移源ID](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50022.png)
+        ![获取迁移源ID](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50022.png)
 
     3.  单击**创建迁移任务**。
 
@@ -259,7 +259,7 @@
 
         迁移任务**基本配置**说明：
 
-        -   **目标地域**（必填）：您的源服务器要迁入的阿里云地域ID。地域详情，请参见[地域和可用区](https://help.aliyun.com/document_detail/123712.html)。
+        -   **目标地域**（必填）：您的源服务器要迁入的阿里云地域ID。地域详情，请参见[地域和可用区]()。
         -   **任务名称**：迁移任务的名称。
 
             **说明：** 同一阿里云地域下，任务名称必须唯一。
@@ -267,7 +267,7 @@
         -   **任务描述**：迁移任务的描述。
         -   **目标磁盘（GiB）**：设置目标服务器的磁盘结构。
 
-            ![目标磁盘](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p112652.png)
+            ![目标磁盘](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p112652.png)
 
             配置项说明表如下：
 
@@ -288,7 +288,7 @@
                 -   变量`<N>`表示第几个数据盘。
                 -   目标数据盘取值需要大于迁移源数据盘的实际占用大小。例如，源数据盘大小为500GiB，实际占用100GiB，则目标数据盘取值需大于100GiB。
             -   **分区<N\>**：SMC能够根据迁移源的磁盘分区结果自动生成目标磁盘分区，单位为GiB。 取值范围：0~141。变量`<N>`表示第几个分区。如果迁移源的数据盘是单分区结构，则只会生成**分区0**。
-**说明：** 若您的迁移源没有数据盘，或数据盘未挂载，不会出现**数据盘**配置项。详情请参见[为什么新建迁移任务页面没有出现数据盘配置项？怎么办？](/cn.zh-CN/常见问题/SMC FAQ.md) |
+**说明：** 若您的迁移源没有数据盘，或数据盘未挂载，不会出现**数据盘**配置项。更多信息，请参见[为什么新建迁移任务页面没有出现数据盘配置项？怎么办？](/cn.zh-CN/常见问题/SMC FAQ.md) |
 
         -   **目标镜像类型**：设置迁移源迁移至阿里云的目标镜像类型。
             -   选择**云服务器镜像**。配置项说明如下：
@@ -333,7 +333,7 @@
 
         -   **网络模式**：传输迁移数据到中转实例使用的网络。中转实例会被创建在所选专有网络（VPC）、交换机（VSwitch）下，因此中转实例会被分配公网IP。
 
-            ![网络模式](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p112663.png)
+            ![网络模式](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p112663.png)
 
             配置项说明表如下：
 
@@ -348,7 +348,7 @@
 批量迁移时，若不指定VPC和VSwitch，SMC会为每个中转实例创建一个VPC。
 
 **说明：** 由于每个账号在一个地域下的VPC限额为10（包括您创建的VPC和SMC自动创建的VPC），因此每次批量迁移的最大值不超过10台迁移源。如需提高VPC限额，请[提交工单](https://workorder.console.aliyun.com/#/ticket/list/)。 |
-            |**内网传输**|迁移数据通过VPC内网传输到中转实例。使用该模式，需要将源服务器与阿里云VPC打通，并且必须指定VPC和VSwitch。 **说明：** 如果您能直接从自建机房（Integrated Data Center，IDC）、虚拟机环境或者云主机访问某一阿里云地域下的专有网络VPC，建议您使用该方式进行迁移。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。您可以通过VPN网关、高速通道物理专线、智能接入网关将源服务器和云上VPC打通。更多详情，请参见[连接本地IDC](/cn.zh-CN/VPC与外部网络连接/连接本地IDC.md)。 |
+            |**内网传输**|迁移数据通过VPC内网传输到中转实例。使用该模式，需要将源服务器与阿里云VPC打通，并且必须指定VPC和VSwitch。 **说明：** 如果您能直接从自建机房（Integrated Data Center，IDC）、虚拟机环境或者云主机访问某一阿里云地域下的专有网络VPC，建议您使用该方式进行迁移。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。您可以通过VPN网关、高速通道物理专线、智能接入网关将源服务器和云上VPC打通。更多信息，请参见[连接本地IDC](/cn.zh-CN/VPC与外部网络连接/连接本地IDC.md)。 |
 
         **高级配置（可选）**说明：
 
@@ -381,6 +381,6 @@
 
 迁移任务完成后，请根据您所选择的目标镜像类型执行以下操作：
 
--   当您的目标镜像为云服务器镜像时，可以通过自定义镜像创建实例。创建实例的具体操作请参见[使用自定义镜像创建实例](/cn.zh-CN/实例/创建实例/使用自定义镜像创建实例.md)。
--   当您的目标镜像为容器镜像时，可以通过容器镜像部署应用。示例操作请参见[验证容器镜像](/cn.zh-CN/最佳实践/源服务器迁移至容器镜像.mdsection_840_v5e_lea)。
+-   当您的目标镜像为云服务器镜像时，可以通过自定义镜像创建实例。创建实例的具体操作，请参见[使用自定义镜像创建实例](/cn.zh-CN/实例/创建实例/使用自定义镜像创建实例.md)。
+-   当您的目标镜像为容器镜像时，可以通过容器镜像部署应用。具体的示例操作，请参见[验证容器镜像](/cn.zh-CN/最佳实践/源服务器迁移至容器镜像.mdsection_840_v5e_lea)。
 
