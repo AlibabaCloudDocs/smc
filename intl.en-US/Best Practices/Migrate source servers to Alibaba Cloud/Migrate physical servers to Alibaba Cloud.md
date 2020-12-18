@@ -68,13 +68,13 @@ Create an Alibaba Cloud account. For more information, see [Before you begin](/i
 
         **Note:** Linux systems run the unzip <name of the SMC client package\> command. This allows you to decompress the SMC client package. Make sure that the unzip utility is installed on the source server. For example, the installation command for CentOS 7 is yum -y install unzip.
 
-        ![Client version](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/4994588951/p50475.png)
+        ![Client version](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/4994588951/p50475.png)
 
     4.  Decompress the client package that is compatible with the operating system of your source server.
 
         The following figure shows the directories and files in the decompressed folder.
 
-        ![Home directory of the client](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/4994588951/p49979.png)
+        ![Home directory of the client](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/4994588951/p49979.png)
 
         |Folder or file|Description|
         |:-------------|:----------|
@@ -225,17 +225,17 @@ Create an Alibaba Cloud account. For more information, see [Before you begin](/i
 
             Enter the AccessKey ID and AccessKey secret, and then press `Enter`.
 
-            ![Enter the AccessKey pair](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/4994588951/p49934.png)
+            ![Enter the AccessKey pair](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/4994588951/p49934.png)
 
             The following prompts may appear:
 
             -   The rsync tool is installed in most mainstream migration sources. If rsync is not installed on the migration source, the SMC client displays a prompt. Enter yes to install rsync, as shown in the following figure.
 
-                ![Install rsync](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/4994588951/p50398.png)
+                ![Install rsync](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/4994588951/p50398.png)
 
             -   If SELinux is enabled on the migration source, you are prompted to disable SELinux. Enter yes to disable SELinux, as shown in the following figure.
 
-                ![Disable SELinux](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/4994588951/p50473.png)
+                ![Disable SELinux](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/4994588951/p50473.png)
 
     **Note:** Do not close the client until the migration is complete. Otherwise, the migration source will be disconnected from the SMC console and the migration fails.
 
@@ -247,17 +247,17 @@ Create an Alibaba Cloud account. For more information, see [Before you begin](/i
 
     2.  Find the migration source that you want to migrate.
 
-        You can obtain the ID of the target migration source from the SMC client, as shown in the following figure. Then, you can use the ID to find the target migration source in the SMC console. For more information, see the "How do I find a migration source in the SMC console?" section in [SMC FAQ](/intl.en-US/FAQ/SMC FAQ.md).
+        You can obtain the ID of the target migration source from the SMC client, as shown in the following figure. Then, you can use the ID to find the target migration source in the SMC console. For more information, see the "How do I find a migration source in the SMC console?" section of the [SMC FAQ](/intl.en-US/FAQ/SMC FAQ.md).
 
-        ![Obtain the ID of the target migration source](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/6994588951/p50022.png)
+        ![Obtain the ID of the target migration source](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6994588951/p50022.png)
 
     3.  Click **Create Migration Task** in the Actions column.
 
-    4.  In the **Create Migration Task** pane, read migration instructions and configure migration task parameters.
+    4.  In the **Create Migration Task** pane, read migration instructions and set the migration task parameters.
 
         The **Basic configuration** section includes the following parameters:
 
-        -   **Target Region**: required. The ID of the destination region. For more information about Alibaba Cloud regions, see[Regions and zones](https://www.alibabacloud.com/help/doc-detail/123712.htm).
+        -   **Target Region**: required. The ID of the destination region. For more information, see [Regions and zones]().
         -   **Task name**: the name of the migration task.
 
             **Note:** The task name must be unique in the destination region.
@@ -265,7 +265,7 @@ Create an Alibaba Cloud account. For more information, see [Before you begin](/i
         -   **Description**: the description of the migration task.
         -   **Target Disk Size \(GiB\)**: the disk configuration of the destination server.
 
-            ![Configure destination disks](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/6994588951/p112652.png)
+            ![Configure destination disks](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6994588951/p112652.png)
 
             The following table describes the parameters.
 
@@ -273,23 +273,23 @@ Create an Alibaba Cloud account. For more information, see [Before you begin](/i
             |---------|--------|-----------|
             |**Enable Block Replication**|No|            -   Selected: Block replication ensures a stable data transmission rate during migration. This also ensures that the source and destination disks use the same partitioning scheme. You cannot modify the size of each partition in the destination disk. When you enable block replication, the **Whether to enable block replication** switch appears next to **Partition <N\>**.
             -   Cleared: SMC uses the default method to migrate the migration source. You can modify the size of each partition in the destination disk. |
-            |**System Disk**|Yes|            -   **System Disk**: the system disk size of the destination ECS instance. Unit: GiB. Valid values: 20 to 500. The size of the destination system disk must be greater than that of data in the source system disk. For example, if the total size of the source system disk is 500 GiB but the size of data stored in this disk is only 100 GiB, you must set this parameter to a value greater than 100 GiB.
+            |**System Disk**|Yes|            -   **System Disk**: the system disk size of the destination ECS instance. Unit: GiB. Valid values: 20 to 500. The size of the destination system disk must be greater than the amount of data in the source system disk. For example, if the total size of the source system disk is 500 GiB but the size of data stored in this disk is only 100 GiB, you must set this parameter to a value greater than 100 GiB.
 
 **Note:** The default value of this parameter is the size of the source system disk. We recommend that you retain the default value or specify a greater value.
 
             -   **Partition <N\>**: SMC generates a partitioning scheme for the destination system disk based on that of the source system disk. Unit: GiB. Valid values: 0 to 98. `N` indicates the serial number of the partition. For example, if the system disk of the migration source has only one partition, **Partition 0** is generated.
-            -   **Whether to enable block replication**: This switch is available only when you select **Enable Block Replication**. SMC allows or disallows you to turn on the switch based on whether the migration source supports block replication.
+            -   **Whether to enable block replication**: This switch is available only when you select **Enable Block Replication**. If you want to turn on the switch, SMC allows or disallows you based on whether the migration source supports block replication.
                 -   If the migration source does not support block replication for partitions, you are disallowed to turn on this switch.
                 -   If the migration source supports block replication for partitions, you are allowed to turn on this switch to migrate disk data at the partition level. |
             |**Data Disk <N\>**|No|            -   **Data Disk <N\>**: the data disk size of the destination ECS instance. Unit: GiB. Valid values: 20 to 32768.
                 -   If you select the **Data Disk <N\>** check box, a destination data disk is generated.
                 -   `N` indicates the serial number of the data disk.
-                -   The size of the destination data disk must be greater than that of existing data in the source data disk. For example, if the total size of the source data disk is 500 GiB but the size of data stored in the disk is only 100 GiB, you must set this parameter to a value greater than 100 GiB.
+                -   The size of the destination data disk must be greater than that of the existing data in the source data disk. For example, if the total size of the source data disk is 500 GiB but the size of data stored in the disk is only 100 GiB, you must set this parameter to a value greater than 100 GiB.
             -   **Partition <N\>**: SMC generates a partitioning scheme for the destination data disk based on that of the source data disk. Unit: GiB. Valid values: 0 to 141. `N` indicates the serial number of the partition. For example, if a data disk of the migration source has only one partition, **Partition 0** is generated.
-            -   **Whether to enable block replication**: This switch is available only when you select **Enable Block Replication**. SMC allows or disallows you to turn on the switch based on whether the migration source supports block replication.
+            -   **Whether to enable block replication**: This switch is available only when you select **Enable Block Replication**. If you want to turn on the switch, SMC allows or disallows you based on whether the migration source supports block replication.
                 -   If the migration source does not support block replication for partitions, you are disallowed to turn on this switch.
                 -   If the migration source supports block replication for partitions, you are allowed to turn on this switch to migrate disk data at the partition level.
-**Note:** **Data Disk <N\>** is available only if the migration source has a data disk. For more information, see [Why are no data disk parameters displayed in the Create Migration Task pane? How can I resolve this issue?](/intl.en-US/FAQ/SMC FAQ.md) |
+**Note:** **Data Disk <N\>** is available only if the migration source has a data disk. For more information, see [Why are the data disk parameters of a migration source not displayed in the Create Migration Task pane? How can I resolve this issue?](/intl.en-US/FAQ/SMC FAQ.md) |
 
         -   **Target Image Type**: the type of the destination image. Valid values:
             -   **ECS Image**. The following table describes the parameters.
@@ -297,13 +297,21 @@ Create an Alibaba Cloud account. For more information, see [Before you begin](/i
                 |Parameter|Required|Description|
                 |---------|--------|-----------|
                 |**Image Name**|No|Specifies the name of the destination ECS image generated by SMC for the migration source. **Note:** The image name must be unique in the destination region. |
-                |**Automatic incremental synchronization**|No|Specifies whether SMC automatically synchronizes incremental data of the migration source to Alibaba Cloud.                 -   To enable this feature, you must configure the following parameters:
+                |**Automatic incremental synchronization**|No|Specifies whether SMC automatically synchronizes incremental data of the migration source to Alibaba Cloud.                 -   To enable this feature, you must set the following parameters:
 
-                    -   **Synchronization Interval**: the interval at which SMC automatically synchronizes incremental data to Alibaba Cloud
-                    -   **Maximum mirror retention**: the maximum number of images that can be retained during incremental migration
+                    -   **Synchronization Interval**: the interval at which SMC automatically synchronizes incremental data to Alibaba Cloud.
+                    -   **Maximum mirror retention**: the maximum number of images that can be retained during incremental migration.
 SMC automatically synchronizes incremental data to Alibaba Cloud at the specified interval. For more information about best practices for incremental migration, see [Migrate incremental data from a source server](/intl.en-US/Best Practices/Migrate incremental data from a source server.md).
 
                 -   If you disable this feature, incremental data is not synchronized. |
+
+            -   **ECS Instance**. The following table describes the parameters.
+
+                **Note:** The storage and operating systems of the source server and destination instance must be compatible. For more information, see [Migrate servers to ECS instances](/intl.en-US/Best Practices/Migrate servers to ECS instances.md).
+
+                ![smc-instance](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6904865061/p176925.png)
+
+                **Target Instance**: Select an ECS instance as the destination instance.
 
             -   **Container Image**. The following table describes the parameters.
 
@@ -311,10 +319,10 @@ SMC automatically synchronizes incremental data to Alibaba Cloud at the specifie
 
                 |Parameter|Required|Description|
                 |---------|--------|-----------|
-                |**Namespace**|Yes|The namespace of the destination container image|
-                |**Repository Name**|Yes|The name of the repository that stores the destination container image|
-                |**Version**|No|The version of the destination container image|
-                |**RAM Role**|Yes|The instance RAM role that is attached to the intermediate instance|
+                |**Namespace**|Yes|The namespace of the destination container image.|
+                |**Repository Name**|Yes|The name of the repository that stores the destination container image.|
+                |**Version**|No|The version of the destination container image.|
+                |**RAM Role**|Yes|The instance RAM role that is attached to the intermediate instance.|
 
         -   **Method to Run**: specifies whether to run a task immediately after it is created and whether to automatically run the task.
 
@@ -334,12 +342,12 @@ SMC automatically synchronizes incremental data to Alibaba Cloud at the specifie
 
         -   **Network Type**: the type of the network that is used to migrate data to an intermediate instance. During migration, SMC creates an intermediate instance that connects to a VSwitch in a virtual private cloud \(VPC\). When you select Public Network, a public IP address is assigned to the intermediate instance.
 
-            ![Network Type](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/6994588951/p112663.png)
+            ![Network Type](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/6994588951/p112663.png)
 
-            The following table describes the valid values.
+            The following table describes the parameters.
 
-            |Parameter value|Description|
-            |---------------|-----------|
+            |Parameter|Description|
+            |---------|-----------|
             |**Public Network**|SMC migrates data to the intermediate instance over the Internet. If you select Public Network, make sure that the migration source can access the Internet. You can choose whether to specify a VPC and a VSwitch based on your requirements.             -   If you specify a VPC and a VSwitch, SMC creates an intermediate instance that connects to the specified VPC and VSwitch.
 
 When you migrate multiple migration sources at a time, you can specify the same VPC and VSwitch for migration tasks. This improves the usage of VPC resources. You can migrate a maximum of 100 migration sources at a time.
@@ -363,7 +371,7 @@ If you do not specify a VPC or a VSwitch before you migrate multiple migration s
             -   If a high bandwidth is available, we recommend that you do not compress data. Data compression consumes CPU resources of the migration source.
             The default value is 0, which indicates that data to be migrated is not compressed.
 
-        -   **Checksum**: This feature enhances the verification of data consistency between the migration source and the destination server, but may compromise the data transmission rate.
+        -   **Checksum**: This feature enhances the verification of data consistency between the migration source and the destination server. However, this may slow the rate of data transmission.
 
             By default, this feature is disabled.
 
@@ -371,7 +379,7 @@ If you do not specify a VPC or a VSwitch before you migrate multiple migration s
 
 6.  Start the migration task.
 
-    **Note:** If you set the Method to Run parameter to **Run Now**, skip this step. If you set the Method to Run parameter to **Create Only** or **Run Later**, you can perform the following steps to start the migration task.
+    **Note:** If you set the Method to Run parameter to **Run Now**, skip this step. If you set the Method to Run parameter to **Create Only** or **Run Later**, you can perform the following steps to start the migration task:
 
     1.  In the left-side navigation pane, click **Migration Tasks**.
 
