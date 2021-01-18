@@ -38,7 +38,8 @@
 |TargetType|String|否|Image|迁移任务交付的目标类型。取值范围：
 
  -   Image：迁移成功后，SMC为您的迁移源生成阿里云镜像。
--   ContainerImage：迁移成功后，SMC为您的迁移源生成Docker容器镜像。 |
+-   ContainerImage：迁移成功后，SMC为您的迁移源生成Docker容器镜像。
+-   Instance：迁移成功后，SMC将您的迁移源直接迁移至目标实例。当您设置该参数值时，您需要同时指定`InstanceId`参数。 |
 |ScheduledStartTime|String|否|2019-06-04T13:35:00Z|迁移任务的执行时间。该参数值的设置需满足以下要求：
 
  -   遵循ISO8601标准，并需要使用UTC+0时间，格式为YYYY-MM-DDThh:mm:ssZ。例如，2018-01-01T12:00:00Z，表示北京时间2018年01月01日20点00分00秒。
@@ -146,6 +147,12 @@
 |ContainerNamespace|String|否|testNamespace|Docker的命名空间。关于Docker容器镜像详情请参见[容器镜像服务](~~60744~~)。 |
 |ContainerRepository|String|否|testRepository|Docker的镜像仓库。关于Docker容器镜像详情请参见[容器镜像服务](~~60744~~)。 |
 |ContainerTag|String|否|CentOS:v1|Docker的镜像标签。关于Docker容器镜像详情请参见[容器镜像服务](~~60744~~)。 |
+|LicenseType|String|否|BYOL|许可证类型。取值范围：
+
+ -   空值：无许可证
+-   BYOL：自带许可
+
+ 更多信息，请参见[SMC FAQ](~~121707~~)。 |
 
 ## 返回数据
 
