@@ -137,7 +137,7 @@ SMC会按下列顺序，根据库存情况，依次选择符合条件的实例�
 确认源服务器能访问以下服务地址和端口。
 
 -   服务器迁移中心SMC：`https://smc.aliyuncs.com`443端口。
--   中转实例：公网IP地址8080和8703端口。使用VPC内网迁移方案时，需访问私有IP地址。VPC内网迁移详情，请参见[VPC内网迁移]()。
+-   中转实例：公网IP地址8080和8703端口。当您使用**内网传输**的**网络模式**时，需访问私有IP地址。
 
 **说明：** 源服务器不需要开放任何入方向的端口，但是需要在出方向访问上述公网地址和端口。
 
@@ -299,7 +299,7 @@ SMC客户端导入迁移源时，只会检测已挂载的磁盘分区。若您�
 
 迁移任务主状态和业务状态的关系如下图所示。
 
-![job_status](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6949816951/p51026.png)
+![job_status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6949816951/p51026.png)
 
 |迁移任务主状态|状态说明|该状态下您可以进行的操作|
 |:------|:---|:-----------|
@@ -483,7 +483,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 2.  如果有数据盘缺失，进入磁盘管理检查盘符是否丢失。
 3.  等待文件系统权限修复过程完成后，选择是否重启实例。
 
-    ![windows系统检查](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6949816951/p13956.png)
+    ![windows系统检查](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6949816951/p13956.png)
 
     **说明：** 初次启动ECS实例后，如果文件系统权限修复程序未自启动，您可以运行C:\\go2aliyun\_prepare\\go2aliyun\_restore.exe手动修复。执行前要确保实例上的磁盘数量和盘符路径跟源系统保持一致。
 
@@ -509,9 +509,9 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 -   检查驱动。创建I/O优化的实例时，请确保源服务器已经安装[virtio驱动](/intl.zh-CN/镜像/自定义镜像/导入镜像/安装virtio驱动.md)。
 -   检查源系统引导配置是否正确。
--   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](/intl.zh-CN/实例/连接实例/连接Linux实例/通过VNC远程连接登录Linux实例.md)登录实例发现开机界面如下图所示。
+-   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](/intl.zh-CN/实例/连接实例/使用VNC连接实例/通过VNC远程连接登录Linux实例.md)登录实例发现开机界面如下图所示。
 
-    ![Linux服务器启动检查](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6949816951/p50179.png)
+    ![Linux服务器启动检查](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6949816951/p50179.png)
 
     您需要升级GRUB系统引导程序至1.9版本以上后，重新迁移。升级GRUB的步骤，请参见[如何为Linux服务器安装GRUB？](/intl.zh-CN/镜像/常见问题/如何为Linux服务器安装GRUB？.md)。
 
@@ -534,7 +534,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 SMC为您的迁移源生成一份自定义镜像。您可以在迁移任务页面，找到您的迁移任务，在**迁移结果**栏单击红框中的链接，可查看该自定义镜像。
 
-![迁移结果](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/6949816951/p50103.png)
+![迁移结果](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6949816951/p50103.png)
 
 ## 迁移后创建的ECS实例hostname依旧保留了其他云平台的名称，如何解决？
 
