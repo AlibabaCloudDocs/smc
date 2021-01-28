@@ -8,6 +8,7 @@
     -   [在一台物理主机数据库服务器上有单实例Oracle数据库，在向阿里云做迁移时，应该选择整台服务器（包含操作系统、数据库）迁移，还是选择数据库迁移（仅迁移数据库）？两种方式都有哪些利弊？](#section_7wr_yaq_j99)
     -   [SMC的迁移过程是什么？](#section_h30_ti7_cno)
     -   [SMC迁移所需时间如何评估？如何测试传输速度？](#section_mx1_h0s_1fv)
+    -   [SMC是否支持自带许可证迁移上云？](#section_v7z_kk9_haw)
     -   [SMC是否支持断点续传？](#section_jas_0vg_mmr)
     -   [SMC是否支持增量迁移数据？](#section_qnr_e43_55i)
     -   [迁移中断或提示失败时，如何处理？](#section_aao_rej_1jy)
@@ -91,6 +92,33 @@ SMC的迁移过程如下：
 迁移周期主要分为迁移前、迁移过程中、迁移后三部分。迁移周期时长与待迁移服务器的数量和实际数据量成正比，建议您根据实际迁移测试演练进行评估。
 
 迁移过程中所需时间的评估方法以及传输速度的测试方法，请参见[评估迁移时间与测试传输速度](/cn.zh-CN/最佳实践/评估迁移时间与测试传输速度.md)。
+
+## SMC是否支持自带许可证迁移上云？
+
+支持。自带许可（Bring Your Own License，简称BYOL） 迁移上云目前主要有以下两种：
+
+-   Microsoft
+
+    微软自带许可场景包含：
+
+    -   通过软件保障协议（Software Assurance，简称SA）实现自带许可场景
+
+        支持微软许可证移动性（License Mobility）的软件，包括SQL Server，SharePoint等，可以通过创建ECS实例实现自带许可。
+
+    -   Windows操作系统场景
+
+        Windows客户端访问许可（[Client Access License，简称CAL](https://docs.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/rds-client-access-license)）不适用于许可证移动性，所以无法在共享硬件环境下使用已经拥有的Windows许可证。您需要将Windows部署在独享的物理环境中，可以使用阿里云的专有宿主机或弹性裸金属服务器。更多信息，请参见[专有宿主机产品文档](/cn.zh-CN/产品简介/什么是专有宿主机DDH.md)和[弹性裸金属服务器产品文档](/cn.zh-CN/实例/选择实例规格/弹性裸金属服务器/弹性裸金属服务器概述.md)。
+
+        对于此类ECS实例，阿里云不提供KMS、WSUS服务及对软件的技术支持，您可以联系微软获取软件技术支持。
+
+    -   无SA或不支持通过SA实现自带许可的场景
+
+        此场景类似于与Windows操作系统场景，您可以在独享的硬件环境中复用已购的软件许可证并自行下载软件进行部署。
+
+-   Redhat
+
+    Redhat提供云接入（Cloud Access）方式。若要迁移当前的Red Hat订阅在阿里云上使用（Bring Your Own Subscription，简称BYOS），可以注册Red Hat云接入计划。更多信息，请参见[步骤一：注册Red Hat云接入计划]()
+
 
 ## SMC是否支持断点续传？
 
@@ -521,7 +549,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 -   检查驱动。创建I/O优化的实例时，请确保源服务器已经安装[virtio驱动](/cn.zh-CN/镜像/自定义镜像/导入镜像/安装virtio驱动.md)。
 -   检查源系统引导配置是否正确。
--   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](/cn.zh-CN/实例/连接实例/连接Linux实例/通过VNC远程连接登录Linux实例.md)登录实例发现开机界面如下图所示。
+-   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](/cn.zh-CN/实例/连接实例/使用VNC连接实例/通过VNC远程连接登录Linux实例.md)登录实例发现开机界面如下图所示。
 
     ![Linux服务器启动检查](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6949816951/p50179.png)
 
