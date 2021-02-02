@@ -2,31 +2,17 @@
 
 Incremental migration allows you to migrate incremental data from a source server to Alibaba Cloud at a specified interval. Incremental migration minimizes service disruptions and service delivery periods. This topic describes the best practices for incremental migration.
 
-The information of the source server is imported to the SMC console. For more information, see [Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md).
+-   Incremental migration is supported by SMC client V2.0.0 and later. Therefore, we recommend that you use [SMC client V2.0.0 and later](https://p2v-tools.oss-cn-hangzhou.aliyuncs.com/smc/Alibaba_Cloud_Migration_Tool.zip?file=Alibaba_Cloud_Migration_Tool.zip) to import the information of the migration source.
+-   The information of the server is imported to the SMC console. For more information, see [Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md).
 
-**Note:**
-
--   Incremental migration is supported by SMC client 2.0.0 and later . Therefore, we recommend that you use [SMC client 2.0.0 and later](http://p2v-tools.oss-cn-hangzhou.aliyuncs.com/smc/Alibaba_Cloud_Migration_Tool.zip) to import the information of the migration source.
--   Keep the SMC client in the running state during a migration task. If data transfer is interrupted, you can restart the client and the migration task to resume the migration.
-
-Each incremental migration task creates an intermediate instance to facilitate the migration process. The intermediate instance incurs a small fee. For more information, see [Pay-as-you-go](/intl.en-US/Pricing/Billing methods/Pay-as-you-go.md). The intermediate instance is released only when the incremental migration task is in the **Expired** state or when the task is deleted.
-
-## Procedure
-
-The following steps show the best practices for incremental migration:
-
-1.  [\(Optional\) Step 1: Exclude dynamic data directories](#section_bek_cm0_0tr)
-
-2.  [Step 2: Create and start an incremental migration task](#section_jq3_f9e_out)
-
-3.  [Step 3: Stop the services and run an incremental migration task](#section_p6e_8ju_nzd)
-
+-   Make sure that the SMC client is running during migration. If data transfer is interrupted, you can restart the client and the migration task to resume migration.
+-   Each incremental migration task creates an intermediate instance to facilitate the migration process. The intermediate instance incurs a small fee. For more information, see [Pay-as-you-go](/intl.en-US/Pricing/Billing methods/Pay-as-you-go.md). The intermediate instance is released only when the incremental migration task is in the **Expired** state or when the task is deleted.
 
 ## \(Optional\) Step 1: Exclude dynamic data directories
 
-To ensure stable migration, we recommend that you exclude dynamic data directories, such as data directories of large databases. Then, you can stop the services on the source server and start the migration task. Skip this step if you do not need to exclude dynamic data directories.
+To ensure stable migration, we recommend that you exclude dynamic data directories, such as data directories of large databases. Then, you can stop the services on the source server and start the migration task. Skip this step if you do not need to exclude dynamic data directories from migration.
 
-To exclude dynamic data directories, perform the following steps. You do not need to stop the services that are running on the source server.
+To exclude dynamic data directories, perform the following steps. You do not need to stop services that are running on the source server.
 
 1.  Log on to the source server.
 
@@ -45,28 +31,28 @@ You can perform the following steps to exclude dynamic data directories. You do 
 
 3.  Find the source server from which you want to migrate data. Click **Create Migration Task** in the **Actions** column.
 
-4.  On the **Create Migration Task** page, turn on the **Automatic Incremental Synchronization** switch, and set the **Synchronization Interval** and **Upperlimit of Reserved Images** parameters. Set other parameters based on your needs and then click **OK**.
+4.  On the **Create Migration Task** page, turn on the **Automatic Incremental Synchronization** switch, and set the **Synchronization Interval** and **Maximum Mirror Retention** parameters. Set other parameters based on your needs and then click **OK**.
 
-    ![Automatic incremental synchronization](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3229177951/p64669.png)
+    ![Automatic incremental synchronization](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3229177951/p64669.png)
 
-    You can specify the following parameters. For more information, see [Migration task parameters](/intl.en-US/User Guide/Step 2: Create and start a migration task.md).
+    You can specify the following parameters. For more information, see the "Migration task parameters" table in the [Step 2: Create and start a migration task](/intl.en-US/User Guide/Step 2: Create and start a migration task.md) topic.
 
-    -   **Synchronization Interval**: Specify the time interval between incremental migration tasks.
-    -   **Upperlimit of Reserved Images**: Specify the maximum number of reserved images. Each incremental migration task generates new images. If the total number of generated image files exceeds the upper limit, the earliest unused images are deleted.
-    -   **Method to Run**: Select a method to run the migration task. In this topic, **Run Now** is selected.
+    -   **Synchronization Interval**: Specify the time interval between two consecutive incremental migration tasks. Minimum value: 1 hour. Maximum value: 7 days.
+    -   **Upperlimit of Reserved Images**: Specify the maximum number of reserved images. Valid values: 1 to 10. Each incremental migration task generates new images. If the total number of generated image files exceeds the upper limit, the earliest unused images are deleted.
+    -   **Method to Run**: Select a method to run the migration task. In this example, select **Run Now**.
     The migration task immediately runs after it is created.
 
-    1.  The first incremental migration task migrates all data except the excluded directories and files and generates a full image. You can use this image to create an instance for verification.
-    2.  After the first incremental migration task is complete, SMC migrates incremental data and generates images at specific time points based on the specified **synchronization interval**.
+    1.  The first incremental migration task migrates all data except the excluded directories and files, and generates a full image. You can use this image to create an instance for verification.
+    2.  After the first incremental migration task is complete, SMC migrates incremental data and generates images at specific points in time based on the specified **synchronization interval**.
 
         **Note:** The image generated for each incremental migration task is a full image of the source server at a specific time. The image includes the incremental data and all migrated data.
 
         In the image names that are generated during incremental migration, `CYCLE_X` indicates that the image is generated by the Xth incremental migration task. For example, if an image name contains CYCLE\_2, it indicates that the image is generated by the second incremental migration task, as shown in the following figure.
 
-        ![cycle](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3229177951/p63594.png)
+        ![cycle](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3229177951/p63594.png)
 
 
-## Step 3: Stop the services and run an incremental migration task
+## Step 3: Stop the services on the source server and run an incremental migration task
 
 After you stop the services on the source server, perform the following steps to skip the excluded data directories and run an incremental migration task again:
 
@@ -76,25 +62,25 @@ After you stop the services on the source server, perform the following steps to
 
     1.  On the Migration Tasks page, find the incremental migration task.
 
-    2.  In the **Actions** column, click the More icon and choose **Manual Incremental Migration** from the shortcut menu.
+    2.  In the **Actions** column, click the More icon and choose **Manual Incremental Migration**.
 
-        ![Manual incremental migration](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3229177951/p63448.png)
+        ![Manual incremental migration](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3229177951/p63448.png)
 
     3.  In the Start Migration Task message, click **OK**.
 
 
 On the Migration Tasks page, wait until the task is complete.
 
--   If the migration task is in the **Waiting** state, the migration succeeded and you can obtain the image that was generated during the migration. This image contains all the data for the first full migration and each subsequent incremental migration of the source server.
--   If the migration task is in the **InError** state, the migration fails. You must check the log to fix the issue, and then restart the task. For information about common errors and solutions, see [SMC FAQ](/intl.en-US/FAQ/SMC FAQ.md).
+-   If the migration task is in the **Waiting** state, the migration succeeded and you can obtain the image that was generated during the migration. This image contains all the data of the first full migration and each subsequent incremental migration of the source server.
+-   If the migration task is in the **InError** state, the migration has failed. You must check logs to fix the issue, and then restart the task. For information about common errors and solutions, see [SMC FAQ](/intl.en-US/FAQ/SMC FAQ.md).
 
 After you obtain the latest full image, you can perform the following operations:
 
 -   Create an instance to verify the image by performing the following steps:
-    1.  On the Migration Tasks page, find the target migration task and click **Create Instance** in the **Actions** column.
+    1.  On the Migration Tasks page, find the migration task and click **Create Instance** in the **Actions** column.
     2.  On the Custom Launch tab, the **Image** section shows the latest full image. Configure other parameters based on your needs and purchase the instance. For more information, see [Create an instance by using the wizard](/intl.en-US/Instance/Create an instance/Create an instance by using the wizard.md).
 
-        ![](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3229177951/p64719.png)
+        ![](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3229177951/p64719.png)
 
     3.  Connect to the instance and check the system of the destination server. For more information, see [How can I check my system after migrating a Windows server?](/intl.en-US/FAQ/SMC FAQ.md) or [How can I check my system after migrating a Linux server?](/intl.en-US/FAQ/SMC FAQ.mdsection_8nx_71l_ksv)
 -   Stop the incremental migration task by performing the following steps:
@@ -102,10 +88,10 @@ After you obtain the latest full image, you can perform the following operations
     **Note:** You can pause an incremental migration task only when the task is in the **Syncing** or **Waiting** state.
 
     1.  On the Migration Tasks page, find the migration task.
-    2.  In the **Actions** column, click the ![more](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/en-US/3229177951/p63650.png) icon and choose **Pause** from the shortcut menu.
+    2.  In the **Actions** column, click the ![more](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/3229177951/p63650.png) icon and select **Pause**.
     3.  In the Stop Migration Task dialog box, click **OK**.
--   Delete the incremental migration task by perform the following steps:
-    1.  On the Migration Tasks page, find the target migration task.
+-   Delete the incremental migration task
+    1.  On the Migration Tasks page, find the migration task.
     2.  In the **Actions** column, click **Delete**.
     3.  In the Delete Migration Tasks dialog box, click **OK**.
 
