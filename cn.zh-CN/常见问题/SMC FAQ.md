@@ -419,7 +419,7 @@ SMC需要使用账号访问密钥AccessKeyID和AccesKeySecret调用ECS API创建
 
 VPC超出限额后，您可以通过下列一种方式处理。
 
--   删除现有VPC。具体步骤，请参见[删除专有网络](/cn.zh-CN/专有网络和交换机/管理专有网络/删除专有网络.md)。
+-   删除现有VPC。具体步骤，请参见[删除专有网络](/cn.zh-CN/专有网络和交换机/管理专有网络/创建专有网络.md)。
 -   调整VPC限额。请您[提交工单](https://workorder.console.aliyun.com/)。
 
 ## 日志提示InvalidAccessKeyId.NotFound错误，怎么办？
@@ -549,7 +549,7 @@ Windows 服务器迁云停在Prepare For Rsync Disk 0阶段，查看日志文件
 
 -   检查驱动。创建I/O优化的实例时，请确保源服务器已经安装[virtio驱动](/cn.zh-CN/镜像/自定义镜像/导入镜像/安装virtio驱动.md)。
 -   检查源系统引导配置是否正确。
--   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](/cn.zh-CN/实例/连接实例/使用VNC连接实例/通过VNC远程连接登录Linux实例.md)登录实例发现开机界面如下图所示。
+-   如果您的源服务器系统是内核版本较低的CentOS 5或者Debian 7，而且自带的GRUB程序版本低于1.9，同时在ECS控制台[远程连接](/cn.zh-CN/实例/连接实例/使用VNC连接实例/通过密码认证登录Linux实例.md)登录实例发现开机界面如下图所示。
 
     ![Linux服务器启动检查](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/6949816951/p50179.png)
 
