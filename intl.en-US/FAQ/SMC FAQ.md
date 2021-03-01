@@ -8,6 +8,7 @@ This topic provides answers to some frequently asked questions \(FAQ\) about Ser
     -   [I have a single Oracle database instance on a physical server. Do I need to migrate the entire server \(including the operating system and database\) or only the database to Alibaba Cloud? What are the advantages and disadvantages of the two methods?](#section_7wr_yaq_j99)
     -   [What migration process does SMC use?](#section_h30_ti7_cno)
     -   [How do I estimate the time required for a migration task? How do I test the data transfer rate?](#section_mx1_h0s_1fv)
+    -   [Is bring your own license \(BYOL\) supported when I migrate servers by using SMC?](#section_v7z_kk9_haw)
     -   [Does SMC support resumable data transfer?](#section_jas_0vg_mmr)
     -   [Does SMC support incremental data migration?](#section_qnr_e43_55i)
     -   [What can I do if a migration task is interrupted or fails?](#section_aao_rej_1jy)
@@ -20,7 +21,7 @@ This topic provides answers to some frequently asked questions \(FAQ\) about Ser
 -   Migration source FAQ
     -   [How do I exclude files or directories from a migration task?](#section_9xm_osd_b9i)
 -   SMC console FAQ
-    -   [What can I do if I released an intermediate instance by mistake?](#section_1nu_xd1_bip)
+    -   [What can I do if I release an intermediate instance by accident?](#section_1nu_xd1_bip)
     -   [What can I do if I want to reimport a migration source?](#section_uez_q5r_a20)
     -   [What can I do if I cannot create a migration task because a migration source is not in the Active state?](#section_weo_he3_b2a)
     -   [Why am I unable to delete a migration source?](#section_nu9_xbl_bad)
@@ -44,31 +45,31 @@ This topic provides answers to some frequently asked questions \(FAQ\) about Ser
     -   [Why do I receive a "Connect to Server Failed" error?](#section_7ad_mse_m2s)
     -   [Why do I receive a "Do Rsync Disk x Failed" error?](#section_gh1_ywk_103)
     -   [Why do I receive a "check rsync failed" or "rsync not found" error on my Linux server?](#section_i9v_jy5_513)
-    -   [Why have I received a "check virtio failed" error message on my Linux server?](#section_eji_23f_0ry)
+    -   [Why do I receive a "check virtio failed" error message on my Linux server?](#section_eji_23f_0ry)
     -   [Why do I receive a "check selinux failed" error message on my Linux server?](#section_wdz_y67_4sv)
     -   [Why do I receive a "Do Grub Failed" error on my Linux server?](#section_284_a0c_8dl)
     -   [What can I do if Windows server migration stops in the "Prepare For Rsync Disk 0" stage?](#section_22e_ozc_d0w)
 -   Post-migration FAQ
     -   [What can I do if I am prompted to activate the Windows service after I migrate a Windows server?](#section_kxd_mod_x2b)
     -   [What can I do if the drive letters of data disks are missing or invalid after I migrate a Windows server?](#section_kxs_fqi_hz3)
-    -   [What can I do if the file system access is abnormal or system menus are displayed in different languages during instance startup after I migrate a Windows server?](#section_6l1_guc_ms9)
+    -   [What can I do if the file system access is inaccessible or system menus are displayed in different languages during instance startup after I migrate a Windows server?](#section_6l1_guc_ms9)
     -   [How do I check my system after I migrate a Windows server?](#section_c5i_33t_xn7)
     -   [How do I check my system after I migrate a Linux server?](#section_8nx_71l_ksv)
     -   [Why does no data exist in the original data disk directory during instance startup after I migrate a Linux server?](#section_rak_i9w_gky)
     -   [What can I do if I am unable to start the ECS instance created based on the custom image after a Linux server migration?](#section_4wq_e1j_can)
     -   [Why is the network service unavailable when an Others Linux instance is started?](#section_d07_qlt_y6e)
-    -   [How do I perform another migration task on the same migration source?](#section_sz6_lrl_8aa)
-    -   [What do I do after a migration task is completed and a custom image is generated?](#section_pd1_rka_nhr)
-    -   [What happens after a migration task is completed?](#section_203_izc_s31)
+    -   [How do I migrate a server again?](#section_sz6_lrl_8aa)
+    -   [What do I do after a migration task is complete and a custom image is generated?](#section_pd1_rka_nhr)
+    -   [What happens after a migration task is complete?](#section_203_izc_s31)
     -   [Why does the hostname of the ECS instance created after a migration task contain the name of another cloud platform?](#section_6py_r5e_qgz)
 
 ## What scenarios can I use SMC for?
 
-You can use SMC to migrate various types of servers to Elastic Compute Service \(ECS\), such as physical servers, virtual machines \(VMs\), and third-party cloud servers. These servers can run on Windows or Linux. For more information, see [What is SMC?](/intl.en-US/Product Introduction/What is SMC?.md)
+You can use SMC to migrate various types of servers to Elastic Compute Service \(ECS\), such as physical servers, virtual machines \(VMs\), and third-party cloud servers. These servers can run on Windows or Linux. For more information, see [What is SMC?](/intl.en-US/Product Introduction/What is SMC?.md).
 
 ## What migration modes does SMC support?
 
-SMC supports the daemon mode. In this mode, you can import the migration source information by using an SMC client. Then, you can log on to the SMC console to create and complete a migration task. For more information, see [Migration process](/intl.en-US/User Guide/Migration process.md).
+SMC supports the daemon mode. In this mode, you can import the information of the migration source by using an SMC client. Then, you can log on to the SMC console to create and complete a migration task. For more information, see [Migration process](/intl.en-US/User Guide/Migration process.md).
 
 ## I have a single Oracle database instance on a physical server. Do I need to migrate the entire server \(including the operating system and database\) or only the database to Alibaba Cloud? What are the advantages and disadvantages of the two methods?
 
@@ -81,16 +82,43 @@ You can migrate the entire server or only the database based on your business re
 
 SMC uses the following migration process:
 
-1.  You import the migration source information to the SMC console.
-2.  The SMC backend server prepares the intermediate instance.
+1.  You import the information of the migration source to the SMC console.
+2.  The SMC backend server prepares an intermediate instance.
 3.  The SMC client transfers data from the migration source to the intermediate instance.
 4.  SMC creates an image from the migration source and installs the image on Alibaba Cloud.
 
 ## How do I estimate the time required for a migration task? How do I test the data transfer rate?
 
-You can estimate the time required for a migration task based on the migration period. The migration period is divided into three phases: pre-migration, migration, and post-migration. The migration period is proportional to the number of servers that you want to migrate and the volume of data to be migrated. We recommend that you perform a test migration to estimate the time required for a migration task.
+You can estimate the time required for a migration task based on the migration period. The migration period is divided into three phases: pre-migration, migration, and post-migration. The migration period is proportional to the number of servers that you want to migrate and the volume of data. We recommend that you perform a test migration to estimate the time required for a migration task.
 
-For more information, see [t1840773.md\#](/intl.en-US/Best Practices/Estimate the time required for migration and test the transmission speed.md).
+For more information, see [Estimate the time required for migration and test the data transfer speed](/intl.en-US/Best Practices/Estimate the time required for migration and test the data transfer speed.md).
+
+## Is bring your own license \(BYOL\) supported when I migrate servers by using SMC?
+
+Yes, SMC supports BYOL. BYOL licenses are used in the following scenarios:
+
+-   Microsoft
+
+    Microsoft BYOL licenses are used in the following scenarios:
+
+    -   BYOL implemented through Software Assurance \(SA\)
+
+        BYOL can be implemented for software programs that support License Mobility when ECS instances are created, such as SQL Server and SharePoint.
+
+    -   Windows operating systems
+
+        Windows [client access licenses \(CALs\)](https://docs.microsoft.com/zh-cn/windows-server/remote/remote-desktop-services/rds-client-access-license) do not support License Mobility. Therefore, existing Windows licenses cannot be used in shared hardware environments. You must deploy Windows operating systems in a dedicated physical environment, which can be an Alibaba Cloud dedicated host or an ECS bare metal instance. For more information, see the [DDH documentation](/intl.en-US/Product Introduction/What is DDH?.md) and [ECS Bare Metal Instance documentation](/intl.en-US/Instance/Instance type families/ECS Bare Metal Instance types/Overview.md).
+
+        Alibaba Cloud does not provide Key Management Service \(KMS\), Windows Server Update Services \(WSUS\), or software technical support for these kinds of ECS instances. You can contact Microsoft for software technical support.
+
+    -   No SA is available or BYOLs implemented through SA are not supported
+
+        This scenario is similar to the Windows operating system scenario. You can reuse software licenses that you have purchased and downloaded, and deploy software programs in a dedicated hardware environment.
+
+-   Redhat
+
+    Red Hat provides the Cloud Access program. If you migrate Red Hat subscriptions to Alibaba Cloud by using the bring your own subscription \(BYOS\) method, you can register with Red Hat Cloud Access. For more information, see [Step 1: Sign up with Red Hat Cloud Access]().
+
 
 ## Does SMC support resumable data transfer?
 
@@ -98,7 +126,7 @@ Yes, SMC supports resumable data transfer. If data transfer is interrupted, you 
 
 ## Does SMC support incremental data migration?
 
-Yes. SMC supports incremental data migration. For more information, see [Migrate incremental data from a source server](/intl.en-US/Best Practices/Migrate incremental data from a source server.md).
+Yes, SMC supports incremental data migration. For more information, see [Migrate incremental data from a source server](/intl.en-US/Best Practices/Migrate incremental data from a source server.md).
 
 ## What can I do if a migration task is interrupted or fails?
 
@@ -112,7 +140,7 @@ If a migration task is interrupted or fails, use the following troubleshooting m
 
 ## How does SMC create an intermediate instance?
 
-SMC attempts to create an intermediate instance based on the following specifications in sequence until an intermediate instance is created.
+SMC attempts to create an intermediate instance based on the following specifications in sequence.
 
 -   1 vCPU 2 GiB
 -   1 vCPU 4 GiB
@@ -128,7 +156,7 @@ If the preceding instance specifications are unavailable, SMC selects other cost
 
 You need to know the following information about intermediate instances:
 
--   SMC creates, starts, stops, and releases an intermediate instance named `No_Delete_SMC_Transition_Instance`. To ensure a smooth migration, do not modify the status of the intermediate instance.
+-   SMC creates, starts, stops, and releases an intermediate instance named `No_Delete_SMC_Transition_Instance` during a migration process. To ensure a smooth migration, do not modify the status of the intermediate instance.
 -   The default security group of the intermediate instance allows access to ports 8080 and 8703. These ports are the migration service ports of the intermediate instance. Do not modify or delete the security group.
 -   After the migration is complete, the intermediate instance is automatically released. If the migration fails, you must manually release the instance. For more information, see [Release an instance](/intl.en-US/Instance/Manage instances/Release an instance.md).
 
@@ -136,8 +164,8 @@ You need to know the following information about intermediate instances:
 
 A source server must access the following endpoint and ports:
 
--   The SMC endpoint `https://smc.aliyuncs.com:443` that is used to access SMC.
--   Ports 8080 and 8703 of the intermediate instance. If the migration is performed over a **virtual private cloud \(VPC\)**, the source server must also access the private IP address of the intermediate instance.
+-   The SMC endpoint: `https://smc.aliyuncs.com:443`.
+-   Ports 8080 and 8703 of the intermediate instance. If the migration is performed over a **virtual private cloud \(VPC\)**, the source server must also access the private IP address of the intermediate instance.****
 
 **Note:** You do not need to enable inbound ports for the source server. However, you must make sure that the server can access the preceding endpoint and ports.
 
@@ -147,7 +175,7 @@ Alibaba Cloud supports licenses for Windows Server 2003, 2008, 2012, and 2016. T
 
 ## How do I install Rsync?
 
-To install Rsync, run one of the following commands. Select the command based on the operating system of your source server.
+To install Rsync, run one of the following commands based on the operating system of your source server:
 
 -   CentOS: yum -y install rsync.
 -   Ubuntu: apt-get -y install rsync.
@@ -161,7 +189,7 @@ To temporarily disable SELinux, run the setenforce 0 command. To permanently dis
 
 ## How do I exclude files or directories from a migration task?
 
-To exclude files or directories from a migration task, add the file paths or directory paths that you want to exclude to the following configuration files. The configuration files reside in the Excludes directory of the client.
+To exclude files or directories from a migration task, add the corresponding file paths or directory paths to the following configuration files. The configuration files reside in the Excludes directory of the client.
 
 -   A system disk configuration file: rsync\_excludes\_win.txt \(for Windows servers\) or rsync\_excludes\_linux.txt \(for Linux servers\)
 
@@ -248,9 +276,9 @@ To exclude files or directories from a migration task, add the file paths or dir
 
 You must delete the migration source, restart the client, and then reimport the migration source. If the migration source is associated with a migration task, you must delete the migration task before you delete the migration source.
 
-## What can I do if I released an intermediate instance by mistake?
+## What can I do if I release an intermediate instance by accident?
 
-If you released an intermediate instance by mistake, delete the current migration task, create a migration task for the migration source, and then start the migration task. If the problem persists, you can [submit a ticket](https://workorder.console.aliyun.com/#/ticket/list/).
+If you release an intermediate instance by accident, delete the current migration task, create a migration task for the migration source, and then start the migration task. If the problem persists, you can [submit a ticket](https://workorder.console.aliyun.com/#/ticket/list/).
 
 ## What can I do if I cannot create a migration task because a migration source is not in the Active state?
 
@@ -260,7 +288,7 @@ Restore the migration source to the Active state, and then create a migration ta
 
     the migration source is disconnected from the SMC console. You must restart the SMC client and wait until the migration is complete. For more information, see [Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md).
 
--   If the migration source is in the InError state, you must check the console logs. You must also check the client logs in the Logs directory and the error message on the client UI. Resolve the error based on the logs. You can also use the error codes and troubleshooting methods in this topic for reference. If the problem persists, contact Alibaba Cloud. For more information, see [Contact us](/intl.en-US/FAQ/Contact us.md).
+-   If the migration source is in the InError state, you must check the console logs. You must also check the client logs in the Logs directory and the error messages on the client UI. Resolve the error based on the logs. You can also use the error codes and troubleshooting methods in this topic for reference. If the problem persists, contact Alibaba Cloud. For more information, see [Contact us](/intl.en-US/FAQ/Contact us.md).
 
 ## Why am I unable to delete a migration source?
 
@@ -268,7 +296,7 @@ You cannot delete a migration source if it is associated with an unfinished migr
 
 ## Why are the data disk parameters of a migration source not displayed in the Create Migration Task pane? How can I resolve this issue?
 
-This is because your migration source is not equipped with data disks or no data disk is attached to the migration source. If your migration source is not equipped with or no data disk is attached to the migration source, the data disk parameters are not displayed in the Create Migration Task pane. To resolve this problem, perform the following steps:
+This is because your migration source is not equipped with data disks or no data disk is attached to the migration source. If your migration source has no data disk or is not attached to a data disk, the data disk parameters are not displayed in the Create Migration Task pane. To resolve this problem, perform the following steps:
 
 1.  Attach the data disk.
 2.  Restart the SMC client.
@@ -313,7 +341,7 @@ The following figure shows the relationships between migration task statuses and
 -   Delete the migration task.
 -   Perform incremental migration of source servers.
 -   Modify the settings of automatic incremental migration. The settings include the interval at which the migration task runs and the maximum number of images that can be retained for the task. |
-|Expired|The migration task has expired.|Delete the migration task. **Note:** Each migration task is valid for 30 days. When a migration task expires, the status of the task changes to Expired and the task is retained for another seven days. SMC deletes the migration task seven days after the task expires. For more information, see [What is the validity period of a migration task? What happens after a migration task expires?](#section_oe7_6bl_vu6) |
+|Expired|The migration task has expired.|Delete the migration task. **Note:** Each migration task is valid for 30 days. When a migration task expires, the status of the task changes to Expired and the task is retained for seven days. SMC deletes the migration task seven days after the task expires. For more information, see [What is the validity period of a migration task? What happens after a migration task expires?](#section_oe7_6bl_vu6) |
 |Deleting|The migration task is being deleted.|Wait until the migration task is deleted, or create another migration task for the migration source. **Note:** After a migration task is deleted, SMC releases the resources used during the migration process, such as the intermediate instance. This process may take a while to complete. |
 
 |Business status|Description|Supported operation|
@@ -337,7 +365,7 @@ To find a migration source, perform the following steps:
 
 ## Why do I receive a "Forbidden.SubUser" error?
 
-You receive the error because SMC requires an account that has no permissions to purchase instances. You must use the AccessKey pair of the account to call the ECS API and create resources such as intermediate instances and disks. Service provider accounts may not have the permissions to purchase instances. If you need to migrate resources, contact Alibaba Cloud. For more information, see [Contact us](/intl.en-US/FAQ/Contact us.md).
+You receive the error because SMC requires a RAM user who has permissions to purchase instances. You must use the AccessKey pair of the account to call the ECS API and create resources such as intermediate instances and disks. Service provider accounts may not have the permissions to purchase instances. If you need to migrate resources, contact Alibaba Cloud. For more information, see [Contact us](/intl.en-US/FAQ/Contact us.md).
 
 ## Why do I receive a "Forbidden.Unauthorized" error?
 
@@ -349,7 +377,7 @@ You receive the error because your account has not passed real-name verification
 
 ## Why do I receive a "Your Account Haven't Authorized For SMC RAM Role" error?
 
-You receive the error because the required role is not created or assigned to SMC. For more information about how to create and assign a role to SMC, see [Procedure](/intl.en-US/User Guide/Before you begin.md).
+You receive the error because the required role is not created or assigned to SMC. For more information about how to create a role and assign it to SMC, see [Procedure](/intl.en-US/User Guide/Before you begin.md).
 
 ## Why do I receive an "IllegalTimestamp" error?
 
@@ -357,7 +385,7 @@ You receive the error because the system time of a migration source is inconsist
 
 ## Why do I receive an "InvalidAccountStatus.NotEnoughBalance" error?
 
-You receive the error because your account balance is insufficient. The default billing method of intermediate instances is pay-as-you-go. If your account balance is insufficient, migration cannot be completed. You must add funds to your account and try again. For more information, see [Pay-as-you-go](/intl.en-US/Pricing/Billing methods/Pay-as-you-go.md).
+You receive the error because your account balance is insufficient. The default billing method of intermediate instances is pay-as-you-go. If your account balance is insufficient, migration cannot be completed. You must add sufficient funds to your account and try again. For more information, see [Pay-as-you-go](/intl.en-US/Pricing/Billing methods/Pay-as-you-go.md).
 
 ## Why do I receive a "Forbidden.RAM" error?
 
@@ -375,7 +403,7 @@ You receive the error because the snapshot service has not been activated for yo
 
 ## Why do I receive a "Connect to Server Failed" error?
 
-You receive the error because SMC cannot connect to the intermediate instance. Perform the following steps to troubleshoot the error:
+You receive the error because SMC cannot connect to the intermediate instance. To resolve the error, perform the following steps:
 
 1.  Check the detailed migration logs.
 2.  Perform the following steps:
@@ -385,13 +413,13 @@ You receive the error because SMC cannot connect to the intermediate instance. P
 
 ## Why do I receive a "Create transition vpc failed" error message? \(QuotaExceeded.Vpc: VPC quota exceeded.\)
 
-You receive the error because your VPC quota is exceeded. If you do not specify a VPC and vSwitch for your migration task, SMC creates an intermediate VPC and vSwitch during the migration. After the migration task is completed, the intermediate VPC and vSwitch are deleted.
+You receive the error because your VPC quota is exceeded. If you do not specify a VPC and vSwitch for your migration task, SMC creates an intermediate VPC and vSwitch during the migration. After the migration task is completed, SMC deletes the intermediate VPC and vSwitch.
 
-Each Alibaba Cloud account has a maximum of 10 VPCs in a region. If you want to perform multiple migration tasks at a time or the number of VPCs in the destination region reaches the quota, we recommend that you increase the rate of VPC reuse. To do so, you can specify the same VPC and vSwitch when you create migration tasks. For more information, see [Migration task parameters](/intl.en-US/User Guide/Step 2: Create and start a migration task.md).
+Each Alibaba Cloud account can have a maximum of 10 VPCs in a region. If you perform multiple migration tasks at a time or the number of VPCs in the destination region reaches the quota, we recommend that you increase the VPC reuse rate. To do so, you can specify the same VPC and vSwitch when you create migration tasks. For more information, see [Migration task parameters](/intl.en-US/User Guide/Step 2: Create and start a migration task.md).
 
 If the VPC quota is reached, perform one of the following steps:
 
--   Delete an existing VPC. For more information, see [Delete a VPC network](/intl.en-US/VPCs and VSwitches/VPC management/Delete a VPC network.md).
+-   Delete an existing VPC. For more information, see [Delete a VPC network]().
 -   Increase the VPC quota. [Submit a ticket](https://workorder.console.aliyun.com/).
 
 ## Why do I receive an "InvalidAccessKeyId.NotFound" error?
@@ -405,7 +433,7 @@ You receive the error because the AccessKey pair you specified is invalid. To re
 
 ## Why do I receive a "Do Rsync Disk x Failed" error?
 
-You receive the error because the data transfer is interrupted. Perform the following steps to troubleshoot the error:
+You receive the error because the data transfer is interrupted. To resolve the error, perform the following steps:
 
 1.  Check the migration logs for exceptions. If the log file contains `return: 3072` or `return: 7680`, check whether the database or container services such as Oracle, MySQL, Microsoft SQL Server, MongoDB, or Docker are enabled on the source server. If the services are enabled, disable these services or exclude the related directories before you migrate data.
 2.  Perform the following steps:
@@ -417,9 +445,9 @@ You receive the error because the data transfer is interrupted. Perform the foll
 
 You receive the error because you have not installed the Rsync component on the source server. For more information, see [How do I install Rsync?](#section_6ai_ig1_k06)
 
-## Why have I received a "check virtio failed" error message on my Linux server?
+## Why do I receive a "check virtio failed" error message on my Linux server?
 
-You receive the error because you have not installed the VirtIO driver on the source server. For more information, see [VirtIO driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md).
+You receive the error because you have not installed the Virtio driver on the source server. For more information, see [Virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md).
 
 ## Why do I receive a "check selinux failed" error message on my Linux server?
 
@@ -435,7 +463,7 @@ If Windows server migration stops in the "Prepare For Rsync Disk 0" stage and `V
 
 1.  Enable the Volume Shadow Copy service.
     1.  Log on to your on-premises server. Click **Start**, enter **services.msc** in the search box, and then press Enter.
-    2.  Find the Volume Shadow Copy service and click **Start the service**.
+    2.  Find the Volume Shadow Copy service and click **Start Service**.
 2.  Uninstall the QEMU Guest Agent software.
     1.  Log on to your on-premises server. Click **Start**, enter **services.msc** in the search box, and then press Enter.
     2.  Check whether the QEMU Guest Agent VSS Provider service is running. If this service is unavailable, restart the SMC client.
@@ -471,7 +499,7 @@ You can reinstall Key Management Service \(KMS\) to activate the Windows service
     2.  In the Disk Management utility, right-click the data disk whose drive letter is missing, and click **Change Drive Letters and Path**.
     3.  Click **Change** to change the drive letter.
 
-## What can I do if the file system access is abnormal or system menus are displayed in different languages during instance startup after I migrate a Windows server?
+## What can I do if the file system access is inaccessible or system menus are displayed in different languages during instance startup after I migrate a Windows server?
 
 You must wait until the access permissions on the file system automatically recover. For more information, see [How do I check my system after I migrate a Windows server?](#section_c5i_33t_xn7)
 
@@ -481,7 +509,7 @@ After you migrate your Windows server, you must perform the following steps when
 
 1.  Check whether the system disk data is complete.
 2.  If a data disk is missing, go to the Disk Management utility to check whether the drive letter is missing.
-3.  After the file system access permissions automatically recover, select whether to restart the instance.
+3.  After the access permissions on the file system automatically recover, select whether to restart the instance.
 
     ![Windows system check](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2159816951/p13956.png)
 
@@ -495,7 +523,7 @@ After you migrate your Windows server, you must perform the following steps when
 After you migrate your Linux server, you must perform the following steps when you start the created instance for the first time:
 
 1.  Check whether the system disk data is complete.
-2.  If data disks exist, you must attach them. For more information, see [Attach a data disk](/intl.en-US/Block Storage/Cloud disks/Attach a data disk.md).
+2.  If data disks exist, you must attach them to the instance. For more information, see [Attach a data disk](/intl.en-US/Block Storage/Cloud disks/Attach a data disk.md).
 3.  Check whether the network is connected.
 4.  Check whether other system services are running as expected.
 
@@ -507,9 +535,9 @@ This is because the data disks are not attached during instance startup by defau
 
 To resolve this issue, perform the following steps:
 
--   Check the driver. Before you create an I/O optimized instance, ensure that the [VirtIO driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md) is installed on the source server.
--   Check whether the boot configurations of the source server are valid.
--   Upgrade GRUB to version 1.9 or later. Then, perform the migration again after the following conditions are met: The operating system of your source server is CentOS 5 or Debian 7 and the GRUB version is earlier than 1.9. In addition, the following output appears when you connect to the ECS instance by using the [Management Terminal](/intl.en-US/Instance/Connect to instances/Connect to an instance by using VNC/Connect to a Linux instance by using VNC.md) in the ECS console.
+-   Check the driver. Before you create an I/O optimized instance, ensure that the [Virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md) is installed on the source server.
+-   Check whether the GRUB configurations of the source server are valid.
+-   If the following conditions apply, you must upgrade GRUB to version 1.9 or later, and then perform the migration again: The operating system of your source server is CentOS 5 or Debian 7 and the GRUB version is earlier than 1.9. In addition, the following output appears when you connect to the ECS instance by using the [Management Terminal](/intl.en-US/Instance/Connect to instances/Connect to an instance by using VNC/Connect to a Linux instance by using VNC.md) in the ECS console.
 
     ![Linux server check during startup](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2159816951/p50179.png)
 
@@ -520,19 +548,19 @@ To resolve this issue, perform the following steps:
 
 This is because Alibaba Cloud does not perform configurations such as network or Secure Shell \(SSH\) configurations on ECS instances created from imported images of the Others Linux type. To resolve this issue, you can change the network configurations.
 
-The network configurations of the images generated by the SMC client have been changed since March 31, 2018. By default, IP addresses are allocated based on Dynamic Host Configuration Protocol \(DHCP\).
+The network configurations of the images generated by the SMC client were changed on March 31, 2018. By default, IP addresses are allocated based on the Dynamic Host Configuration Protocol \(DHCP\).
 
-## How do I perform another migration task on the same migration source?
+## How do I migrate a server again?
 
 To migrate a migration source again, create a migration task for the migration source, and then start the task.
 
-## What do I do after a migration task is completed and a custom image is generated?
+## What do I do after a migration task is complete and a custom image is generated?
 
 We recommend that you use the image to create a pay-as-you-go instance, and then check whether the system is running as expected. Select instance types that meet your business requirements and create ECS instances. For more information, see [Instance families](/intl.en-US/Instance/Instance families.md) and [Create an instance by using the wizard](/intl.en-US/Instance/Create an instance/Create an instance by using the wizard.md).
 
-## What happens after a migration task is completed?
+## What happens after a migration task is complete?
 
-After a migration task is completed, SMC generates a custom image for your migration source. You can find your migration task on the Migration Tasks page, and click the link in the **Migration Result** column to view the custom image.
+After a migration task is complete, SMC generates a custom image for your migration source. You can find your migration task on the Migration Tasks page, and click the link in the **Migration Result** column to view the custom image.
 
 ## Why does the hostname of the ECS instance created after a migration task contain the name of another cloud platform?
 
