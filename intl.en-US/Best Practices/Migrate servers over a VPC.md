@@ -17,7 +17,7 @@ The following table lists the scenarios where you can migrate servers over a VPC
 Migration process:
 
 1.  Download the [SMC client](https://p2v-tools.oss-cn-hangzhou.aliyuncs.com/smc/Alibaba_Cloud_Migration_Tool.zip?file=Alibaba_Cloud_Migration_Tool.zip) package and install the SMC client on the source server.
-2.  Run the SMC client on the source server and use the proxy server to import the information of the source server to the SMC console. For more information about proxy servers, see[Forward proxies](#section_fef_t9b_m2l).
+2.  Run the SMC client on the source server and use the proxy server to import the information of the source server to the SMC console. For more information about proxy servers, see [Forward proxies](#section_fef_t9b_m2l).
 3.  Create a migration task, specify VPC as the network type, and then start the task.
 4.  SMC creates resources based on the migration task configurations and migrates data from the source server to Alibaba Cloud over a VPC.
 5.  During the migration, the proxy server replaces the source server. Then, the proxy server receives instructions from the SMC console. For example, if an error occurs during the migration task, SMC stops the migration and sends an error log to the SMC client.
@@ -32,7 +32,7 @@ Perform the following steps during the migration:
 
 2.  Download and install an SMC client on the source server, and import the information of the source server to the SMC console.
 
-    For more information, see[Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md). Before you import the information of the source server, take note of the following information:
+    For more information, see [Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md). Before you import the information of the source server, take note of the following information:
 
     -   If you do not need a proxy server, you can directly import the information of the source server.
     -   If you need a proxy server, you must configure the proxy server information in the configuration file of your SMC client. Then, you can run the client to import the information of the source server. In the following example, Linux is used to show the procedure of configuring the proxy server:
