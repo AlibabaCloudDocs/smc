@@ -419,7 +419,7 @@ Each Alibaba Cloud account can have a maximum of 10 VPCs in a region. If you per
 
 If the VPC quota is reached, perform one of the following steps:
 
--   Delete an existing VPC. For more information, see [Delete a VPC network]().
+-   Delete an existing VPC. For more information, see [Delete a VPC](/intl.en-US/VPCs and vSwitchs/Work with VPCs.md).
 -   Increase the VPC quota. [Submit a ticket](https://workorder.console.aliyun.com/).
 
 ## Why do I receive an "InvalidAccessKeyId.NotFound" error?
@@ -537,7 +537,7 @@ To resolve this issue, perform the following steps:
 
 -   Check the driver. Before you create an I/O optimized instance, ensure that the [Virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md) is installed on the source server.
 -   Check whether the GRUB configurations of the source server are valid.
--   If the following conditions apply, you must upgrade GRUB to version 1.9 or later, and then perform the migration again: The operating system of your source server is CentOS 5 or Debian 7 and the GRUB version is earlier than 1.9. In addition, the following output appears when you connect to the ECS instance by using the [Management Terminal](/intl.en-US/Instance/Connect to instances/Connect to an instance by using VNC/Connect to a Linux instance by using VNC.md) in the ECS console.
+-   If the following conditions apply, you must upgrade GRUB to version 1.9 or later, and then perform the migration again: The operating system of your source server is CentOS 5 or Debian 7 and the GRUB version is earlier than 1.9. In addition, the following output appears when you connect to the ECS instance by using the [Management Terminal](/intl.en-US/Instance/Connect to instances/Connect to an instance by using VNC/Connect to a Linux instance by using password authentication.md) in the ECS console.
 
     ![Linux server check during startup](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2159816951/p50179.png)
 
