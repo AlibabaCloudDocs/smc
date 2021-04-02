@@ -33,7 +33,7 @@ SMC supports automatic data migration from one or more source servers to Alibaba
 
 -   Migration from diverse platforms and environments
     -   SMC allows you to migrate source servers that run various versions of Windows and Linux operating systems. For more information, see [Limits](/intl.en-US/Product Introduction/Limits.md).
-    -   SMC allows you to migrate data from servers in data centers, local virtual machines \(VMs\), and third-party cloud platforms to Alibaba Cloud. Supported VMs include VMware, VirtualBox, Xen, and KVM. Third-party cloud platforms can be Amazon Web Services \(AWS\), Microsoft Azure, Google Cloud Platform \(GCP\), HUAWEI CLOUD, Tencent Cloud, UCloud, China Telecom e-Cloud, and QingCloud.
+    -   SMC allows you to migrate data from servers in data centers, local virtual machines \(VMs\), and third-party cloud platforms to Alibaba Cloud. Supported VMs include VMware, VirtualBox, Xen, KVM, and Hyper-V. Third-party cloud platforms can be Amazon Web Services \(AWS\), Microsoft Azure, Google Cloud Platform \(GCP\), HUAWEI CLOUD, Tencent Cloud, UCloud, China Telecom e-Cloud, and QingCloud.
 
         ![Support for migration from diverse platforms](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/8422834951/p71294.png)
 
