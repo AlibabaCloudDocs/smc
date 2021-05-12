@@ -62,7 +62,7 @@
 
     2.  将SMC客户端上传至迁移源。
 
-        -   您可以搭建FTP站点上传文件，具体操作请参见[手动搭建FTP站点（Windows）](/intl.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（Windows）.md)或[手动搭建FTP站点（CentOS 7）](/intl.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（CentOS 7）.md)。
+        -   您可以搭建FTP站点上传文件。具体操作，请参见[手动搭建FTP站点（Windows）](/intl.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（Windows）.md)或[手动搭建FTP站点（CentOS 7）](/intl.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（CentOS 7）.md)。
         -   您也可以使用支持文件传输的第三方远程连接工具将SMC客户端上传至迁移源。
     3.  解压SMC客户端。
 
@@ -70,13 +70,13 @@
 
         **说明：** Linux系统中使用unzip <SMC客户端压缩包名称\>命令解压SMC客户端，如果您的源服务器未安装unzip插件，请先安装。例如，CentOS 7的安装命令为yum -y install unzip。
 
-        ![客户端版本](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50475.png)
+        ![客户端版本](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50475.png)
 
     4.  解压适配您迁移源系统版本的客户端压缩包。
 
         解压后文件夹中包含的目录和文件，如下图所示。
 
-        ![客户端主目录](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p49979.png)
+        ![客户端主目录](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p49979.png)
 
         |文件（夹）名|描述|
         |:-----|:-|
@@ -87,7 +87,7 @@
         |Excludes|排除不迁移文件目录的配置文件夹。|
         |client\_data|迁移数据文件，包含ECS中转实例信息和迁移进度等。|
 
-2.  （可选）排除不迁移的文件或目录。
+2.  排除不迁移的文件或目录。
 
     **说明：** 如果开启块复制功能迁移，则不支持排除不迁移的文件或目录。
 
@@ -138,7 +138,7 @@
             -   去掉路径前缀（scr\_path），例如去掉上述示例中的`D:`。
             -   将原路径中的`\`替换为`/`。
     -   配置示例二：为Linux服务器排除不迁移的文件或目录
-        -   系统盘（根目录 /）
+        -   系统盘（根目录/）
 
 -   待排除的文件或目录为：
 
@@ -204,42 +204,44 @@
                 sudo ./go2aliyun_client
                 ```
 
-            您也可以根据迁移源系统对权限的支持情况，不运行上述命令，而选择运行以下命令快速导入迁移源，可跳过下一步（即输入账号的访问密钥）。
+            您也可以根据迁移源系统对权限的支持情况，不运行上述命令，而选择运行以下命令快速导入迁移源，可跳过下一步（即输入阿里云账号的访问密钥）。
+
+            **说明：** 阿里云账号的访问密钥AccessKey包括AccessKey ID和AccessKey Secret，如果您未创建AccessKey，请先创建。具体操作，请参见[创建AccessKey]()。
 
             -   使用root权限
 
                 ```
-                ./go2aliyun_client --accessid=<Your AccessKeyID> --secretkey=<Your AccessKeySecret>
+                ./go2aliyun_client --accessid=<AccessKey ID\> --secretkey=<AccessKey Secret\>
                 ```
 
             -   使用sudo权限
 
                 ```
-                sudo ./go2aliyun_client --accessid=<Your AccessKeyID> --secretkey=<Your AccessKeySecret>
+                sudo ./go2aliyun_client --accessid=<AccessKey ID\> --secretkey=<AccessKey Secret\>
                 ```
 
-    2.  输入账号的访问密钥（AccessKey）。
+    2.  输入阿里云账号的访问密钥（AccessKey）。
 
         **说明：** 如果您输入的AccessKey不正确，请在user\_config.json文件中删除access\_id和secret\_key的值，并重新运行客户端。
 
         -   Windows系统
-            -   GUI版本：在**账号AK**和**账号SK**文本框中，分别输入AccessKeyId和AccessKeySecret后，单击**运行**。详情请参见[Window GUI版本控制台迁移模式](/intl.zh-CN/最佳实践/使用SMC客户端Windows GUI版本.md)。
-            -   命令行版本： 输入访问密钥的AccessKeyId和AccessKeySecret，并按`Enter`键。
+            -   GUI版本：在**账号AK**和**账号SK**文本框中，分别输入AccessKey ID和AccessKey Secret后，单击**运行**。更多信息，请参见[使用SMC客户端Windows GUI版本](/intl.zh-CN/最佳实践/使用SMC客户端Windows GUI版本.md)。
+            -   命令行版本： 输入访问密钥的AccessKey ID和AccessKey Secret，并按`Enter`键。
         -   Linux系统
 
-            输入访问密钥的AccessKeyId和AccessKeySecret，并按`Enter`键。
+            输入访问密钥的AccessKey ID和AccessKey Secret，并按`Enter`键。
 
-            ![输入AK](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p49934.png)
+            ![输入AK](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p49934.png)
 
             可能会出现以下提示信息：
 
             -   多数主流迁移源系统已默认安装rsync。若没有安装，则SMC客户端会提示，请输入yes自动安装rsync，如下图所示。
 
-                ![安装rsync](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50398.png)
+                ![安装rsync](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50398.png)
 
             -   若迁移源系统的SELinux处于开启状态，则SMC客户端会提示您关闭。请输入yes自动关闭SELinux，如下图所示。
 
-                ![关闭SELinux](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50473.png)
+                ![关闭SELinux](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50473.png)
 
     **说明：** 请勿关闭客户端直至迁移完成。否则，迁移源将与SMC控制台失去联系，无法完成迁移。
 
@@ -253,7 +255,7 @@
 
         您可以从客户端界面获取迁移源ID，如下图所示，并根据迁移源ID找到目标迁移源。查找迁移源，请参见[如何查找迁移源](/intl.zh-CN/常见问题/SMC FAQ.md)。
 
-        ![获取迁移源ID](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p50022.png)
+        ![获取迁移源ID](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p50022.png)
 
     3.  单击**创建迁移任务**。
 
@@ -261,7 +263,7 @@
 
         迁移任务**基本配置**说明：
 
-        -   **目标地域**（必填）：您的源服务器要迁入的阿里云地域ID。地域详情，请参见[地域和可用区](https://www.alibabacloud.com/help/zh/doc-detail/123712.htm)。
+        -   **目标地域**（必填）：您的源服务器要迁入的阿里云地域ID。地域详情，请参见[地域和可用区]()。
         -   **任务名称**：迁移任务的名称。
 
             **说明：** 同一阿里云地域下，任务名称必须唯一。
@@ -269,7 +271,7 @@
         -   **任务描述**：迁移任务的描述。
         -   **目标磁盘（GiB）**：设置目标服务器的磁盘结构。
 
-            ![目标磁盘](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p112652.png)
+            ![目标磁盘](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p112652.png)
 
             配置项说明表如下：
 
@@ -293,9 +295,9 @@
             -   **是否开启块复制**：仅当打开上述的**是否启用块复制**开关后，才会出现该开关。SMC会根据迁移源磁盘分区状态进行判断是否支持开启块复制。
                 -   如果迁移源不支持分区开启块复制，则该开关无法打开。
                 -   如果迁移源支持分区开启块复制，您可以打开开关，实现分区级别的磁盘迁移。
-**说明：** 若您的迁移源没有数据盘，或数据盘未挂载，不会出现**数据盘**配置项。详情请参见[为什么新建迁移任务页面没有出现数据盘配置项？怎么办？](/intl.zh-CN/常见问题/SMC FAQ.md) |
+**说明：** 若您的迁移源没有数据盘，或数据盘未挂载，不会出现**数据盘**配置项。更多信息，请参见[为什么新建迁移任务页面没有出现数据盘配置项？怎么办？](/intl.zh-CN/常见问题/SMC FAQ.md) |
 
-        -   **目标镜像类型**：设置迁移源迁移至阿里云的目标镜像类型。
+        -   **目标类型**：设置迁移源迁移至阿里云的目标类型。
             -   选择**云服务器镜像**。配置项说明如下：
 
                 |配置项|是否必选|说明|
@@ -308,6 +310,14 @@
 迁移任务将自动周期性执行，并同步增量数据至阿里云。增量迁移的最佳实践，请参见[增量迁移源服务器](/intl.zh-CN/最佳实践/增量迁移源服务器.md)。
 
                 -   关闭该开关后，迁移任务仅执行一次。 |
+
+            -   选择**云服务器实例**。配置项说明如下：
+
+                **说明：** 迁移源和目标实例的存储、操作系统等需要适配。迁移至目标实例最佳实践，请参见[源服务器迁移至目标实例](/intl.zh-CN/最佳实践/源服务器迁移至目标实例.md)。
+
+                ![smc-instance](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/1170973061/p176925.png)
+
+                **目标实例**：选择一个ECS实例作为目标实例。
 
             -   选择**容器镜像**。配置项说明如下：
 
@@ -338,7 +348,7 @@
 
         -   **网络模式**：传输迁移数据到中转实例使用的网络。中转实例会被创建在所选专有网络（VPC）、交换机（VSwitch）下，因此中转实例会被分配公网IP。
 
-            ![网络模式](https://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/zh-CN/0145559951/p112663.png)
+            ![网络模式](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p112663.png)
 
             配置项说明表如下：
 
@@ -353,7 +363,7 @@
 批量迁移时，若不指定VPC和VSwitch，SMC会为每个中转实例创建一个VPC。
 
 **说明：** 由于每个账号在一个地域下的VPC限额为10（包括您创建的VPC和SMC自动创建的VPC），因此每次批量迁移的最大值不超过10台迁移源。如需提高VPC限额，请[提交工单](https://workorder.console.aliyun.com/#/ticket/list/)。 |
-            |**内网传输**|迁移数据通过VPC内网传输到中转实例。使用该模式，需要将源服务器与阿里云VPC打通，并且必须指定VPC和VSwitch。 **说明：** 如果您能直接从自建机房（Integrated Data Center，IDC）、虚拟机环境或者云主机访问某一阿里云地域下的专有网络VPC，建议您使用该方式进行迁移。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。您可以通过VPN网关、高速通道物理专线、智能接入网关将源服务器和云上VPC打通。更多详情，请参见[连接本地IDC](/intl.zh-CN/VPC与外部网络连接/连接本地IDC.md)。 |
+            |**内网传输**|迁移数据通过VPC内网传输到中转实例。使用该模式，需要将源服务器与阿里云VPC打通，并且必须指定VPC和VSwitch。 **说明：** 如果您能直接从自建机房（Integrated Data Center，IDC）、虚拟机环境或者云主机访问某一阿里云地域下的专有网络VPC，建议您使用该方式进行迁移。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。您可以通过VPN网关、高速通道物理专线、智能接入网关将源服务器和云上VPC打通。更多信息，请参见[连接本地IDC](/intl.zh-CN/网络连接/VPC与外部网络连接/连接本地IDC.md)。 |
 
         **高级配置（可选）**说明：
 
