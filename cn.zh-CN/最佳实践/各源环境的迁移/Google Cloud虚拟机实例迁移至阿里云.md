@@ -60,7 +60,7 @@
 
     2.  将SMC客户端上传至迁移源。
 
-        -   您可以搭建FTP站点上传文件，具体操作请参见[手动搭建FTP站点（Windows）](/cn.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（Windows）.md)或[手动搭建FTP站点（CentOS 7）](/cn.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（CentOS 7）.md)。
+        -   您可以搭建FTP站点上传文件。具体操作，请参见[手动搭建FTP站点（Windows）](/cn.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（Windows）.md)或[手动搭建FTP站点（CentOS 7）](/cn.zh-CN/建站教程/搭建应用/搭建FTP站点/手动搭建FTP站点（CentOS 7）.md)。
         -   您也可以使用支持文件传输的第三方远程连接工具将SMC客户端上传至迁移源。
     3.  解压SMC客户端。
 
@@ -85,7 +85,7 @@
         |Excludes|排除不迁移文件目录的配置文件夹。|
         |client\_data|迁移数据文件，包含ECS中转实例信息和迁移进度等。|
 
-2.  （可选）排除不迁移的文件或目录。
+2.  排除不迁移的文件或目录。
 
     **说明：** 如果开启块复制功能迁移，则不支持排除不迁移的文件或目录。
 
@@ -136,7 +136,7 @@
             -   去掉路径前缀（scr\_path），例如去掉上述示例中的`D:`。
             -   将原路径中的`\`替换为`/`。
     -   配置示例二：为Linux服务器排除不迁移的文件或目录
-        -   系统盘（根目录 /）
+        -   系统盘（根目录/）
 
 -   待排除的文件或目录为：
 
@@ -202,30 +202,32 @@
                 sudo ./go2aliyun_client
                 ```
 
-            您也可以根据迁移源系统对权限的支持情况，不运行上述命令，而选择运行以下命令快速导入迁移源，可跳过下一步（即输入账号的访问密钥）。
+            您也可以根据迁移源系统对权限的支持情况，不运行上述命令，而选择运行以下命令快速导入迁移源，可跳过下一步（即输入阿里云账号的访问密钥）。
+
+            **说明：** 阿里云账号的访问密钥AccessKey包括AccessKey ID和AccessKey Secret，如果您未创建AccessKey，请先创建。具体操作，请参见[创建AccessKey]()。
 
             -   使用root权限
 
                 ```
-                ./go2aliyun_client --accessid=<Your AccessKeyID> --secretkey=<Your AccessKeySecret>
+                ./go2aliyun_client --accessid=<AccessKey ID\> --secretkey=<AccessKey Secret\>
                 ```
 
             -   使用sudo权限
 
                 ```
-                sudo ./go2aliyun_client --accessid=<Your AccessKeyID> --secretkey=<Your AccessKeySecret>
+                sudo ./go2aliyun_client --accessid=<AccessKey ID\> --secretkey=<AccessKey Secret\>
                 ```
 
-    2.  输入账号的访问密钥（AccessKey）。
+    2.  输入阿里云账号的访问密钥（AccessKey）。
 
         **说明：** 如果您输入的AccessKey不正确，请在user\_config.json文件中删除access\_id和secret\_key的值，并重新运行客户端。
 
         -   Windows系统
-            -   GUI版本：在**账号AK**和**账号SK**文本框中，分别输入AccessKeyId和AccessKeySecret后，单击**运行**。详情请参见[Window GUI版本控制台迁移模式](/cn.zh-CN/最佳实践/使用SMC客户端Windows GUI版本.md)。
-            -   命令行版本： 输入访问密钥的AccessKeyId和AccessKeySecret，并按`Enter`键。
+            -   GUI版本：在**账号AK**和**账号SK**文本框中，分别输入AccessKey ID和AccessKey Secret后，单击**运行**。更多信息，请参见[使用SMC客户端Windows GUI版本](/cn.zh-CN/最佳实践/使用SMC客户端Windows GUI版本.md)。
+            -   命令行版本： 输入访问密钥的AccessKey ID和AccessKey Secret，并按`Enter`键。
         -   Linux系统
 
-            输入访问密钥的AccessKeyId和AccessKeySecret，并按`Enter`键。
+            输入访问密钥的AccessKey ID和AccessKey Secret，并按`Enter`键。
 
             ![输入AK](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/zh-CN/0145559951/p49934.png)
 
@@ -348,7 +350,7 @@
 批量迁移时，若不指定VPC和VSwitch，SMC会为每个中转实例创建一个VPC。
 
 **说明：** 由于每个账号在一个地域下的VPC限额为10（包括您创建的VPC和SMC自动创建的VPC），因此每次批量迁移的最大值不超过10台迁移源。如需提高VPC限额，请[提交工单](https://workorder.console.aliyun.com/#/ticket/list/)。 |
-            |**内网传输**|迁移数据通过VPC内网传输到中转实例。使用该模式，需要将源服务器与阿里云VPC打通，并且必须指定VPC和VSwitch。 **说明：** 如果您能直接从自建机房（Integrated Data Center，IDC）、虚拟机环境或者云主机访问某一阿里云地域下的专有网络VPC，建议您使用该方式进行迁移。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。您可以通过VPN网关、高速通道物理专线、智能接入网关将源服务器和云上VPC打通。更多信息，请参见[连接本地IDC](/cn.zh-CN/VPC与外部网络连接/连接本地IDC.md)。 |
+            |**内网传输**|迁移数据通过VPC内网传输到中转实例。使用该模式，需要将源服务器与阿里云VPC打通，并且必须指定VPC和VSwitch。 **说明：** 如果您能直接从自建机房（Integrated Data Center，IDC）、虚拟机环境或者云主机访问某一阿里云地域下的专有网络VPC，建议您使用该方式进行迁移。使用内网传输能获得比通过公网更快速更稳定的数据传输效果，提高迁移工作效率。您可以通过VPN网关、高速通道物理专线、智能接入网关将源服务器和云上VPC打通。更多信息，请参见[连接本地IDC](/cn.zh-CN/网络连接/VPC与外部网络连接/连接本地IDC.md)。 |
 
         **高级配置（可选）**说明：
 
