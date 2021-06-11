@@ -567,8 +567,6 @@ We recommend that you use the image to create a pay-as-you-go instance, and then
 
 After a migration task is completed, SMC generates a custom image for your migration source. You can find your migration task on the Migration Tasks page, and click the link in the **Migration Result** column to view the custom image.
 
-![Migration result](../images/p50103.png)
-
 ## Why does the hostname of the ECS instance created after a migration task contain the name of another cloud platform?
 
 This is because cloud\_init is not installed or started on the ECS instance, or the cloud-init versions of the source server and Alibaba Cloud are incompatible. To resolve this issue, you can install cloud-init and then restart the instance to update the hostname. For more information, see [Install cloud-init](/intl.en-US/Images/Custom image/Import images/Install cloud-init.md).
