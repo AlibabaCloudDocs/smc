@@ -40,7 +40,7 @@ This topic provides answers to some frequently asked questions \(FAQ\) about Ser
     -   [Why do I receive a "Forbidden.RAM" error?](#section_5qw_dzv_7z7)
     -   [Why do I receive an "InvalidImageName.Duplicated" error?](#section_f09_jaz_05u)
     -   [Why do I receive an "InvalidAccountStatus.SnapshotServiceUnavailable" error?](#section_gph_ns2_acq)
-    -   [Why do I receive a "Create transition vpc failed" error message? \(QuotaExceeded.Vpc: VPC quota exceeded.\)](#section_qur_9g3_nka)
+    -   [Why do I receive a "Create transition vpc failed" error message? \(QuotaExceeded.Vpc: VPC quota exceeded.\)error message?](#section_qur_9g3_nka)
     -   [Why do I receive an "InvalidAccessKeyId.NotFound" error?](#section_rfn_fot_g83)
     -   [Why do I receive a "Connect to Server Failed" error?](#section_7ad_mse_m2s)
     -   [Why do I receive a "Do Rsync Disk x Failed" error?](#section_gh1_ywk_103)
@@ -57,15 +57,16 @@ This topic provides answers to some frequently asked questions \(FAQ\) about Ser
     -   [How do I check my system after I migrate a Linux server?](#section_8nx_71l_ksv)
     -   [Why does no data exist in the original data disk directory during instance startup after I migrate a Linux server?](#section_rak_i9w_gky)
     -   [What can I do if I am unable to start the ECS instance created based on the custom image after a Linux server migration?](#section_4wq_e1j_can)
+    -   [Why does the LVM partitions of my Linux server change to standard partitions?](#section_r6m_dya_fvv)
     -   [Why is the network service unavailable when an Others Linux instance is started?](#section_d07_qlt_y6e)
     -   [How do I migrate a server again?](#section_sz6_lrl_8aa)
-    -   [What do I do after a migration task is complete and a custom image is generated?](#section_pd1_rka_nhr)
-    -   [What happens after a migration task is complete?](#section_203_izc_s31)
+    -   [What do I do after a migration task is completed and a custom image is generated?](#section_pd1_rka_nhr)
+    -   [What happens after a migration task is completed?](#section_203_izc_s31)
     -   [Why does the hostname of the ECS instance created after a migration task contain the name of another cloud platform?](#section_6py_r5e_qgz)
 
 ## What scenarios can I use SMC for?
 
-You can use SMC to migrate various types of servers to Elastic Compute Service \(ECS\), such as physical servers, virtual machines \(VMs\), and third-party cloud servers. These servers can run on Windows or Linux. For more information, see [What is SMC?](/intl.en-US/Product Introduction/What is SMC?.md).
+You can use SMC to migrate various types of servers to Elastic Compute Service \(ECS\), such as physical servers, virtual machines \(VMs\), and third-party cloud servers. These servers can run on Windows or Linux. For more information, see [What is SMC?](/intl.en-US/Product Introduction/What is SMC?.md)
 
 ## What migration modes does SMC support?
 
@@ -101,7 +102,7 @@ Yes, SMC supports BYOL. BYOL licenses are used in the following scenarios:
 
     Microsoft BYOL licenses are used in the following scenarios:
 
-    -   BYOL implemented through Software Assurance \(SA\)
+    -   BYOL implemented by using Software Assurance \(SA\)
 
         BYOL can be implemented for software programs that support License Mobility when ECS instances are created, such as SQL Server and SharePoint.
 
@@ -115,7 +116,7 @@ Yes, SMC supports BYOL. BYOL licenses are used in the following scenarios:
 
         This scenario is similar to the Windows operating system scenario. You can reuse software licenses that you have purchased and downloaded, and deploy software programs in a dedicated hardware environment.
 
--   Redhat
+-   Red Hat
 
     Red Hat provides the Cloud Access program. If you migrate Red Hat subscriptions to Alibaba Cloud by using the bring your own subscription \(BYOS\) method, you can register with Red Hat Cloud Access. For more information, see [Step 1: Sign up with Red Hat Cloud Access]().
 
@@ -158,7 +159,7 @@ You need to know the following information about intermediate instances:
 
 -   SMC creates, starts, stops, and releases an intermediate instance named `No_Delete_SMC_Transition_Instance` during a migration process. To ensure a smooth migration, do not modify the status of the intermediate instance.
 -   The default security group of the intermediate instance allows access to ports 8080 and 8703. These ports are the migration service ports of the intermediate instance. Do not modify or delete the security group.
--   After the migration is complete, the intermediate instance is automatically released. If the migration fails, you must manually release the instance. For more information, see [Release an instance](/intl.en-US/Instance/Manage instances/Release an instance.md).
+-   After the migration is completed, the intermediate instance is automatically released. If the migration fails, you must manually release the instance. For more information, see [Release an instance](/intl.en-US/Instance/Manage instances/Release an instance.md).
 
 ## What public endpoints and ports does my source server need to access?
 
@@ -286,7 +287,7 @@ Restore the migration source to the Active state, and then create a migration ta
 
 -   If the migration source is in the Inactive state,
 
-    the migration source is disconnected from the SMC console. You must restart the SMC client and wait until the migration is complete. For more information, see [Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md).
+    the migration source is disconnected from the SMC console. You must restart the SMC client and wait until the migration is completed. For more information, see [Step 1: Import the information of a migration source](/intl.en-US/User Guide/Step 1: Import the information of a migration source.md).
 
 -   If the migration source is in the InError state, you must check the console logs. You must also check the client logs in the Logs directory and the error messages on the client UI. Resolve the error based on the logs. You can also use the error codes and troubleshooting methods in this topic for reference. If the problem persists, contact Alibaba Cloud. For more information, see [Contact us](/intl.en-US/FAQ/Contact us.md).
 
@@ -311,7 +312,7 @@ No, you cannot create a migration task for the migration source in this case. Ho
 
 ## What is the validity period of a migration task? What happens after a migration task expires?
 
-A migration task expires 30 days after it is created in the SMC console. The expiration time cannot be changed in the console. If you call the CreateReplicationJob operation to create a migration task, you can set a value for the validity period based on your needs. The validity period ranges from 7 to 90 days. For more information, see [CreateReplicationJob](/intl.en-US/API Reference/Migration tasks/CreateReplicationJob.md).
+A migration task expires 30 days after it is created in the SMC console. The expiration time cannot be changed in the console. If you call the [CreateReplicationJob](/intl.en-US/API Reference/Migration tasks/CreateReplicationJob.md) operation to create a migration task, you can set a value for the validity period based on your needs. The validity period ranges from 7 to 90 days.
 
 The validity period starts from the time when the migration task is created. The following two methods are used to process an expired migration task:
 
@@ -322,17 +323,17 @@ The validity period starts from the time when the migration task is created. The
 
 The statuses of a migration task are divided into the following two types:
 
--   Status of a migration task: the status of the migration task throughout the entire lifecycle. For more information, see [Migration task status](#table_njm_7xg_xep).
--   Business status of a migration task: the status of a migration task in the Running state. For more information, see [Migration task business status](#table_6p3_f67_5zr).
+-   Status of a migration task: the status of the migration task throughout the entire lifecycle. For more information, see [Statuses of a migration task](#table_njm_7xg_xep).
+-   Business status of a migration task: the status of a migration task in the Running state. For more information, see [Business statuses of a migration task](#table_6p3_f67_5zr).
 
-The following figure shows the relationships between migration task statuses and business statuses.
+The following figure shows the relationships between the statuses and business statuses of a migration task.
 
 ![job_status](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2159816951/p51026.png)
 
 |Status|Description|Supported operation|
 |:-----|:----------|:------------------|
 |Ready|The migration task is created but is not started.|Start the migration task.|
-|Running|The migration task is running. The [Business status](#table_6p3_f67_5zr) rather than the Running status is displayed in the **Status** column of the SMC console.|Stop the migration task when it is completed or when it is in the **Syncing** state. **Note:** You cannot delete a migration task that is in the Running state. |
+|Running|The migration task is running. The business status rather than the running status is displayed in the **Status** column of the SMC console. For more information, see [Business statuses of a migration task](#table_6p3_f67_5zr).|Stop the migration task when it is completed or when it is in the **Syncing** state. **Note:** You cannot delete a migration task that is in the Running state. |
 |Stopped|The migration task is stopped.|Restart or delete the migration task.|
 |InError|The migration task fails.|Check the error message or migration logs in the client or console to identify the cause and fix the issue. If the migration source is in the Inactive or InError state, the failure is caused by the SMC client. You must restart the client before you restart the migration task.|
 |Finished|The migration task is completed.|Go to the Custom Images tab in the Elastic Compute Service \(ECS\) console to view the image generated by SMC.|
@@ -377,7 +378,7 @@ You receive the error because your account has not passed real-name verification
 
 ## Why do I receive a "Your Account Haven't Authorized For SMC RAM Role" error?
 
-You receive the error because the required role is not created or assigned to SMC. For more information about how to create a role and assign it to SMC, see [Procedure](/intl.en-US/User Guide/Before you begin.md).
+You receive the error because the required role is not created or assigned to SMC. For more information about the authorization methods, see [Procedure](/intl.en-US/User Guide/Before you begin.md).
 
 ## Why do I receive an "IllegalTimestamp" error?
 
@@ -411,7 +412,7 @@ You receive the error because SMC cannot connect to the intermediate instance. T
     -   Check whether the network of the on-premises server is connected. Check whether TCP ports 80, 443, 8703, and 8080 are enabled on your server. SMC must have access to these ports.
 3.  After you resolve the error, run the SMC client again.
 
-## Why do I receive a "Create transition vpc failed" error message? \(QuotaExceeded.Vpc: VPC quota exceeded.\)
+## Why do I receive a "Create transition vpc failed" error message? \(QuotaExceeded.Vpc: VPC quota exceeded.\)error message?
 
 You receive the error because your VPC quota is exceeded. If you do not specify a VPC and vSwitch for your migration task, SMC creates an intermediate VPC and vSwitch during the migration. After the migration task is completed, SMC deletes the intermediate VPC and vSwitch.
 
@@ -435,7 +436,7 @@ You receive the error because the AccessKey pair you specified is invalid. To re
 
 You receive the error because the data transfer is interrupted. To resolve the error, perform the following steps:
 
-1.  Check the migration logs for exceptions. If the log file contains `return: 3072` or `return: 7680`, check whether the database or container services such as Oracle, MySQL, Microsoft SQL Server, MongoDB, or Docker are enabled on the source server. If the services are enabled, disable these services or exclude the related directories before you migrate data.
+1.  Check the migration logs for exceptions. If the log file contains `return:3072` or `return:7680`, check whether the database or container services such as Oracle, MySQL, Microsoft SQL Server, MongoDB, or Docker are enabled on the source server. If the services are enabled, disable these services or exclude the related directories before you migrate data.
 2.  Perform the following steps:
     -   Check whether the intermediate instance is running as expected.
     -   Check whether the network of the on-premises server is connected. Check whether TCP ports 80, 443, 8703, and 8080 are enabled on your server. SMC must have access to these ports.
@@ -447,7 +448,7 @@ You receive the error because you have not installed the Rsync component on the 
 
 ## Why do I receive a "check virtio failed" error message on my Linux server?
 
-You receive the error because you have not installed the Virtio driver on the source server. For more information, see [Virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md).
+You receive the error because you have not installed the virtio driver on the source server. For more information, see [Install a virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md).
 
 ## Why do I receive a "check selinux failed" error message on my Linux server?
 
@@ -459,7 +460,7 @@ You receive the error because you have not installed GRand Unified Bootloader \(
 
 ## What can I do if Windows server migration stops in the "Prepare For Rsync Disk 0" stage?
 
-If Windows server migration stops in the "Prepare For Rsync Disk 0" stage and `VssSnapshotul::VssSnapshotul GetSnapshotul Failed: 0x80042308` is displayed in the log file, perform the following steps:
+If Windows server migration stops in the "Prepare For Rsync Disk 0" stage and `VssSnapshotul::VssSnapshotul GetSnapshotul Failed:0x80042308` is displayed in the log file, perform the following steps:
 
 1.  Enable the Volume Shadow Copy service.
     1.  Log on to your on-premises server. Click **Start**, enter **services.msc** in the search box, and then press Enter.
@@ -535,14 +536,18 @@ This is because the data disks are not attached during instance startup by defau
 
 To resolve this issue, perform the following steps:
 
--   Check the driver. Before you create an I/O optimized instance, ensure that the [Virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md) is installed on the source server.
+-   Check the driver. Before you create an I/O optimized instance, make sure that the virtio driver is installed on the source server. For more information, see [Install a virtio driver](/intl.en-US/Images/Custom image/Import images/Install a virtio driver.md).
 -   Check whether the GRUB configurations of the source server are valid.
--   If the following conditions apply, you must upgrade GRUB to version 1.9 or later, and then perform the migration again: The operating system of your source server is CentOS 5 or Debian 7 and the GRUB version is earlier than 1.9. In addition, the following output appears when you connect to the ECS instance by using the [Management Terminal](/intl.en-US/Instance/Connect to instances/Connect to an instance by using VNC/Connect to a Linux instance by using password authentication.md) in the ECS console.
+-   If the following conditions apply, you must upgrade GRUB to version 1.9 or later, and then perform the migration again: The operating system of your source server is CentOS 5 or Debian 7 and the GRUB version is earlier than 1.9. In addition, the following output appears when you connect to the ECS instance by using the Management Terminal in the ECS console. For information about how to connect to the ECS instance, see [Connect to a Linux instance by using password authentication](/intl.en-US/Instance/Connect to instances/Connect to an instance by using VNC/Connect to a Linux instance by using password authentication.md).
 
     ![Linux server check during startup](https://static-aliyun-doc.oss-accelerate.aliyuncs.com/assets/img/en-US/2159816951/p50179.png)
 
-    For more information, see [Install GRUB on a Linux server](/intl.en-US/Images/FAQ/Install GRUB on a Linux server.md).
+    For information about how to upgrade GRUB to version 1.9 or later, see [Install GRUB on a Linux server](/intl.en-US/Images/FAQ/Install GRUB on a Linux server.md).
 
+
+## Why does the LVM partitions of my Linux server change to standard partitions?
+
+SMC does not allow you to replicate Logical Volume Manager \(LVM\) partitions. After a Linux server is migrated, the LVM partitions of the server is changed to standard partitions.
 
 ## Why is the network service unavailable when an Others Linux instance is started?
 
@@ -554,13 +559,15 @@ The network configurations of the images generated by the SMC client were change
 
 To migrate a migration source again, create a migration task for the migration source, and then start the task.
 
-## What do I do after a migration task is complete and a custom image is generated?
+## What do I do after a migration task is completed and a custom image is generated?
 
 We recommend that you use the image to create a pay-as-you-go instance, and then check whether the system is running as expected. Select instance types that meet your business requirements and create ECS instances. For more information, see [Instance families](/intl.en-US/Instance/Instance families.md) and [Create an instance by using the wizard](/intl.en-US/Instance/Create an instance/Create an instance by using the wizard.md).
 
-## What happens after a migration task is complete?
+## What happens after a migration task is completed?
 
-After a migration task is complete, SMC generates a custom image for your migration source. You can find your migration task on the Migration Tasks page, and click the link in the **Migration Result** column to view the custom image.
+After a migration task is completed, SMC generates a custom image for your migration source. You can find your migration task on the Migration Tasks page, and click the link in the **Migration Result** column to view the custom image.
+
+![Migration result](../images/p50103.png)
 
 ## Why does the hostname of the ECS instance created after a migration task contain the name of another cloud platform?
 
